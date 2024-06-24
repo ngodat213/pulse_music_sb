@@ -12,19 +12,13 @@ import lombok.*;
 public class RequestUpdateUser {
     private String password;
     private String email;
-    private String phone;
-    private String firstName;
-    private String lastName;
     private String bio;
     private ImageStorage avatar;
 
     public User toUpdate(User user){
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
         user.setPassword(password);
         user.setEmail(email);
         user.setAvatar(avatar);
-        user.setPhone(phone);
         user.setBio(bio);
         return user;
     }

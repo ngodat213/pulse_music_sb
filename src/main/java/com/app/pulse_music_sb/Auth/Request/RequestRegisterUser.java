@@ -12,10 +12,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RequestRegisterUser {
-    private String firstName;
-
-    private String lastName;
-
     @Email()
     private String email;
 
@@ -35,8 +31,6 @@ public class RequestRegisterUser {
         User user = new User();
         user.setPassword(password);
         user.setEmail(email);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
         user.setEnabled(true);
         user.setRole(UserRole.USER);
         return user;

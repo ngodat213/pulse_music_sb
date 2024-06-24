@@ -16,8 +16,6 @@ public interface IUserService extends UserDetailsService {
 
     boolean existsByEmail(String email);
 
-    boolean existsByPhone(String phone);
-
     User register(RequestRegisterUser req);
 
     User createUser(User user);

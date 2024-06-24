@@ -24,12 +24,6 @@ public class User{
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(nullable = false)
-    private String firstName;
-
-    @Column(nullable = false)
-    private String lastName;
-
     @Column(nullable = false, length = 80)
     @Size.List({
             @Size(min = 8, message = "Password too short"),
@@ -41,13 +35,9 @@ public class User{
     @Email()
     private String email;
 
-    private String phone;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "avatar_id", referencedColumnName = "id")
     private ImageStorage avatar;
-
-    private String location;
 
     @Column(nullable = true, length = 1000)
     @Size(max = 1000)
