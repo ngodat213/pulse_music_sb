@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="Fragments/head :: head(Login)">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:if="${param.error}">
+    <p>Username hoac password sai</p>
+</div>
+<div class="container" id="container">
+    <div class="app dk" id="app">
+        <div class="padding">
+            <div class="navbar">
+                <div class="pull-center">
+                    <a class="navbar-brand md" th:href="@{/index.html}">
+                        <svg height="32" viewBox="0 0 48 48" width="32" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="24" cy="24" fill="rgba(255,255,255,0.2)" r="24"/>
+                            <circle class="brand-color" cx="24" cy="24" fill="#1c202b" r="22"/>
+                            <circle cx="24" cy="24" fill="#ffffff" r="10"/>
+                            <circle class="brand-animate" cx="13" cy="13" fill="#ffffff" r="2"/>
+                            <path d="M 14 24 L 24 24 L 14 44 Z" fill="#FFFFFF"/>
+                            <circle cx="24" cy="24" fill="#000000" r="3"/>
+                        </svg>
+                        <img alt="." class="hide" th:src="@{/images/logo.png}"/>
+                        <span class="hidden-folded inline">pulse</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="b-t">
+            <div class="center-block w-xxl w-auto-xs p-y-md text-center">
+                <div class="p-a-md">
+                    <div>
+                        <a class="btn btn-block indigo text-white m-b-sm" href="#">
+                            <i class="fa fa-facebook pull-left"></i> Sign in with Facebook
+                        </a>
+                        <a class="btn btn-block red text-white" href="#">
+                            <i class="fa fa-google-plus pull-left"></i> Sign in with Google+
+                        </a>
+                    </div>
+                    <div class="m-y text-sm">OR</div>
+                    <form th:action="@{/login}" method="post">
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Email" required type="email" id="username"/>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="password" required type="password" id="password"/>
+                        </div>
+                        <div class="m-b-md">
+                            <label class="md-check">
+                                <input type="checkbox"/><i class="primary"></i> Keep me signed in
+                            </label>
+                        </div>
+                        <button class="btn btn-lg black p-x-lg" type="submit">Sign in</button>
+                    </form>
+                    <div class="m-y">
+                        <a class="_600" href="forgot-password.html">Forgot password?</a>
+                    </div>
+                    <div>
+                        Do not have an account?
+                        <a onclick="location.href='/register'" class="text-primary _600">Sign up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/scripts/app.min.js}"></script>
+</body>
+</html>
