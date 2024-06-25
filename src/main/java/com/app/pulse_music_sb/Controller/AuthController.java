@@ -1,6 +1,6 @@
 package com.app.pulse_music_sb.Controller;
 
-import com.app.pulse_music_sb.Auth.Model.CustomUserDetail;
+import com.app.pulse_music_sb.Models.CustomUserDetail;
 import com.app.pulse_music_sb.Request.RequestRegisterUser;
 import com.app.pulse_music_sb.Request.UserPasswordChange;
 import com.app.pulse_music_sb.Request.UserPasswordReset;

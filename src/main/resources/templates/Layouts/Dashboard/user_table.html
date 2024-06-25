@@ -47,9 +47,8 @@
                                     <table class="table lms_table_active ">
                                         <thead>
                                         <tr>
-                                            <th scope="col">Email</th>
                                             <th scope="col">Full name</th>
-                                            <th scope="col">Phone</th>
+                                            <th scope="col">Email</th>
                                             <th scope="col">Role</th>
                                             <th scope="col">Avatar</th>
                                             <th scope="col">Status</th>
@@ -58,9 +57,8 @@
                                         </thead>
                                         <tbody>
                                         <tr th:each="user : ${users}">
+                                            <td th:text="${user.fullName}"></td>
                                             <td th:text="${user.email}"></td>
-                                            <td th:text="${user.firstName} + ${user.lastName}"></td>
-                                            <td th:text="${user.phone}"></td>
                                             <td th:text="${user.role.getAuthority()}"></td>
                                             <td><img th:src="${user.getAvatarUrl()}" alt="avatar"
                                                      style="width: 30px; height: 30px;"></td>
@@ -234,15 +232,9 @@
                     <div id="formErrors" class="mb-3 alert alert-danger" role="alert" style="display: none;">
                         <ul id="errorList"></ul>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-6">
-                            <label for="firstName" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required>
-                        </div>
-                        <div class="col-6">
-                            <label for="lastName" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="lastName" th:field="*{lastName}" required>
-                        </div>
+                    <div class="mb-3">
+                        <label for="fullname" class="form-label">Password</label>
+                        <input type="text" class="form-control" id="fullname" th:field="*{fullName}" required>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
@@ -251,10 +243,6 @@
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" id="email" th:field="*{email}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">Phone</label>
-                        <input type="text" class="form-control" id="phone" th:field="*{phone}">
                     </div>
                     <div class="mb-3">
                         <label for="role" class="form-label">Role</label>

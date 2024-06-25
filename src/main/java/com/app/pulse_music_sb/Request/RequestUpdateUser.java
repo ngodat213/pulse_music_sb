@@ -1,7 +1,7 @@
 package com.app.pulse_music_sb.Request;
 
 import com.app.pulse_music_sb.Models.User;
-import com.app.pulse_music_sb.Util.Model.ImageStorage;
+import com.app.pulse_music_sb.Models.CloudStorage;
 import lombok.*;
 
 @Data
@@ -13,7 +13,7 @@ public class RequestUpdateUser {
     private String password;
     private String email;
     private String bio;
-    private ImageStorage avatar;
+    private CloudStorage avatar;
 
     public User toUpdate(User user){
         user.setPassword(password);

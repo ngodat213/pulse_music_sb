@@ -12,6 +12,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RequestRegisterUser {
+    @Size(max = 80, message = "Full name too long")
+    private String fullName;
+
     @Email()
     private String email;
 
@@ -29,6 +32,7 @@ public class RequestRegisterUser {
 
     public User toUser(){
         User user = new User();
+        user.setFullName(fullName);
         user.setPassword(password);
         user.setEmail(email);
         user.setEnabled(true);

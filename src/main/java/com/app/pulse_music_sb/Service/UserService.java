@@ -10,8 +10,8 @@ import com.app.pulse_music_sb.Models.Otp;
 import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Repository.OtpRepository;
 import com.app.pulse_music_sb.Repository.UserRepository;
-import com.app.pulse_music_sb.Util.Model.PaginationDTO;
-import com.app.pulse_music_sb.Util.PaginationService;
+import com.app.pulse_music_sb.Request.PaginationDTO;
+import com.app.pulse_music_sb.Service.Interface.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -46,6 +46,11 @@ public class UserService implements IUserService {
     public List<User> getAll(PaginationDTO paginationDTO) {
         Pageable pageable = paginationService.getPageable(paginationDTO);
         return userRepository.findAll(pageable).toList();
+    }
+
+    @Override
+    public User findById(String id) {
+        return userRepository.findById(id).get();
     }
 
     @Override

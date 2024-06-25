@@ -2,6 +2,7 @@ package com.app.pulse_music_sb.Models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @Table(name = "user_otp")
+@EntityListeners(AuditingEntityListener.class)
 public class Otp {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

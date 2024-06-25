@@ -2,8 +2,8 @@ package com.app.pulse_music_sb.Controller;
 
 import com.app.pulse_music_sb.Models.MusicType;
 import com.app.pulse_music_sb.Service.Interface.MusicTypeService;
-import com.app.pulse_music_sb.Util.Model.PaginationDTO;
-import com.app.pulse_music_sb.Util.PaginationService;
+import com.app.pulse_music_sb.Request.PaginationDTO;
+import com.app.pulse_music_sb.Service.PaginationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,8 +22,7 @@ public class MusicTypeController {
 
     @GetMapping
     public Page<MusicType> findAll(@RequestBody PaginationDTO paginationDTO) {
-        Pageable pageable = paginationService.getPageable(paginationDTO);
-        return musicTypeService.findAll(pageable);
+        return musicTypeService.findAll(paginationDTO);
     }
 
     @GetMapping("/{id}")

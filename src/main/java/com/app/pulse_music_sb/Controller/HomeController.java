@@ -1,7 +1,7 @@
 package com.app.pulse_music_sb.Controller;
 
 import ch.qos.logback.core.model.Model;
-import com.app.pulse_music_sb.Auth.Model.CustomUserDetail;
+import com.app.pulse_music_sb.Models.CustomUserDetail;
 import com.app.pulse_music_sb.Service.Interface.MusicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

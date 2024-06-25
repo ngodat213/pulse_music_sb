@@ -1,13 +1,15 @@
 package com.app.pulse_music_sb.Controller;
 
 import com.app.pulse_music_sb.Models.Music;
+import com.app.pulse_music_sb.Request.RequestCreateMusic;
 import com.app.pulse_music_sb.Service.Interface.MusicService;
-import com.app.pulse_music_sb.Util.Model.PaginationDTO;
-import com.app.pulse_music_sb.Util.PaginationService;
+import com.app.pulse_music_sb.Request.PaginationDTO;
+import com.app.pulse_music_sb.Service.PaginationService;
+import org.apache.coyote.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
@@ -22,8 +24,7 @@ public class MusicController {
 
     @GetMapping
     public Page<Music> findAll(@RequestBody PaginationDTO paginationDTO) {
-        Pageable pageable = paginationService.getPageable(paginationDTO);
-        return musicService.findAll(pageable);
+        return musicService.findAll(paginationDTO);
     }
 
     @GetMapping("/{id}")
@@ -32,8 +33,8 @@ public class MusicController {
     }
 
     @PostMapping
-    public Music save(@RequestBody Music music) {
-        return musicService.save(music);
+    public Music save(@RequestBody RequestCreateMusic requestCreateMusic, MultipartFile image, MultipartFile mp3) {
+        return musicService.save(requestCreateMusic, image, mp3);
     }
 
     @PutMapping("/{id}")

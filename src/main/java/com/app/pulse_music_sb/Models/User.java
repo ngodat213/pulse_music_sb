@@ -1,7 +1,6 @@
 package com.app.pulse_music_sb.Models;
 import com.app.pulse_music_sb.Const.Constants;
 import com.app.pulse_music_sb.Enums.UserRole;
-import com.app.pulse_music_sb.Util.Model.ImageStorage;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
@@ -35,9 +34,12 @@ public class User{
     @Email()
     private String email;
 
+    @Column(unique = true, nullable = false, length = 100)
+    private String fullName;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "avatar_id", referencedColumnName = "id")
-    private ImageStorage avatar;
+    private CloudStorage avatar;
 
     @Column(nullable = true, length = 1000)
     @Size(max = 1000)

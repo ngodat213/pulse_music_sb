@@ -6,7 +6,7 @@ public class ManagerRouter {
     };
 
     public static final String[] AdminMatchers = {
-            "/"
+            "/", "/dashboard/**"
     };
 
     public static final String[] PartnerMatchers = {

@@ -1,6 +1,6 @@
 package com.app.pulse_music_sb.Service;
 
-import com.app.pulse_music_sb.Auth.Model.CustomUserDetail;
+import com.app.pulse_music_sb.Models.CustomUserDetail;
 import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

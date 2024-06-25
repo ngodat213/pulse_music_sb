@@ -2,8 +2,8 @@ package com.app.pulse_music_sb.Controller;
 
 import com.app.pulse_music_sb.Models.Playlist;
 import com.app.pulse_music_sb.Service.Interface.PlaylistService;
-import com.app.pulse_music_sb.Util.Model.PaginationDTO;
-import com.app.pulse_music_sb.Util.PaginationService;
+import com.app.pulse_music_sb.Request.PaginationDTO;
+import com.app.pulse_music_sb.Service.PaginationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
