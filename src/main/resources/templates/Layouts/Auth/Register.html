@@ -44,6 +44,9 @@
           <div class="m-y text-sm">OR</div>
           <form th:action="@{/register_submit}" method="post" th:object="${registerUser}">
             <div class="form-group">
+              <input type="text" class="form-control" placeholder="Full name" required th:field="*{fullName}"/>
+            </div>
+            <div class="form-group">
               <input type="email" class="form-control" placeholder="Email" required th:field="*{email}"/>
             </div>
             <div class="form-group">

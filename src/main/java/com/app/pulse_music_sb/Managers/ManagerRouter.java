@@ -10,7 +10,7 @@ public class ManagerRouter {
     };
 
     public static final String[] PartnerMatchers = {
-            "/", "/dashboard/**"
+            "/"
     };
 
     public static final String rememberMeKey = "Freal";

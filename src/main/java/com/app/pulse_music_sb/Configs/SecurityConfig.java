@@ -1,6 +1,6 @@
 package com.app.pulse_music_sb.Configs;
 
-import com.app.pulse_music_sb.Auth.Service.CustomUserDetailService;
+import com.app.pulse_music_sb.Service.CustomUserDetailService;
 import com.app.pulse_music_sb.Enums.UserRole;
 import com.app.pulse_music_sb.Managers.ManagerRouter;
 import org.springframework.beans.factory.annotation.Autowired;
