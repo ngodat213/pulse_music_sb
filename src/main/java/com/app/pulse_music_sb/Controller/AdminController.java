@@ -5,6 +5,7 @@ import com.app.pulse_music_sb.Const.ToastConstants;
 import com.app.pulse_music_sb.Models.Music;
 import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Request.RequestCreateMusic;
+import com.app.pulse_music_sb.Request.RequestUpdateMusic;
 import com.app.pulse_music_sb.Service.Interface.MusicService;
 import com.app.pulse_music_sb.Service.Interface.MusicTypeService;
 import com.app.pulse_music_sb.Service.UserService;
@@ -69,6 +70,32 @@ public class AdminController {
         return "Layouts/Dashboard/music_table";
     }
     // API
+    @GetMapping("/music_table/{id}")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> getMusic(@PathVariable String id) {
+        Music music = musicService.findById(id);
+        if (music != null) {
+            return ResponseEntity.ok(Map.of("status", "success", "music", music));
+        } else {
+            return ResponseEntity.status(404).body(Map.of("status", "error", "message", "Music not found"));
+        }
+    }
+
+    @PutMapping("/music_table/{id}")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> editLocation(@PathVariable String id,
+                                                            @Validated @ModelAttribute RequestUpdateMusic request,
+                                                            @RequestParam("image") MultipartFile image,
+                                                            @RequestParam("mp3") MultipartFile mp3) {
+        Music existingMusic = musicService.findById(id);
+        if (existingMusic != null) {
+            musicService.update(id, request, image, mp3);
+            return ResponseEntity.ok(Map.of("status", "success", "message", "Music updated successfully"));
+        } else {
+            return ResponseEntity.status(404).body(Map.of("status", "error", "message", "Music not found"));
+        }
+    }
+
     @PostMapping("/music_table")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> createMusic(@Valid @ModelAttribute RequestCreateMusic createMusic,

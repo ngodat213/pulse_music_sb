@@ -48,6 +48,9 @@
                                         <thead>
                                         <tr>
                                             <th scope="col">Title</th>
+                                            <th scope="col">Image</th>
+                                            <th scope="col">Duration</th>
+                                            <th scope="col">Description</th>
                                             <th scope="col">Play count</th>
                                             <th scope="col">Heart</th>
                                             <th scope="col">User</th>
@@ -58,19 +61,21 @@
                                         <tbody>
                                         <tr th:each="music : ${musics}">
                                             <td th:text="${music.title}"></td>
+                                            <td><img th:src="${music.image.url}" alt="avatar"
+                                                     style="width: 50px; height: 50px;">
+                                            </td>
+                                            <td th:text="${music.duration}"></td>
+                                            <td th:text="${music.description}"></td>
                                             <td th:text="${music.playCount}"></td>
                                             <td th:text="${music.heartCount}"></td>
                                             <td th:text="${music.user.fullName}"></td>
-                                            <td><img th:src="${music.user.getAvatarUrl()}" alt="avatar"
-                                                     style="width: 30px; height: 30px;"></td>
-                                            <td th:text="${music.isDeleted()}"></td>
                                             <td><a href="#" th:class=" ${!music.isDeleted()} ? 'status_btn' : 'status_btn bg-danger'"
                                                    th:text="${!music.isDeleted()} ? Active : Unlock"></a>
                                             </td>
                                             <td>
-                                                <a href="#" class="edit-location" th:data-musicid="${music.id}">
-                                                za    <i class="fa-solid fa-pen-to-square"></i>
-                                                </a>  |
+                                                <a href="#" class="edit-music" th:data-musicid="${music.id}">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </a> |
                                                 <a href="#" th:data-musicid="${music.id}" class="open-delete-modal">
                                                     <i class="fa-solid fa-trash-can"></i>
                                                 </a>
@@ -224,6 +229,44 @@
         <i class="ti-angle-up"></i>
     </a>
 </div>
+<!-- Edit Music Modal -->
+<div class="modal fade" id="editMusicModal" tabindex="-1" aria-labelledby="editMusicModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editMusicModalLabel">Edit Music</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editMusicForm">
+                    <input type="hidden" id="editMusicId" name="id">
+                    <div class="mb-3">
+                        <label for="editTitle" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="editTitle" name="title">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="editDescription" name="description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editImage" class="form-label">Image</label>
+                        <input type="file" class="form-control" id="editImage" name="image">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editMp3" class="form-label">MP3</label>
+                        <input type="file" class="form-control" id="editMp3" name="mp3">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveEditMusicChanges">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Create Music Modal-->
 <div class="modal fade" id="createMusicModal" tabindex="-1" aria-labelledby="createMusicModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -280,7 +323,7 @@
         </div>
     </div>
 </div>
-<!--lock user modal-->
+<!--Soft Delete Modal-->
 <div class="modal fade" id="lockUserModal" tabindex="-1" aria-labelledby="lockUserModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -362,6 +405,7 @@
 <script th:src="@{/js/custom.js}"></script>
 <script src="https://kit.fontawesome.com/99cbdec5b3.js" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/99cbdec5b3.js" crossorigin="anonymous"></script>
+<!--add-->
 <script>
     $(document).ready(function () {
         $('#createMusicForm').submit(function (event) {
@@ -410,6 +454,61 @@
         });
     });
 </script>
+<!--edit-->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle edit button click
+        document.querySelectorAll('.edit-music').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const musicId = this.getAttribute('data-musicid');
+                fetch(`/dashboard/music_table/${musicId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            const music = data.music;
+                            document.getElementById('editMusicId').value = music.id;
+                            document.getElementById('editTitle').value = music.title;
+                            document.getElementById('editDescription').value = music.description;
+                            $('#editMusicModal').modal('show');
+                        } else {
+                            alert('Error aaa: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        alert('Error bbb: ' + error.message);
+                    });
+            });
+        });
+
+        // Handle save changes button click in edit modal
+        document.getElementById('saveEditMusicChanges').addEventListener('click', function() {
+            const form = document.getElementById('editMusicForm');
+            const formData = new FormData(form);
+            const musicId = document.getElementById('editMusicId').value;
+
+            $.ajax({
+                url: `/dashboard/music_table/${musicId}`,
+                type: 'PUT',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    if (data.status === 'success') {
+                        $('#editMusicModal').modal('hide');
+                        window.location.reload(); // Reload the page to reflect changes
+                    } else {
+                        alert('Error ccc: ' + data.message);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert('Error ddd: ' + errorThrown);
+                }
+            });
+        });
+    });
+</script>
+
+<!--soft delete-->
 <script>
     $(document).ready(function() {
         // Function to open the modal with the user ID
