@@ -43,4 +43,9 @@ public class MusicTypeServiceImpl implements MusicTypeService {
     public void deleteById(String id) {
         musicTypeRepository.deleteById(id);
     }
+
+    @Override
+    public boolean existsById(String id) {
+        return musicTypeRepository.existsById(id);
+    }
 }

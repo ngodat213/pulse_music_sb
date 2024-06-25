@@ -3,8 +3,10 @@ package com.app.pulse_music_sb.Controller;
 import com.app.pulse_music_sb.Const.ErrorConstants;
 import com.app.pulse_music_sb.Const.ToastConstants;
 import com.app.pulse_music_sb.Models.Music;
+import com.app.pulse_music_sb.Models.MusicType;
 import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Request.RequestCreateMusic;
+import com.app.pulse_music_sb.Request.RequestMusicType;
 import com.app.pulse_music_sb.Request.RequestUpdateMusic;
 import com.app.pulse_music_sb.Service.Interface.MusicService;
 import com.app.pulse_music_sb.Service.Interface.MusicTypeService;
@@ -22,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/dashboard")
@@ -51,8 +54,14 @@ public class AdminController {
     }
 
     @GetMapping("/music_type_table")
-    public String musicTypeTable (){
-
+    public String musicTypeTable (@RequestParam(defaultValue = "1") int page,
+                                  @RequestParam(defaultValue = "10") int limit,
+                                  @RequestParam(defaultValue = "desc", name = "sort") String sortDirection,
+                                  @RequestParam(defaultValue = "createdAt") String sortBy,
+                                  Model model){
+        PaginationDTO paginationDTO = new PaginationDTO(page, limit, sortDirection, sortBy);
+        model.addAttribute("type", new RequestMusicType());
+        model.addAttribute("types", musicTypeService.findAll(paginationDTO));
         return "Layouts/Dashboard/music_type_table";
     }
 
@@ -70,6 +79,50 @@ public class AdminController {
         return "Layouts/Dashboard/music_table";
     }
     // API
+    // ----------------------==MUSIC TYPE==---------------------- //
+    @GetMapping("/music_type_table/{id}")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> getMusicTypeById(@PathVariable String id) {
+        Optional<MusicType> musicType = musicTypeService.findById(id);
+        if (musicType.isPresent()) {
+            return ResponseEntity.ok(Map.of("status", "success", "musicType", musicType.get()));
+        } else {
+            return ResponseEntity.status(404).body(Map.of("status", "error", "message", "MusicType not found"));
+        }
+    }
+
+    @PostMapping("/music_type_table")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> createMusicType(@RequestBody MusicType musicType) {
+        MusicType savedMusicType = musicTypeService.save(musicType);
+        return ResponseEntity.ok(Map.of("status", "success", "musicType", savedMusicType));
+    }
+
+    @PutMapping("/music_type_table/{id}")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> updateMusicType(@PathVariable String id, @RequestBody MusicType musicTypeDetails) {
+        Optional<MusicType> optionalMusicType = musicTypeService.findById(id);
+        if (optionalMusicType.isPresent()) {
+            MusicType musicType = optionalMusicType.get();
+            musicType.setTypeName(musicTypeDetails.getTypeName());
+            MusicType updatedMusicType = musicTypeService.save(musicType);
+            return ResponseEntity.ok(Map.of("status", "success", "musicType", updatedMusicType));
+        } else {
+            return ResponseEntity.status(404).body(Map.of("status", "error", "message", "MusicType not found"));
+        }
+    }
+
+    @DeleteMapping("/music_type_table/{id}")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> deleteMusicType(@PathVariable String id) {
+        if (musicTypeService.existsById(id)) {
+            musicTypeService.deleteById(id);
+            return ResponseEntity.ok(Map.of("status", "success", "message", "MusicType deleted successfully"));
+        } else {
+            return ResponseEntity.status(404).body(Map.of("status", "error", "message", "MusicType not found"));
+        }
+    }
+    // ----------------------==MUSIC==---------------------- //
     @GetMapping("/music_table/{id}")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> getMusic(@PathVariable String id) {
@@ -128,7 +181,7 @@ public class AdminController {
         }
     }
 
-    // User
+    // ----------------------==USER==---------------------- //
     @PostMapping("/user_lock/{id}")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> userLock(@PathVariable("id") String userId) {

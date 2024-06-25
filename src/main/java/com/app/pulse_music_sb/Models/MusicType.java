@@ -3,6 +3,7 @@ package com.app.pulse_music_sb.Models;
 import com.app.pulse_music_sb.Common.AbstractEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,6 +21,6 @@ public class MusicType extends AbstractEntity {
     @OneToMany(mappedBy = "musicType")
     private List<MusicTypeUser> musicTypeUsers;
 
-    @OneToMany(mappedBy = "musicType")
-    private List<TrackType> trackTypes;
+    @ManyToMany(mappedBy = "musicTypes")
+    private List<Music> music;
 }

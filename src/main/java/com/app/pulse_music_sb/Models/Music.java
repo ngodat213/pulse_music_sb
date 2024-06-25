@@ -37,6 +37,14 @@ public class Music extends AbstractEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @ManyToMany
+    @JoinTable(
+            name = "MusicTypes",
+            joinColumns = @JoinColumn(name = "music_id"),
+            inverseJoinColumns = @JoinColumn(name = "music_type_id")
+    )
+    private List<MusicType> musicTypes;
+
     @OneToMany(mappedBy = "music")
     private List<Track> tracks;
 
