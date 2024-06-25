@@ -1,6 +1,5 @@
-package com.app.pulse_music_sb.Auth.Model;
+package com.app.pulse_music_sb.Models;
 
-import com.app.pulse_music_sb.Models.User;
 import jakarta.persistence.EntityListeners;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,4 +1,4 @@
-package com.app.pulse_music_sb.Auth.Request;
+package com.app.pulse_music_sb.Request;
 
 import com.app.pulse_music_sb.Enums.UserRole;
 import com.app.pulse_music_sb.Models.User;

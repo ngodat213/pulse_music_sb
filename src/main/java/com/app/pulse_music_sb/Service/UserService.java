@@ -1,8 +1,8 @@
 package com.app.pulse_music_sb.Service;
 
-import com.app.pulse_music_sb.Auth.Request.RequestRegisterUser;
-import com.app.pulse_music_sb.Auth.Request.UserPasswordChange;
-import com.app.pulse_music_sb.Auth.Request.UserPasswordReset;
+import com.app.pulse_music_sb.Request.RequestRegisterUser;
+import com.app.pulse_music_sb.Request.UserPasswordChange;
+import com.app.pulse_music_sb.Request.UserPasswordReset;
 import com.app.pulse_music_sb.Enums.UserRole;
 import com.app.pulse_music_sb.Exceptions.DuplicateResourceException;
 import com.app.pulse_music_sb.Exceptions.ResourceNotFoundException;

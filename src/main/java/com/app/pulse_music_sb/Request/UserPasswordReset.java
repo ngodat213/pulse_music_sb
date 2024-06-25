@@ -1,4 +1,4 @@
-package com.app.pulse_music_sb.Auth.Request;
+package com.app.pulse_music_sb.Request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
