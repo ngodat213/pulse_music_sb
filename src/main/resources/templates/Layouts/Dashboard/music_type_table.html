@@ -37,7 +37,7 @@
                                             </div>
                                         </div>
                                         <button class="add_button ms-2" type="button" data-bs-toggle="modal"
-                                                data-bs-target="#createMusicModal">
+                                                data-bs-target="#createMusicTypeModal">
                                             Create Music
                                         </button>
                                     </div>
@@ -47,36 +47,24 @@
                                     <table class="table lms_table_active ">
                                         <thead>
                                         <tr>
-                                            <th scope="col">Title</th>
-                                            <th scope="col">Image</th>
-                                            <th scope="col">Duration</th>
-                                            <th scope="col">Description</th>
-                                            <th scope="col">Play count</th>
-                                            <th scope="col">Heart</th>
-                                            <th scope="col">User</th>
+                                            <th scope="col">Type name</th>
+                                            <th scope="col">Songs</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="music : ${musics}">
-                                            <td th:text="${music.title}"></td>
-                                            <td><img th:src="${music.image.url}" alt="avatar"
-                                                     style="width: 50px; height: 50px;">
-                                            </td>
-                                            <td th:text="${music.duration}"></td>
-                                            <td th:text="${music.description}"></td>
-                                            <td th:text="${music.playCount}"></td>
-                                            <td th:text="${music.heartCount}"></td>
-                                            <td th:text="${music.user.fullName}"></td>
-                                            <td><a href="#" th:class=" ${!music.isDeleted()} ? 'status_btn' : 'status_btn bg-danger'"
-                                                   th:text="${!music.isDeleted()} ? Active : Unlock"></a>
+                                        <tr th:each="type : ${types}">
+                                            <td th:text="${type.typeName}"></td>
+                                            <td th:text="${type.getMusic().size()}"></td>
+                                            <td><a href="#" th:class=" ${!type.isDeleted()} ? 'status_btn' : 'status_btn bg-danger'"
+                                                   th:text="${!type.isDeleted()} ? Active : Unlock"></a>
                                             </td>
                                             <td>
-                                                <a href="#" class="edit-music" th:data-musicid="${music.id}">
+                                                <a href="#" class="edit-music" th:data-typeid="${type.id}">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </a> |
-                                                <a href="#" th:data-musicid="${music.id}" class="open-delete-modal">
+                                                <a href="#" th:data-typeid="${type.id}" class="open-delete-modal">
                                                     <i class="fa-solid fa-trash-can"></i>
                                                 </a>
                                             </td>
@@ -229,97 +217,50 @@
         <i class="ti-angle-up"></i>
     </a>
 </div>
-<!-- Edit Music Modal -->
-<div class="modal fade" id="editMusicModal" tabindex="-1" aria-labelledby="editMusicModalLabel" aria-hidden="true">
+<!-- Edit Music Type Modal -->
+<div class="modal fade" id="editMusicTypeModal" tabindex="-1" aria-labelledby="editMusicTypeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editMusicModalLabel">Edit Music</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="editMusicTypeModalLabel">Edit Music Type</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="editMusicForm">
-                    <input type="hidden" id="editMusicId" name="id">
+                <form id="editMusicTypeForm">
+                    <input type="hidden" id="editMusicTypeId" name="id">
                     <div class="mb-3">
-                        <label for="editTitle" class="form-label">Title</label>
-                        <input type="text" class="form-control" id="editTitle" name="title">
-                    </div>
-                    <div class="mb-3">
-                        <label for="editDescription" class="form-label">Description</label>
-                        <textarea class="form-control" id="editDescription" name="description"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editImage" class="form-label">Image</label>
-                        <input type="file" class="form-control" id="editImage" name="image">
-                    </div>
-                    <div class="mb-3">
-                        <label for="editMp3" class="form-label">MP3</label>
-                        <input type="file" class="form-control" id="editMp3" name="mp3">
+                        <label for="editTypeName" class="form-label">Type Name</label>
+                        <input type="text" class="form-control" id="editTypeName" name="typeName" required>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveEditMusicChanges">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveEditMusicTypeChanges">Save changes</button>
             </div>
         </div>
     </div>
 </div>
-
-<!--Create Music Modal-->
-<div class="modal fade" id="createMusicModal" tabindex="-1" aria-labelledby="createMusicModalLabel" aria-hidden="true">
+<!-- Create Music Type Modal -->
+<div class="modal fade" id="createMusicTypeModal" tabindex="-1" aria-labelledby="createMusicTypeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createMusicModalLabel">Create Music</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="createMusicTypeModalLabel">Create Music Type</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="createMusicForm" th:object="${music}" enctype="multipart/form-data">
-                <div class="modal-body">
-                    <div id="formErrors" class="mb-3 alert alert-danger" role="alert" style="display: none;">
-                        <ul id="errorList"></ul>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-12">
-                            <label for="title" class="form-label">Title</label>
-                            <input type="text" class="form-control" id="title" th:field="*{title}" required>
-                        </div>
-                    </div>
-
+            <div class="modal-body">
+                <form id="createMusicTypeForm">
                     <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" id="description" th:field="*{description}"></textarea>
+                        <label for="createTypeName" class="form-label">Type Name</label>
+                        <input type="text" class="form-control" id="createTypeName" name="typeName" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="types" class="form-label">Music Types</label>
-                        <select class="form-select" id="types" th:field="*{types}" multiple>
-                            <option th:each="type : ${types}" th:value="${type.id}" th:text="${type.typeName}"></option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="userId" class="form-label">Artist</label>
-                        <select class="form-select" id="userId" th:field="*{userId}">
-                            <option th:each="user : ${artists}" th:value="${user.id}" th:text="${user.fullName}"></option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <div class="col-12">
-                            <label for="image" class="form-label">Upload Image</label>
-                            <input type="file" class="form-control" id="image" th:field="*{image}" required>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <div class="col-12">
-                            <label for="mp3" class="form-label">Upload MP3</label>
-                            <input type="file" class="form-control" id="mp3" th:field="*{mp3}" required>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveCreateMusicType">Save changes</button>
+            </div>
         </div>
     </div>
 </div>
@@ -344,7 +285,6 @@
         </div>
     </div>
 </div>
-
 
 <script th:src="@{/js/jquery1-3.4.1.min.js}"></script>
 
@@ -408,48 +348,33 @@
 <script src="https://kit.fontawesome.com/99cbdec5b3.js" crossorigin="anonymous"></script>
 <!--add-->
 <script>
-    $(document).ready(function () {
-        $('#createMusicForm').submit(function (event) {
-            event.preventDefault(); // Prevent the form from submitting via the browser
-            var form = $('#createMusicForm')[0];
-            var formData = new FormData(form);
+    $(document).ready(function() {
+        // Handle create button click (assuming there's a button to open the create modal)
+        $('#openCreateMusicTypeModal').on('click', function() {
+            $('#createMusicTypeModal').modal('show');
+        });
+
+        // Handle save changes button click in create modal
+        $('#saveCreateMusicType').on('click', function() {
+            const formData = {
+                typeName: $('#createTypeName').val()
+            };
 
             $.ajax({
+                url: '/dashboard/music_type_table',
                 type: 'POST',
-                url: '/dashboard/music_table',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (response) {
-                    console.log("success");
-                    if (response.status === 'success') {
-                        $('#createMusicModal').modal('hide');
-                        window.location.href = '/dashboard/music_table';
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function(response) {
+                    if (response) {
+                        $('#createMusicTypeModal').modal('hide');
+                        window.location.reload(); // Reload the page to reflect changes
                     } else {
-                        $('#formErrors').show();
-                        var errorList = $('#errorList');
-                        errorList.empty();
-                        if (response.errors) {
-                            response.errors.forEach(function (error) {
-                                errorList.append('<li>' + error.defaultMessage + '</li>');
-                            });
-                        } else if (response.message) {
-                            errorList.append('<li>' + response.message + '</li>');
-                        }
+                        alert('Error: Unable to create Music Type');
                     }
                 },
-                error: function (response) {
-                    console.log(response.responseJSON.message)
-                    $('#formErrors').show();
-                    var errorList = $('#errorList');
-                    errorList.empty();
-                    if (response.responseJSON.errors) {
-                        response.responseJSON.errors.forEach(function (error) {
-                            errorList.append('<li>' + error.defaultMessage + '</li>');
-                        });
-                    } else if (response.responseJSON.message) {
-                        errorList.append('<li>' + response.responseJSON.message + '</li>');
-                    }
+                error: function() {
+                    alert('Error: Unable to create Music Type');
                 }
             });
         });
@@ -461,75 +386,75 @@
         // Handle edit button click
         document.querySelectorAll('.edit-music').forEach(function(button) {
             button.addEventListener('click', function() {
-                const musicId = this.getAttribute('data-musicid');
-                fetch(`/dashboard/music_table/${musicId}`)
+                const typeId = this.getAttribute('data-typeid');
+                fetch(`/dashboard/music_type_table/${typeId}`)
                     .then(response => response.json())
                     .then(data => {
-                        if (data.status === 'success') {
-                            const music = data.music;
-                            document.getElementById('editMusicId').value = music.id;
-                            document.getElementById('editTitle').value = music.title;
-                            document.getElementById('editDescription').value = music.description;
-                            $('#editMusicModal').modal('show');
+                        if (data) {
+                            const type = data.musicType;
+                            document.getElementById('editMusicTypeId').value = type.id;
+                            document.getElementById('editTypeName').value = type.typeName;
+                            $('#editMusicTypeModal').modal('show');
                         } else {
-                            alert('Error aaa: ' + data.message);
+                            alert('Error: Music Type not found');
                         }
                     })
                     .catch(error => {
-                        alert('Error bbb: ' + error.message);
+                        alert('Error: ' + error.message);
                     });
             });
         });
 
         // Handle save changes button click in edit modal
-        document.getElementById('saveEditMusicChanges').addEventListener('click', function() {
-            const form = document.getElementById('editMusicForm');
-            const formData = new FormData(form);
-            const musicId = document.getElementById('editMusicId').value;
+        document.getElementById('saveEditMusicTypeChanges').addEventListener('click', function() {
+            const typeId = document.getElementById('editMusicTypeId').value;
+            const formData = {
+                typeName: document.getElementById('editTypeName').value
+            };
 
             $.ajax({
-                url: `/dashboard/music_table/${musicId}`,
+                url: `/dashboard/music_type_table/${typeId}`,
                 type: 'PUT',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(data) {
-                    if (data.status === 'success') {
-                        $('#editMusicModal').modal('hide');
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function(response) {
+                    if (response) {
+                        $('#editMusicTypeModal').modal('hide');
                         window.location.reload(); // Reload the page to reflect changes
                     } else {
-                        alert('Error ccc: ' + data.message);
+                        alert('Error: Unable to update Music Type');
                     }
                 },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    alert('Error ddd: ' + errorThrown);
+                error: function() {
+                    alert('Error: Unable to update Music Type');
                 }
             });
         });
     });
 </script>
-
-<!--soft delete-->
+<!-- Soft Delete -->
 <script>
     $(document).ready(function() {
-        // Function to open the modal with the user ID
-        // Handle delete button click
-        document.querySelectorAll('.open-delete-modal').forEach(function(button) {
-            button.addEventListener('click', function(event) {
-                event.preventDefault();
-                const typeId = this.getAttribute('data-typeid');
-                document.getElementById('deleteMusicTypeId').value = typeId;
-                $('#deleteMusicTypeModal').modal('show');
-            });
+        // Function to open the delete modal with the type ID
+        function openDeleteMusicTypeModal(typeId) {
+            $('#deleteMusicTypeId').val(typeId);
+            $('#deleteMusicTypeModal').modal('show');
+        }
+
+        // Handle click event to open the delete modal
+        $('.open-delete-modal').click(function(event) {
+            event.preventDefault(); // Prevent the default anchor behavior
+            var typeId = $(this).data('typeid');
+            openDeleteMusicTypeModal(typeId);
         });
 
-        // Handle confirm delete button click in delete modal
-        document.getElementById('confirmDeleteMusicType').addEventListener('click', function() {
-            const typeId = document.getElementById('deleteMusicTypeId').value;
-
+        // AJAX call to delete the music type
+        $('#confirmDeleteMusicType').click(function() {
+            var formData = $('#deleteMusicTypeForm').serialize();
             $.ajax({
-                url: `/dashboard/music_type_table/${typeId}`,
                 type: 'DELETE',
+                url: '/dashboard/music_type_table/' + $('#deleteMusicTypeId').val(), // URL should include the type ID
+                data: formData,
                 success: function(response) {
                     if (response) {
                         $('#deleteMusicTypeModal').modal('hide');
@@ -538,13 +463,15 @@
                         alert('Error: Unable to delete Music Type');
                     }
                 },
-                error: function() {
-                    alert('Error: Unable to delete Music Type');
+                error: function(response) {
+                    var errorMessage = response.responseJSON ? response.responseJSON.message : 'An error occurred';
+                    alert(errorMessage); // Display error message for AJAX request failure
                 }
             });
         });
     });
 </script>
+
 
 </body>
 </html>

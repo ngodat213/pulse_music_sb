@@ -12,4 +12,5 @@ public interface MusicTypeService {
     MusicType save(MusicType musicType);
     MusicType update(MusicType musicType);
     void deleteById(String id);
+    boolean existsById(String id);
 }

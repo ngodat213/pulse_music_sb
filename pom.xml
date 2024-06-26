@@ -30,11 +30,19 @@
         <java.version>21</java.version>
     </properties>
     <dependencies>
+        <!--Get duration for mp3-->
+        <dependency>
+            <groupId>javazoom</groupId>
+            <artifactId>jlayer</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+        <!--Upload file to cloud-->
         <dependency>
             <groupId>com.cloudinary</groupId>
             <artifactId>cloudinary-http44</artifactId>
             <version>1.38.0</version>
         </dependency>
+        <!--Image transformations-->
         <dependency>
             <groupId>net.coobird</groupId>
             <artifactId>thumbnailator</artifactId>

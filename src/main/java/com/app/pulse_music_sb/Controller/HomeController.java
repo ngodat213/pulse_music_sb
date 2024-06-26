@@ -1,6 +1,7 @@
 package com.app.pulse_music_sb.Controller;
 
-import ch.qos.logback.core.model.Model;
+import com.app.pulse_music_sb.Request.PaginationDTO;
+import org.springframework.ui.Model;
 import com.app.pulse_music_sb.Models.CustomUserDetail;
 import com.app.pulse_music_sb.Service.Interface.MusicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,12 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(@AuthenticationPrincipal CustomUserDetail customUserDetail, Model model) {
+        PaginationDTO paginationDTO = new PaginationDTO(1, 5, "desc", "playCount");
+        PaginationDTO musicsPaginationDTO = new PaginationDTO(1, 4, "desc", "playCount");
+        PaginationDTO trendingPaginationDTO = new PaginationDTO(1, 10, "desc", "playCount");
+        model.addAttribute("carousels", musicService.findAll(paginationDTO));
+        model.addAttribute("musics", musicService.findAll(musicsPaginationDTO));
+        model.addAttribute("trending", musicService.findAll(trendingPaginationDTO));
         return "Layouts/Home/index";
     }
 }
