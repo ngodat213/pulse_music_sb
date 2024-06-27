@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<div class="padding" th:fragment="artists_content(artists, types, zeroLike)">
+    <div class="page-title m-b">
+        <h1 class="inline m-a-0">Artists</h1>
+        <div class="dropdown inline">
+            <button class="btn btn-sm no-bg h4 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">
+                By name
+            </button>
+            <div class="dropdown-menu">
+                <a href="#" class="dropdown-item active">By name</a>
+                <a href="#" class="dropdown-item">Songs</a>
+            </div>
+        </div>
+    </div>
+    <div data-ui-jp="jscroll" data-ui-options="{
+        autoTrigger: false,
+        loadingHtml: '<i class=\'fa fa-refresh fa-spin text-md text-muted\'></i>',
+        padding: 50,
+        nextSelector: 'a.jscroll-next:last'
+        }">
+        <div class="row row-lg">
+            <div th:each="artist : ${artists}" th:class="${zeroLike} == false ? 'col-xs-4 col-sm-4 col-md-3' : 'col-xs-1 col-sm-1 col-md-1'">
+                <div class="item">
+                    <div class="item-media rounded">
+                        <a href="artist.detail.html"
+                           class="item-media-content"
+                           th:style="'background-image: url(' + ${artist.getAvatarUrl()} + ')'">
+                        </a>
+                    </div>
+                    <div class="item-info text-center">
+                        <div class="item-title text-ellipsis">
+                            <a href="artist.detail.html" th:text="${artist.fullName}"></a>
+                            <div class="text-sm text-muted" th:text="${artist.mySongs.size()} + 'songs'"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a
+                href="scroll.author.html"
+                class="btn btn-sm white rounded jscroll-next"
+        >Show More</a
+        >
+    </div>
+</div>
+</html>

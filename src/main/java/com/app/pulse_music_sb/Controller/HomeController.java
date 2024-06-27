@@ -52,6 +52,22 @@ public class HomeController {
         return "Layouts/Home/browse";
     }
 
+    @GetMapping("/artist")
+    public String artist(@AuthenticationPrincipal CustomUserDetail customUserDetail, Model model) {
+        String[] artistType = {"By name", "By songs"};
+        model.addAttribute("types", artistType);
+        model.addAttribute("artists", userService.getArtists());
+
+        List<Music> likedMusic = userService.getUserLikedMusic(customUserDetail.getUser().getId());
+        if (likedMusic == null) {
+            likedMusic = new ArrayList<>(); // Ensure it's not null
+        }
+        model.addAttribute("zeroLike", likedMusic.size() == 0 ? true : false);
+        model.addAttribute("likes", likedMusic);
+//        model.addAttribute("sizeLikes", likedMusic.size());
+        return "Layouts/Home/artist";
+    }
+
     @GetMapping("/scroll_item")
     public String scroll_item(@AuthenticationPrincipal CustomUserDetail customUserDetail, Model model) {
         model.addAttribute("musics", musicService.findAll());

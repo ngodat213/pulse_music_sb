@@ -13,6 +13,8 @@ import java.util.List;
 public interface IUserService extends UserDetailsService {
     List<User> getAll(PaginationDTO paginationDTO);
 
+    List<User> getArtists();
+
     List<Music> getUserLikedMusic(String userId);
 
     User likeMusic(String userId, String musicId);
