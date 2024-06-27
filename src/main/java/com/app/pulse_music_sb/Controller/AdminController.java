@@ -74,7 +74,7 @@ public class AdminController {
         PaginationDTO paginationDTO = new PaginationDTO(page, limit, sortDirection, sortBy);
         model.addAttribute("music", new RequestCreateMusic());
         model.addAttribute("artists", userService.getAll(paginationDTO));
-        model.addAttribute("musics", musicService.findAll(paginationDTO));
+        model.addAttribute("musics", musicService.findAllBy(paginationDTO));
         model.addAttribute("types", musicTypeService.findAll(paginationDTO));
         return "Layouts/Dashboard/music_table";
     }

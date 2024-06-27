@@ -9,7 +9,9 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,6 +21,7 @@ import java.util.Date;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class User{
+    // -----------------= INFO USER =----------------- //
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
@@ -64,5 +67,21 @@ public class User{
             return avatar.getUrl();
         }
         return Constants.DEFAULT_AVATAR;
+    }
+
+    // -----------------= INFO MUSIC =----------------- //
+    @OneToMany(mappedBy = "user")
+    private List<Music> mySongs = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_liked_music",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "music_id")
+    )
+    private List<Music> userLiked = new ArrayList<>();
+
+    public int sizeMySong(){
+        return mySongs.size();
     }
 }

@@ -1,5 +1,7 @@
 package com.app.pulse_music_sb.Service;
 
+import com.app.pulse_music_sb.Models.Music;
+import com.app.pulse_music_sb.Repository.MusicRepository;
 import com.app.pulse_music_sb.Request.RequestRegisterUser;
 import com.app.pulse_music_sb.Request.UserPasswordChange;
 import com.app.pulse_music_sb.Request.UserPasswordReset;
@@ -39,6 +41,8 @@ public class UserService implements IUserService {
     private PaginationService paginationService;
     @Autowired
     private OtpRepository otpRepository;
+    @Autowired
+    private MusicRepository musicRepository;
 
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -46,6 +50,26 @@ public class UserService implements IUserService {
     public List<User> getAll(PaginationDTO paginationDTO) {
         Pageable pageable = paginationService.getPageable(paginationDTO);
         return userRepository.findAll(pageable).toList();
+    }
+
+    @Override
+    public List<User> getArtists(){
+        System.out.println(UserRole.ARTIST.getAuthority());
+        return userRepository.findAllByRole(UserRole.ARTIST);
+    }
+
+    @Override
+    public List<Music> getUserLikedMusic(String userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        return user.getUserLiked();
+    }
+
+    @Override
+    public User likeMusic(String userId, String musicId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        Music music = musicRepository.findById(musicId).orElseThrow(() -> new RuntimeException("Music not found"));
+        user.getUserLiked().add(music);
+        return userRepository.save(user);
     }
 
     @Override

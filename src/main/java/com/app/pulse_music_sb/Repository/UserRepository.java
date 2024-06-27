@@ -1,9 +1,12 @@
 package com.app.pulse_music_sb.Repository;
 
+import com.app.pulse_music_sb.Enums.UserRole;
 import com.app.pulse_music_sb.Models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
@@ -15,4 +18,5 @@ public interface UserRepository extends JpaRepository<User, String> {
     @Query("select u from User u where u.tokenResetPassword=?1")
     User findByToken(String token);
     boolean existsByEmail(String email);
+    List<User> findAllByRole(UserRole role);
 }

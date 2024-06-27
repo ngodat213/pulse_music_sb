@@ -2,15 +2,15 @@ package com.app.pulse_music_sb.Managers;
 
 public class ManagerRouter {
     public static final String[] UserMatchers = {
-            "/"
+            "/", "/browse", "/artist", "/chart"
+    };
+
+    public static final String[] ArtistsMatchers = {
+            "/", "/browse", "/artist", "/chart"
     };
 
     public static final String[] AdminMatchers = {
-            "/", "/dashboard/**"
-    };
-
-    public static final String[] PartnerMatchers = {
-            "/"
+            "/dashboard/**"
     };
 
     public static final String rememberMeKey = "Freal";
