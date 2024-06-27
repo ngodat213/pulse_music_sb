@@ -7,10 +7,11 @@ import com.app.pulse_music_sb.Request.RequestUpdateMusic;
 import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface MusicService {
-    Page<Music> findAll(PaginationDTO paginationDTO);
+    Page<Music> findAllBy(PaginationDTO paginationDTO);
+    List<Music> findAll();
     Music findById(String id);
     Music save(RequestCreateMusic createMusic, MultipartFile image, MultipartFile mp3);
     Music update(String id, RequestUpdateMusic request, MultipartFile image, MultipartFile mp3);

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,9 +31,14 @@ public class MusicServiceImpl implements MusicService {
     private UserService userService;
 
     @Override
-    public Page<Music> findAll(PaginationDTO paginationDTO) {
+    public Page<Music> findAllBy(PaginationDTO paginationDTO) {
         Pageable pageable = paginationService.getPageable(paginationDTO);
         return musicRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Music> findAll() {
+        return musicRepository.findAll();
     }
 
     @Override

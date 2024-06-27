@@ -45,6 +45,9 @@ public class Music extends AbstractEntity {
     )
     private List<MusicType> musicTypes;
 
+    @ManyToMany(mappedBy = "userLiked")
+    private List<User> likedByUsers;
+
     @OneToMany(mappedBy = "music")
     private List<Track> tracks;
 

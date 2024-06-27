@@ -1,5 +1,6 @@
 package com.app.pulse_music_sb.Service.Interface;
 
+import com.app.pulse_music_sb.Models.Music;
 import com.app.pulse_music_sb.Request.RequestRegisterUser;
 import com.app.pulse_music_sb.Request.UserPasswordChange;
 import com.app.pulse_music_sb.Request.UserPasswordReset;
@@ -11,6 +12,10 @@ import java.util.List;
 
 public interface IUserService extends UserDetailsService {
     List<User> getAll(PaginationDTO paginationDTO);
+
+    List<Music> getUserLikedMusic(String userId);
+
+    User likeMusic(String userId, String musicId);
 
     User findById(String id);
 

@@ -5,7 +5,7 @@
         <a data-toggle="collapse" data-target="#navbar" class="navbar-item pull-right hidden-md-up m-r-0 m-l">
             <i class="material-icons">menu</i>
         </a>
-        <a href="index.html" class="navbar-brand md">
+        <a th:href="@{/}" class="navbar-brand md">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 48 48"
@@ -85,12 +85,12 @@
                     data-ui-nav
             >
                 <li class="nav-item">
-                    <a href="home.html" class="nav-link"
+                    <a th:href="@{/}" class="nav-link"
                     ><span class="nav-text">Discover</span></a
                     >
                 </li>
                 <li class="nav-item">
-                    <a href="browse.html" class="nav-link"
+                    <a th:href="@{/browse}" class="nav-link"
                     ><span class="nav-text">Browse</span></a
                     >
                 </li>

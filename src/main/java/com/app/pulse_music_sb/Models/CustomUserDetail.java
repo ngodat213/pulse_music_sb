@@ -43,4 +43,8 @@ public class CustomUserDetail implements UserDetails{
         }
         return link + defaultPublicIdAvatar + extensionImage;
     }
+
+    public String getId(){
+        return user.getId();
+    }
 }
