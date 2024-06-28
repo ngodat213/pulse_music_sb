@@ -1,11 +1,11 @@
 package com.app.pulse_music_sb.Service.Interface;
 
 import com.app.pulse_music_sb.Models.Music;
-import com.app.pulse_music_sb.Request.RequestRegisterUser;
-import com.app.pulse_music_sb.Request.UserPasswordChange;
-import com.app.pulse_music_sb.Request.UserPasswordReset;
+import com.app.pulse_music_sb.Request.Request.RequestRegisterUser;
+import com.app.pulse_music_sb.Request.Request.RequestPasswordChange;
+import com.app.pulse_music_sb.Request.Request.RequestPasswordReset;
 import com.app.pulse_music_sb.Models.User;
-import com.app.pulse_music_sb.Request.PaginationDTO;
+import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
@@ -39,9 +39,7 @@ public interface IUserService extends UserDetailsService {
 
     boolean checkOldPassword(User authenticatedUser, String oldPassword);
 
-    void UpdatePassword(User authenticatedUser, UserPasswordChange userPasswordChange);
-
-    void handleResetPassword(UserPasswordReset userPasswordReset);
+    void UpdatePassword(User user, String newPassword);
 
     boolean handleLockUser(String id);
 
@@ -54,4 +52,6 @@ public interface IUserService extends UserDetailsService {
     String GenToken(int Length);
 
     User getUserByToken(String token);
+
+    void ResetDateForgotPassword(User user);
 }

@@ -4,10 +4,10 @@ import com.app.pulse_music_sb.Models.CloudStorage;
 import com.app.pulse_music_sb.Models.Music;
 import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Repository.MusicRepository;
-import com.app.pulse_music_sb.Request.RequestCreateMusic;
-import com.app.pulse_music_sb.Request.RequestUpdateMusic;
+import com.app.pulse_music_sb.Request.Request.RequestCreateMusic;
+import com.app.pulse_music_sb.Request.Request.RequestUpdateMusic;
 import com.app.pulse_music_sb.Service.Interface.MusicService;
-import com.app.pulse_music_sb.Request.PaginationDTO;
+import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
 import com.app.pulse_music_sb.Util.MP3DurationUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MusicServiceImpl implements MusicService {

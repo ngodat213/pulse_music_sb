@@ -1,9 +1,9 @@
 package com.app.pulse_music_sb.Controller;
 
 import com.app.pulse_music_sb.Models.CustomUserDetail;
-import com.app.pulse_music_sb.Request.RequestRegisterUser;
-import com.app.pulse_music_sb.Request.UserPasswordChange;
-import com.app.pulse_music_sb.Request.UserPasswordReset;
+import com.app.pulse_music_sb.Request.Request.RequestRegisterUser;
+import com.app.pulse_music_sb.Request.Request.RequestPasswordChange;
+import com.app.pulse_music_sb.Request.Request.RequestPasswordReset;
 import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Service.UserService;
 import jakarta.validation.Valid;
@@ -77,10 +77,11 @@ public class AuthController {
      */
     @PostMapping("change_password")
     public String SavePassword(@AuthenticationPrincipal CustomUserDetail customUserDetail,
-                               @Valid @RequestBody UserPasswordChange userPasswordChange){
+                               @RequestParam("oldpassword") String oldPassword,
+                               @RequestParam("newpassword") String newpassword){
         User user = customUserDetail.getUser();
-        if(userService.checkOldPassword(user, userPasswordChange.oldPassword())){
-            userService.UpdatePassword(user, userPasswordChange);
+        if(userService.checkOldPassword(user, oldPassword)){
+            userService.UpdatePassword(user, newpassword);
             return "redirect:/change_password?done";
         }else{
             return "redirect:/change_password?error";
@@ -126,9 +127,12 @@ public class AuthController {
      * @layout: <a href="https://localhost:8080/reset_password">...</a>
      * @method: POST
      */
-    @PostMapping("/reset_password")
-    public String ResetPassword_Save(@Valid @RequestBody UserPasswordReset userPasswordReset){
-        userService.handleResetPassword(userPasswordReset);
+    @PostMapping("/resetpassword")
+    public String ResetPassword_Save(@RequestParam("username") String username,
+                                     @RequestParam("password") String password){
+        User user = userService.getUserByUsername(username);
+        userService.UpdatePassword(user,password);
+        userService.ResetDateForgotPassword(user);
         return "redirect:/login";
     }
 }

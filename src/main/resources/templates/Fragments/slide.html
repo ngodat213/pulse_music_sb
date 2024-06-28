@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<div class="black dk">
+    <div class="row no-gutter item-info-overlay" th:fragment="slide(carousels, musics)">
+        <div class="col-sm-6 text-white">
+            <div
+                    class="owl-carousel owl-theme owl-dots-sm owl-dots-bottom-left"
+                    data-ui-jp="owlCarousel"
+                    data-ui-options="{
+                                  items: 1
+                                  ,loop: true
+                                  ,autoplay: true
+                                  ,nav: true
+
+                                }"
+            >
+                <div th:each="music : ${carousels}" class="item r" th:data-id="'item-' + ${music.id}" th:data-src="${music.mp3.url}">
+                    <div class="item-media primary">
+                        <a href="track.detail.html" class="item-media-content" th:style="'background-image: url(' + ${music.image.url} + ')'"></a>
+                        <div class="item-overlay center">
+                            <button class="btn-playpause">Play</button>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <div class="item-overlay bottom text-right">
+                            <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                            <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                            <div class="dropdown-menu pull-right black lt"></div>
+                        </div>
+                        <div class="item-title text-ellipsis">
+                            <a href="track.detail.html" th:text="${music.title}">Music Title</a>
+                        </div>
+                        <div class="item-author text-sm text-ellipsis">
+                            <a href="artist.detail.html" class="text-muted" th:text="${music.user.fullName}">Artist Name</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:each="music : ${musics}" class="col-sm-3 col-xs-6">
+            <div class="item r" th:data-id="'item-' + ${music.id}" th:data-src="${music.mp3.getUrl()}">
+                <div class="item-media">
+                    <a href="track.detail.html" class="item-media-content" th:style="'background-image: url(' + ${music.image.getUrl()} + ')'"></a>
+                    <div class="item-overlay center">
+                        <button class="btn-playpause">Play</button>
+                    </div>
+                </div>
+                <div class="item-info">
+                    <div class="item-overlay bottom text-right">
+                        <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                        <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                        <div class="dropdown-menu pull-right black lt"></div>
+                    </div>
+                    <div class="item-title text-ellipsis">
+                        <a href="track.detail.html" th:text="${music.title}"></a>
+                    </div>
+                    <div class="item-author text-sm text-ellipsis">
+                        <a href="artist.detail.html" class="text-muted" th:text="${music.user.fullName}"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

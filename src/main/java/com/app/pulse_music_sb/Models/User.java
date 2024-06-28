@@ -71,7 +71,18 @@ public class User{
 
     // -----------------= INFO MUSIC =----------------- //
     @OneToMany(mappedBy = "user")
-    private List<Music> mySongs = new ArrayList<>();
+    private List<Music> tracks = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Playlist> playLists = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_type",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "music_type_id")
+    )
+    private List<MusicType> userTypes;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -82,6 +93,6 @@ public class User{
     private List<Music> userLiked = new ArrayList<>();
 
     public int sizeMySong(){
-        return mySongs.size();
+        return tracks.size();
     }
 }
