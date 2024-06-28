@@ -19,9 +19,9 @@ public class Playlist extends AbstractEntity {
 
     @ManyToMany
     @JoinTable(
-            name = "MusicTypes",
-            joinColumns = @JoinColumn(name = "music_id"),
-            inverseJoinColumns = @JoinColumn(name = "music_type_id")
+            name = "music_play_list",
+            joinColumns = @JoinColumn(name = "playlist_id"),
+            inverseJoinColumns = @JoinColumn(name = "music_id")
     )
-    private List<MusicType> musicTypes;
+    private List<Music> musics;
 }

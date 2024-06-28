@@ -48,7 +48,7 @@ public class Music extends AbstractEntity {
     @ManyToMany(mappedBy = "userLiked")
     private List<User> likedByUsers;
 
-    @OneToMany(mappedBy = "music")
+    @ManyToMany(mappedBy = "musics")
     private List<Playlist> playlists;
 
     public int getLikedCount(){
