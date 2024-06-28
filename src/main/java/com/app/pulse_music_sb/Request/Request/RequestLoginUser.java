@@ -1,4 +1,4 @@
-package com.app.pulse_music_sb.Request;
+package com.app.pulse_music_sb.Request.Request;
 
 import com.app.pulse_music_sb.Models.User;
 import lombok.*;

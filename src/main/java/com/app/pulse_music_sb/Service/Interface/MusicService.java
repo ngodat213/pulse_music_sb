@@ -1,9 +1,9 @@
 package com.app.pulse_music_sb.Service.Interface;
 
 import com.app.pulse_music_sb.Models.Music;
-import com.app.pulse_music_sb.Request.RequestCreateMusic;
-import com.app.pulse_music_sb.Request.PaginationDTO;
-import com.app.pulse_music_sb.Request.RequestUpdateMusic;
+import com.app.pulse_music_sb.Request.Request.RequestCreateMusic;
+import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
+import com.app.pulse_music_sb.Request.Request.RequestUpdateMusic;
 import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 

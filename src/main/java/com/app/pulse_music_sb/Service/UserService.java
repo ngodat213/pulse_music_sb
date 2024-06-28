@@ -2,17 +2,15 @@ package com.app.pulse_music_sb.Service;
 
 import com.app.pulse_music_sb.Models.Music;
 import com.app.pulse_music_sb.Repository.MusicRepository;
-import com.app.pulse_music_sb.Request.RequestRegisterUser;
-import com.app.pulse_music_sb.Request.UserPasswordChange;
-import com.app.pulse_music_sb.Request.UserPasswordReset;
+import com.app.pulse_music_sb.Request.Request.RequestRegisterUser;
+import com.app.pulse_music_sb.Request.Request.RequestPasswordChange;
+import com.app.pulse_music_sb.Request.Request.RequestPasswordReset;
 import com.app.pulse_music_sb.Enums.UserRole;
 import com.app.pulse_music_sb.Exceptions.DuplicateResourceException;
 import com.app.pulse_music_sb.Exceptions.ResourceNotFoundException;
-import com.app.pulse_music_sb.Models.Otp;
 import com.app.pulse_music_sb.Models.User;
-import com.app.pulse_music_sb.Repository.OtpRepository;
 import com.app.pulse_music_sb.Repository.UserRepository;
-import com.app.pulse_music_sb.Request.PaginationDTO;
+import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
 import com.app.pulse_music_sb.Service.Interface.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -39,8 +37,6 @@ public class UserService implements IUserService {
     private UserRepository userRepository;
     @Autowired
     private PaginationService paginationService;
-    @Autowired
-    private OtpRepository otpRepository;
     @Autowired
     private MusicRepository musicRepository;
 
@@ -144,26 +140,9 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void UpdatePassword(User authenticatedUser, UserPasswordChange userPasswordChange) {
-        Optional.of(authenticatedUser).stream()
-                .filter(u->checkCryptCompare(
-                        userPasswordChange.oldPassword(), u.getPassword()))
-                .map(u->{
-                    u.setPassword(encodePassword(userPasswordChange.newPassword()));
-                    return userRepository.saveAndFlush(u);
-                });
-    }
-
-    @Override
-    public void handleResetPassword(UserPasswordReset userPasswordReset){
-        User user = findByEmail(userPasswordReset.email());
-        Otp otp = otpRepository.findByUser_Id(user.getId())
-                .filter(o -> o.getExpiredAt().isAfter(LocalDateTime.now()))
-                .filter(o -> o.getCode().equals(userPasswordReset.otpCode()))
-                .orElseThrow(() -> new RuntimeException("Invalid otp code"));
-        user.setPassword(passwordEncoder.encode(userPasswordReset.newPassword()));
+    public void UpdatePassword(User user, String newPassword) {
+        user.setPassword(new BCryptPasswordEncoder().encode(newPassword));
         userRepository.save(user);
-        otpRepository.delete(otp);
     }
 
     @Override
@@ -227,6 +206,13 @@ public class UserService implements IUserService {
     @Override
     public User getUserByToken(String token){
         return userRepository.findByToken(token);
+    }
+
+    @Override
+    public void ResetDateForgotPassword(User user){
+        user.setTokenResetPasswordExpired(null);
+        user.setTokenResetPassword(null);
+        userRepository.save(user);
     }
 
     // Private method

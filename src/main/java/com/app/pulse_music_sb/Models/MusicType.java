@@ -23,4 +23,7 @@ public class MusicType extends AbstractEntity {
 
     @ManyToMany(mappedBy = "musicTypes")
     private List<Music> music;
+
+    @ManyToMany(mappedBy = "userTypes")
+    private List<User> users;
 }

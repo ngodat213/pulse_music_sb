@@ -1,10 +1,10 @@
-package com.app.pulse_music_sb.Request;
+package com.app.pulse_music_sb.Request.Request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public record UserPasswordReset(
+public record RequestPasswordReset(
         @NotBlank(message = "email is mandatory")
         @Email(message = "email not valid")
         String email,

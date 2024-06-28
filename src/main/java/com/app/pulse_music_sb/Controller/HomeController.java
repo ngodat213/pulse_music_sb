@@ -1,7 +1,7 @@
 package com.app.pulse_music_sb.Controller;
 
 import com.app.pulse_music_sb.Models.Music;
-import com.app.pulse_music_sb.Request.PaginationDTO;
+import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
 import com.app.pulse_music_sb.Service.Interface.MusicTypeService;
 import com.app.pulse_music_sb.Service.UserService;
 import org.springframework.ui.Model;
@@ -34,7 +34,27 @@ public class HomeController {
         model.addAttribute("musics", musicService.findAllBy(musicsPaginationDTO));
         model.addAttribute("trending", musicService.findAllBy(trendingPaginationDTO));
         model.addAttribute("news", musicService.findAllBy(newPaginationDTO));
+
+        List<Music> likedMusic = userService.getUserLikedMusic(customUserDetail.getUser().getId());
+        if (likedMusic == null) {
+            likedMusic = new ArrayList<>(); // Ensure it's not null
+        }
+        model.addAttribute("likes", likedMusic);
         return "Layouts/Home/index";
+    }
+
+    @GetMapping("/chart")
+    public String chart(@AuthenticationPrincipal CustomUserDetail customUserDetail, Model model) {
+        PaginationDTO typePaginationDTO = new PaginationDTO(1, 100, "desc", "createdAt");
+        model.addAttribute("types", musicTypeService.findAll(typePaginationDTO));
+        model.addAttribute("musics", musicService.findAll());
+
+        List<Music> likedMusic = userService.getUserLikedMusic(customUserDetail.getUser().getId());
+        if (likedMusic == null) {
+            likedMusic = new ArrayList<>(); // Ensure it's not null
+        }
+        model.addAttribute("likes", likedMusic);
+        return "Layouts/Home/chart";
     }
 
     @GetMapping("/browse")
@@ -48,9 +68,9 @@ public class HomeController {
             likedMusic = new ArrayList<>(); // Ensure it's not null
         }
         model.addAttribute("likes", likedMusic);
-//        model.addAttribute("sizeLikes", likedMusic.size());
         return "Layouts/Home/browse";
     }
+
 
     @GetMapping("/artist")
     public String artist(@AuthenticationPrincipal CustomUserDetail customUserDetail, Model model) {
@@ -64,8 +84,22 @@ public class HomeController {
         }
         model.addAttribute("zeroLike", likedMusic.size() == 0 ? true : false);
         model.addAttribute("likes", likedMusic);
-//        model.addAttribute("sizeLikes", likedMusic.size());
         return "Layouts/Home/artist";
+    }
+
+    @GetMapping("/artist_detail/{id}")
+    public String artist_detail(@AuthenticationPrincipal CustomUserDetail customUserDetail, Model model) {
+        String[] artistType = {"By name", "By songs"};
+        model.addAttribute("types", artistType);
+        model.addAttribute("artists", userService.getArtists());
+
+        List<Music> likedMusic = userService.getUserLikedMusic(customUserDetail.getUser().getId());
+        if (likedMusic == null) {
+            likedMusic = new ArrayList<>(); // Ensure it's not null
+        }
+        model.addAttribute("zeroLike", likedMusic.size() == 0 ? true : false);
+        model.addAttribute("likes", likedMusic);
+        return "Layouts/Home/artist.detail";
     }
 
     @GetMapping("/scroll_item")

@@ -18,8 +18,12 @@
                     <div class="col-lg-3 w-xxl w-auto-md" th:if="${likes != null && !likes.isEmpty()}" >
                         <div th:insert="Fragments/likes :: like_sidebar(${likes})"></div>
                     </div>
+                </div>
             </div>
         </div>
+        <div th:replace="/Fragments/switcher.html :: switcher"></div>
+        <div th:replace="/Fragments/search_modal.html :: search_modal"></div>
+        <div th:replace="/Fragments/share_modal.html :: share_modal"></div>
     </div>
 </div>
 

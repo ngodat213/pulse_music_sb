@@ -1,25 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <body>
-<div
-        class="padding"
-        style="bottom: 60px"
-        data-ui-jp="stick_in_parent"
-        th:fragment="like_sidebar(likes)">
+<div class="padding" style="bottom: 60px;" data-ui-jp="stick_in_parent" th:fragment="like_sidebar(likes)">
     <!--        <h6 class="text text-muted" th:text="${sizeLikes} + ' Likes'"></h6>-->
     <div class="row item-list item-list-sm m-b">
         <div class="col-xs-12" th:each="music : ${likes}">
-            <div
-                    class="item r"
-                    data-id="item-9"
-                    th:data-src="${music.mp3.url}"
-            >
+            <div class="item r" data-id="item-9" th:data-src="${music.mp3.url}">
                 <div class="item-media">
-                    <a
-                            href="track.detail.html"
-                            class="item-media-content"
-                            th:style="'background-image: url(' + ${music.image.url} + ')'"
-                    ></a>
+                    <a href="track.detail.html" class="item-media-content" th:style="'background-image: url(' + ${music.image.url} + ')'"></a>
                 </div>
                 <div class="item-info">
                     <div class="item-title text-ellipsis">
@@ -67,6 +55,5 @@
     </div>
     <p class="text-muted text-xs p-b-lg">&copy; Copyright 2016</p>
 </div>
-
 </body>
 </html>

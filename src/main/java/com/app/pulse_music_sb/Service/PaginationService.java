@@ -1,6 +1,6 @@
 package com.app.pulse_music_sb.Service;
 
-import com.app.pulse_music_sb.Request.PaginationDTO;
+import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;

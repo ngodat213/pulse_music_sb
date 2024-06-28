@@ -1,7 +1,7 @@
 package com.app.pulse_music_sb.Service.Interface;
 
 import com.app.pulse_music_sb.Models.MusicType;
-import com.app.pulse_music_sb.Request.PaginationDTO;
+import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
 import org.springframework.data.domain.Page;
 
 import java.util.Optional;

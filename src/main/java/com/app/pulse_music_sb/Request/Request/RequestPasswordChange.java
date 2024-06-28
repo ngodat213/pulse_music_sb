@@ -1,9 +1,9 @@
-package com.app.pulse_music_sb.Request;
+package com.app.pulse_music_sb.Request.Request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public record UserPasswordChange(
+public record RequestPasswordChange(
         @NotBlank(message = "old password is mandatory")
         @Size(min = 8, message = "old password must have at least 8 characters")
         String oldPassword,

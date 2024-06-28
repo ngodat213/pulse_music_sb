@@ -1,4 +1,4 @@
-package com.app.pulse_music_sb.Request;
+package com.app.pulse_music_sb.Request.DTO;
 
 public record PaginationDTO(
         int page,

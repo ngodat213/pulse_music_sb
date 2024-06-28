@@ -3,7 +3,7 @@ package com.app.pulse_music_sb.Service;
 import com.app.pulse_music_sb.Models.MusicType;
 import com.app.pulse_music_sb.Repository.MusicTypeRepository;
 import com.app.pulse_music_sb.Service.Interface.MusicTypeService;
-import com.app.pulse_music_sb.Request.PaginationDTO;
+import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;

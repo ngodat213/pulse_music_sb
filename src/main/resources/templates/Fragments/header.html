@@ -1,108 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <div class="app-header white lt box-shadow-z1" th:fragment="header_user">
     <div class="navbar" data-pjax>
         <a data-toggle="collapse" data-target="#navbar" class="navbar-item pull-right hidden-md-up m-r-0 m-l">
             <i class="material-icons">menu</i>
         </a>
         <a th:href="@{/}" class="navbar-brand md">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 48 48"
-                width="32"
-                height="32">
-            <circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.2)" />
-            <circle
-                    cx="24"
-                    cy="24"
-                    r="22"
-                    fill="#1c202b"
-                    class="brand-color"
-            />
-            <circle cx="24" cy="24" r="10" fill="#ffffff" />
-            <circle
-                    cx="13"
-                    cy="13"
-                    r="2"
-                    fill="#ffffff"
-                    class="brand-animate"
-            />
-            <path d="M 14 24 L 24 24 L 14 44 Z" fill="#FFFFFF" />
-            <circle cx="24" cy="24" r="3" fill="#000000" />
-        </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32">
+                <circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.2)" />
+                <circle cx="24" cy="24" r="22" fill="#1c202b" class="brand-color" />
+                <circle cx="24" cy="24" r="10" fill="#ffffff" />
+                <circle cx="13" cy="13" r="2" fill="#ffffff" class="brand-animate" />
+                <path d="M 14 24 L 24 24 L 14 44 Z" fill="#FFFFFF" />
+                <circle cx="24" cy="24" r="3" fill="#000000" />
+            </svg>
             <img src="images/logo.png" alt="." class="hide" />
-            <span class="hidden-folded inline">pulse</span></a
-        >
+            <span class="hidden-folded inline">pulse</span>
+        </a>
         <ul class="nav navbar-nav pull-right">
             <li class="nav-item">
-                <a
-                        class="nav-link"
-                        data-toggle="modal"
-                        data-target="#search-modal"
-                ><i class="material-icons">search</i></a
-                >
+                <a class="nav-link" data-toggle="modal" data-target="#search-modal">
+                    <i class="material-icons">search</i>
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"
-                ><span class="hidden-xs-down btn btn-sm rounded primary _600"
-                >Upload</span
-                >
-                    <span class="hidden-sm-up btn btn-sm btn-icon rounded primary"
-                    ><i class="material-icons">file_upload</i></span
-                    ></a
-                >
+                <a class="nav-link" href="#">
+                    <span class="hidden-xs-down btn btn-sm rounded primary _600">Upload</span>
+                    <span class="hidden-sm-up btn btn-sm btn-icon rounded primary">
+                            <i class="material-icons">file_upload</i>
+                        </span>
+                </a>
             </li>
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link clear" data-toggle="dropdown"
-                ><span class="avatar w-32"
-                ><img src="images/a3.jpg" alt="..." /></span
-                ></a>
+            <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                <a href="#" class="nav-link clear" data-toggle="dropdown">
+                        <span class="avatar w-32">
+                            <img th:src="${#authentication.principal.getAvatar()}" alt="..." />
+                        </span>
+                </a>
                 <div class="dropdown-menu w dropdown-menu-scale pull-right">
-                    <a class="dropdown-item" href="profile.html#profile"
-                    ><span>Profile</span></a
-                    >
-                    <a class="dropdown-item" href="profile.html#tracks"
-                    ><span>Tracks</span></a
-                    >
-                    <a class="dropdown-item" href="profile.html#playlists"
-                    ><span>Playlists</span></a
-                    >
-                    <a class="dropdown-item" href="profile.html#likes"
-                    ><span>Likes</span></a
-                    >
+                    <a class="dropdown-item" href="profile.html#profile"><span>Profile</span></a>
+                    <a class="dropdown-item" href="profile.html#tracks"><span>Tracks</span></a>
+                    <a class="dropdown-item" href="profile.html#playlists"><span>Playlists</span></a>
+                    <a class="dropdown-item" href="profile.html#likes"><span>Likes</span></a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="docs.html">Need help?</a>
-                    <a class="dropdown-item" href="signin.html">Sign out</a>
+                    <a class="dropdown-item" th:href="@{/logout}">Sign out</a>
                 </div>
             </li>
         </ul>
-        <div
-                class="collapse navbar-toggleable-sm l-h-0 text-center"
-                id="navbar"
-        >
-            <ul
-                    class="nav navbar-nav nav-md inline text-primary-hover"
-                    data-ui-nav
-            >
+        <div class="collapse navbar-toggleable-sm l-h-0 text-center" id="navbar">
+            <ul class="nav navbar-nav nav-md inline text-primary-hover" data-ui-nav>
                 <li class="nav-item">
-                    <a th:href="@{/}" class="nav-link"
-                    ><span class="nav-text">Discover</span></a
-                    >
+                    <a th:href="@{/}" class="nav-link"><span class="nav-text">Discover</span></a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/browse}" class="nav-link"
-                    ><span class="nav-text">Browse</span></a
-                    >
+                    <a th:href="@{/browse}" class="nav-link">
+                        <span class="nav-text">Browse</span>
+                    </a>
                 </li>
                 <li class="nav-item dropdown pos-stc">
-                    <a href="chart.html" class="nav-link"
-                    ><span class="nav-text">Charts</span></a
-                    >
+                    <a th:href="@{/chart}" class="nav-link">
+                        <span class="nav-text">Charts</span>
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/artist}" class="nav-link"
-                    ><span class="nav-text">Artists</span></a
-                    >
+                    <a th:href="@{/artist}" class="nav-link">
+                        <span class="nav-text">Artists</span>
+                    </a>
                 </li>
             </ul>
         </div>

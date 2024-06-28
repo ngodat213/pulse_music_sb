@@ -49,11 +49,12 @@ public class Music extends AbstractEntity {
     private List<User> likedByUsers;
 
     @OneToMany(mappedBy = "music")
-    private List<Track> tracks;
-
-    @OneToMany(mappedBy = "music")
-    private List<TrackType> trackTypes;
-
-    @OneToMany(mappedBy = "music")
     private List<Playlist> playlists;
+
+    public int getLikedCount(){
+        if(likedByUsers != null && !likedByUsers.isEmpty()){
+            return likedByUsers.size();
+        }
+        return 0;
+    }
 }

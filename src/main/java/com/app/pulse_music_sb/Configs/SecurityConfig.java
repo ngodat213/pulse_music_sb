@@ -28,7 +28,11 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request->request
-                        .requestMatchers(ManagerRouter.UserMatchers).hasAuthority(UserRole.USER.getAuthority()+ ", " + UserRole.ARTIST.getAuthority() + ", " + UserRole.ADMIN.getAuthority())
+                        .requestMatchers(ManagerRouter.UserMatchers).hasAnyAuthority(
+                                UserRole.USER.getAuthority(),
+                                UserRole.ARTIST.getAuthority(),
+                                UserRole.ADMIN.getAuthority()
+                        )
                         .requestMatchers(ManagerRouter.AdminMatchers).hasAuthority(UserRole.ADMIN.getAuthority())
                         .anyRequest().permitAll()
                 ).formLogin(AbstractConfiguredSecurityBuilder
