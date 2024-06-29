@@ -1,7 +1,9 @@
 package com.app.pulse_music_sb.Controller;
 
 import com.app.pulse_music_sb.Models.Music;
+import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
+import com.app.pulse_music_sb.Request.DTO.UserDTO;
 import com.app.pulse_music_sb.Service.Interface.MusicTypeService;
 import com.app.pulse_music_sb.Service.UserService;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,10 +91,15 @@ public class HomeController {
     }
 
     @GetMapping("/artist_detail/{id}")
-    public String artist_detail(@AuthenticationPrincipal CustomUserDetail customUserDetail, Model model) {
-        String[] artistType = {"By name", "By songs"};
-        model.addAttribute("types", artistType);
-        model.addAttribute("artists", userService.getArtists());
+    public String artist_detail(@AuthenticationPrincipal CustomUserDetail customUserDetail,
+                                @PathVariable String id,
+                                Model model) {
+        User artist = userService.findById(id);
+        if(artist == null){
+            return "redirect:/";
+        }
+        UserDTO artistDTO = UserDTO.toDTO(artist);
+        model.addAttribute("artist", artistDTO);
 
         List<Music> likedMusic = userService.getUserLikedMusic(customUserDetail.getUser().getId());
         if (likedMusic == null) {
@@ -99,7 +107,7 @@ public class HomeController {
         }
         model.addAttribute("zeroLike", likedMusic.size() == 0 ? true : false);
         model.addAttribute("likes", likedMusic);
-        return "Layouts/Home/artist.detail";
+        return "Layouts/Home/artist_detail";
     }
 
     @GetMapping("/scroll_item")

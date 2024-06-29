@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<div class="tab-pane active" id="tab_1" th:fragment="artists_content(populars, albums)">
+    <h5 class="m-b">Popular</h5>
+    <div class="row item-list item-list-md item-list-li m-b" id="tracks">
+        <div class="col-md-12 col-lg-6" th:each="popular : ${populars}">
+            <div class="item r" data-id="item-3" th:data-src="${popular.mp3.url}">
+                <div class="item-media">
+                    <a href="track.detail.html" class="item-media-content" th:style="'background-image: url(' + ${popular.image.url} + ')'"></a>
+                    <div class="item-overlay center">
+                        <button class="btn-playpause">Play</button>
+                    </div>
+                </div>
+                <div class="item-info">
+                    <div class="item-overlay bottom text-right">
+                        <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                        <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                        <div class="dropdown-menu pull-right black lt"></div>
+                    </div>
+                    <div class="item-title text-ellipsis">
+                        <a href="track.detail.html" th:text="${popular.title}"></a>
+                    </div>
+                    <div class="item-author text-sm text-ellipsis hide">
+                        <a th:href="@{/artist_detail/{id}(id=${popular.user.id})}" class="text-muted" th:text="${popular.user.fullName}"></a>
+                    </div>
+                    <div class="item-meta text-sm text-muted">
+                            <span class="item-meta-stats text-xs">
+                                <i class="fa fa-play text-muted" th:text="${popular.playCount}"></i>
+                                <i class="fa fa-heart m-l-sm text-muted" th:text="${popular.heartCount}"></i>
+                            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h5 class="m-b">Albums</h5>
+    <div class="row m-b">
+        <div class="col-xs-4 col-sm-4 col-md-3" th:each="album : ${albums}">
+            <div class="item r" data-id="item-10" th:data-src="${album.mp3.url}">
+                <div class="item-media">
+                    <a href="track.detail.html" class="item-media-content" th:style="'background-image: url(' + ${album.image.url} + ')'"></a>
+                    <div class="item-overlay center">
+                        <button class="btn-playpause">Play</button>
+                    </div>
+                </div>
+                <div class="item-info">
+                    <div class="item-overlay bottom text-right">
+                        <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                        <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                        <div class="dropdown-menu pull-right black lt"></div>
+                    </div>
+                    <div class="item-title text-ellipsis">
+                        <a href="track.detail.html" th:text="${album.title}">The Open Road</a>
+                    </div>
+                    <div class="item-author text-sm text-ellipsis hide">
+                        <a th:href="@{/artist_detail/{id}(id=${album.user.id})}" class="text-muted" th:text="${popular.user.fullName}"></a>
+                    </div>
+                    <div class="item-meta text-sm text-muted">
+                            <span class="item-meta-stats text-xs">
+                                <i class="fa fa-play text-muted" th:text="${popular.playCount}"></i>
+                                <i class="fa fa-heart m-l-sm text-muted" th:text="${popular.heartCount}"></i>
+                            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="btn btn-sm white rounded">Show More</a>
+</div>
+</html>

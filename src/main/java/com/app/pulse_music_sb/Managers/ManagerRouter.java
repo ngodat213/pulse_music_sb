@@ -2,7 +2,7 @@ package com.app.pulse_music_sb.Managers;
 
 public class ManagerRouter {
     public static final String[] UserMatchers = {
-            "/", "/browse", "/artist", "/chart"
+            "/", "/browse", "/artist", "/chart", "/artist_detail/**"
     };
 
     public static final String[] ArtistsMatchers = {

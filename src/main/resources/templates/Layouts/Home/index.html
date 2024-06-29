@@ -1,38 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-<head th:replace="Fragments/head :: head(Pluse)">
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout.html}">
 <body>
-<div class="app dk" id="app">
-    <div th:replace="/Fragments/header.html :: header_user"></div>
-    <div th:replace="/Fragments/footer.html :: footer_user"></div>
-    <div id="content" class="app-content white bg" role="main">
-        <div class="app-body" id="view">
-            <div class="page-content">
-                <div th:insert="Fragments/slide :: slide(${carousels},${musics})"></div>
-                <div class="row-col">
-                    <div class="col-lg-9 b-r no-border-md">
-                        <div class="padding">
-                            <h2 class="widget-title h4 m-b">Treading</h2>
-                            <div th:insert="Fragments/trending :: trending(${musics})"></div>
-                            <h2 class="widget-title h4 m-b">New</h2>
-                            <div th:insert="Fragments/new :: new(${news})"></div>
-                            <h2 class="widget-title h4 m-b">Recommend for you</h2>
-<!--                            <div th:insert="Fragments/new :: new(${news})"></div>-->
-                        </div>
-                    </div>
-                    <div class="col-lg-3 w-xxl w-auto-md" th:if="${likes != null && !likes.isEmpty()}" >
-                        <div th:insert="Fragments/likes :: like_sidebar(${likes})"></div>
-                    </div>
-                </div>
-            </div>
+<div layout:fragment="content">
+    <div class="col-lg-9 b-r no-border-md">
+        <div class="padding">
+            <h2 class="widget-title h4 m-b">Treading</h2>
+            <div th:insert="Fragments/trending :: trending(${musics})"></div>
+            <h2 class="widget-title h4 m-b">New</h2>
+            <div th:insert="Fragments/new :: new(${news})"></div>
+            <h2 class="widget-title h4 m-b">Recommend for you</h2>
+            <!--                            <div th:insert="Fragments/new :: new(${news})"></div>-->
         </div>
     </div>
-    <div th:replace="/Fragments/switcher.html :: switcher"></div>
-    <div th:replace="/Fragments/search_modal.html :: search_modal"></div>
-    <div th:replace="/Fragments/share_modal.html :: share_modal"></div>
+    <div class="col-lg-3 w-xxl w-auto-md" th:if="${likes != null && !likes.isEmpty()}" >
+        <div th:insert="Fragments/likes :: like_sidebar(${likes})"></div>
+    </div>
 </div>
 <script th:src="@{/scripts/app.min.js}"></script>
 </body>
