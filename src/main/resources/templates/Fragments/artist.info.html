@@ -19,11 +19,10 @@
                 <div class="item-action m-b">
                     <a class="btn btn-icon white rounded btn-share pull-right" data-toggle="modal" data-target="#share-modal"><i class="fa fa-share-alt"></i></a>
                     <button class="btn-playpause text-primary m-r-sm"></button>
-                    <span th:text="${'test'} + ' Albums, ' + ${artist.tracks.size()} + ' Tracks'"></span>
+                    <span th:text="${artist.albums.size()} + ' Albums, ' + ${artist.tracks.size()} + ' Tracks'"></span>
                 </div>
-                <div class="block clearfix m-b">
-                    <a class="btn btn-xs rounded white">Soul</a>
-                    <a class="btn btn-xs rounded white">Electro</a>
+                <div class="block clearfix m-b" th:each="type : ${artist.types}">
+                    <a class="btn btn-xs rounded white" th:text="${type.typeName}"></a>
                 </div>
             </div>
         </div>

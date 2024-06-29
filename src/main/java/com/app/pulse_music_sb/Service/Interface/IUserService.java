@@ -17,6 +17,8 @@ public interface IUserService extends UserDetailsService {
 
     List<Music> getUserLikedMusic(String userId);
 
+    List<Music> getMusicPopulars(User user);
+
     User likeMusic(String userId, String musicId);
 
     User findById(String id);

@@ -1,9 +1,6 @@
 package com.app.pulse_music_sb.Request.DTO;
 
-import com.app.pulse_music_sb.Models.Music;
-import com.app.pulse_music_sb.Models.MusicType;
-import com.app.pulse_music_sb.Models.Playlist;
-import com.app.pulse_music_sb.Models.User;
+import com.app.pulse_music_sb.Models.*;
 import lombok.*;
 
 import java.util.List;
@@ -22,8 +19,9 @@ public class UserDTO {
     private List<MusicType> types;
     private List<Playlist> playlists;
     private List<Music> populars;
+    private List<Album> albums;
 
-    public static UserDTO toDTO(User user) {
+    public static UserDTO toDTO(User user, List<Music> populars) {
         UserDTO userDTO = new UserDTO();
         userDTO.id = user.getId();
         userDTO.avatarUrl = user.getAvatarUrl();
@@ -32,8 +30,8 @@ public class UserDTO {
         userDTO.tracks = user.getTracks();
         userDTO.types = user.getUserTypes();
         userDTO.playlists = user.getPlayLists();
+        userDTO.albums = user.getAlbums();
+        userDTO.populars = populars;
         return userDTO;
     }
-
-
 }

@@ -98,7 +98,7 @@ public class HomeController {
         if(artist == null){
             return "redirect:/";
         }
-        UserDTO artistDTO = UserDTO.toDTO(artist);
+        UserDTO artistDTO = UserDTO.toDTO(artist, userService.getMusicPopulars(artist));
         model.addAttribute("artist", artistDTO);
 
         List<Music> likedMusic = userService.getUserLikedMusic(customUserDetail.getUser().getId());

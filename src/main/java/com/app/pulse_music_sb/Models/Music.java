@@ -33,6 +33,10 @@ public class Music extends AbstractEntity {
     @JoinColumn(name = "mp3_id", referencedColumnName = "id")
     private CloudStorage mp3;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "credit_id", referencedColumnName = "id")
+    private Credit credit;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;

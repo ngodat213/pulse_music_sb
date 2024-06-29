@@ -76,6 +76,9 @@ public class User{
     @OneToMany(mappedBy = "user")
     private List<Playlist> playLists = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    private List<Album> albums = new ArrayList<>();
+
     @ManyToMany
     @JoinTable(
             name = "user_type",

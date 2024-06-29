@@ -4,7 +4,6 @@ import com.app.pulse_music_sb.Common.AbstractEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -23,4 +22,10 @@ public class MusicType extends AbstractEntity {
 
     @ManyToMany(mappedBy = "userTypes")
     private List<User> users;
+
+    @ManyToMany(mappedBy = "albumTypes")
+    private List<Album> album;
+
+    @ManyToMany(mappedBy = "playlistTypes")
+    private List<Playlist> playlist;
 }
