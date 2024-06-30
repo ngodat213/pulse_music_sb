@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<div class="padding b-b" th:fragment="profile_info(profile)">
+    <div class="row-col">
+        <div class="col-sm w w-auto-xs m-b">
+            <div class="item w rounded">
+                <div class="item-media">
+                    <div class="item-media-content" th:style="'background-image: url(' + ${profile.avatarUrl} + ')'"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="p-l-md no-padding-xs">
+                <h1 class="page-title">
+                    <span class="h1 _800" th:text="${profile.fullname}"></span>
+                </h1>
+                <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis" th:if="${profile.bio != null || profile.bio != ''}" th:text="${profile.bio}"></p>
+                <div class="item-action m-b">
+                    <a href="#" class="btn btn-sm rounded primary">Upload</a>
+                    <a href="#" class="btn btn-sm rounded white">Edit Profile</a>
+                </div>
+                <div class="block clearfix m-b">
+                    <span th:text="${profile.albums.size()}"></span>
+                    <span class="text-muted">Albums</span>,
+                    <span th:text="${profile.tracks.size()}">
+                    </span> <span class="text-muted">profile</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

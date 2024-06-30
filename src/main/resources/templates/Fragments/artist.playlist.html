@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<div class="tab-pane" id="tab_3" th:fragment="artist_playlist(playlists)">
+    <div class="row m-b" th:each="playlist : ${playlists}">
+        <div class="col-xs-4 col-sm-4 col-md-3">
+            <div class="item r" data-id="item-1" th:data-src="${playlist.mp3.url}">
+                <div class="item-media">
+                    <a href="track.detail.html" class="item-media-content" th:style="'background-image: url(' + ${playlist.image.url} + ')'"></a>
+                    <div class="item-overlay center">
+                        <button class="btn-playpause">Play</button>
+                    </div>
+                </div>
+                <div class="item-info">
+                    <div class="item-overlay bottom text-right">
+                        <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                        <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                        <div class="dropdown-menu pull-right black lt"></div>
+                    </div>
+                    <div class="item-title text-ellipsis">
+                        <a href="track.detail.html" th:text="${playlist.title}"></a>
+                    </div>
+                    <div class="item-author text-sm text-ellipsis hide">
+                        <a th:href="@{/artist_detail/{id}(id=${playlist.user.id})}" class="text-muted" th:text="${playlist.user.fullName}"></a>
+                    </div>
+                    <div class="item-meta text-sm text-muted">
+                        <span class="item-meta-stats text-xs">
+                            <i class="fa fa-play text-muted" th:text="${playlist.playCount}"></i>
+                            <i class="fa fa-heart m-l-sm text-muted" th:text="${playlist.heartCount}"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

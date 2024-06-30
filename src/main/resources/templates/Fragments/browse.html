@@ -1,55 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<div class="padding" th:fragment="browse_content(musics, types)">
-    <div class="page-title m-b">
-        <h1 class="inline m-a-0">Browse</h1>
-        <div class="dropdown inline">
-            <button class="btn btn-sm no-bg h4 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">
-                All
-            </button>
-            <div class="dropdown-menu">
-                <a href="#" class="dropdown-item active">All</a>
-                <a href="#" class="dropdown-item" th:each="type : ${types}" th:text="type.typeName"></a>
+<div class="col-lg-9 b-r no-border-md" th:fragment="browse_content(musics, types)">
+    <div class="padding">
+        <div class="page-title m-b">
+            <h1 class="inline m-a-0">Browse</h1>
+            <div class="dropdown inline">
+                <button class="btn btn-sm no-bg h4 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">
+                    All
+                </button>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item active">All</a>
+                    <a href="#" class="dropdown-item" th:each="type : ${types}" th:text="type.typeName"></a>
+                </div>
             </div>
         </div>
-    </div>
-    <div
-            data-ui-jp="jscroll"
-            class="jscroll-loading-center"
-            data-ui-options="{
+        <div
+                data-ui-jp="jscroll"
+                class="jscroll-loading-center"
+                data-ui-options="{
                                     autoTrigger: true,
                                     loadingHtml: '<i class=\'fa fa-refresh fa-spin text-md text-muted\'></i>',
                                     padding: 50,
                                     nextSelector: 'a.jscroll-next:last'
                                   }"
-    >
-        <div class="row">
-            <div th:each="music : ${musics}" class="col-xs-4 col-sm-4 col-md-3">
-                <div class="item r" data-id="item-5" th:data-src="${music.mp3.url}">
-                    <div class="item-media">
-                        <a href="track.detail.html" class="item-media-content" th:style="'background-image: url(' + ${music.image.url} + ')'"></a>
-                        <div class="item-overlay center">
-                            <button class="btn-playpause">Play</button>
+        >
+            <div class="row">
+                <div th:each="music : ${musics}" class="col-xs-4 col-sm-4 col-md-3">
+                    <div class="item r" data-id="item-5" th:data-src="${music.mp3.url}">
+                        <div class="item-media">
+                            <a href="track.detail.html" class="item-media-content" th:style="'background-image: url(' + ${music.image.url} + ')'"></a>
+                            <div class="item-overlay center">
+                                <button class="btn-playpause">Play</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="item-info">
-                        <div class="item-overlay bottom text-right">
-                            <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                            <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-                            <div class="dropdown-menu pull-right black lt"></div>
-                        </div>
-                        <div class="item-title text-ellipsis">
-                            <a href="track.detail.html" th:text="${music.title}"></a>
-                        </div>
-                        <div class="item-author text-sm text-ellipsis">
-                            <a href="artist.detail.html" class="text-muted" th:text="${music.user.fullName}"></a>
+                        <div class="item-info">
+                            <div class="item-overlay bottom text-right">
+                                <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                                <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                                <div class="dropdown-menu pull-right black lt"></div>
+                            </div>
+                            <div class="item-title text-ellipsis">
+                                <a href="track.detail.html" th:text="${music.title}"></a>
+                            </div>
+                            <div class="item-author text-sm text-ellipsis">
+                                <a href="artist.detail.html" class="text-muted" th:text="${music.user.fullName}"></a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="text-center">
-            <a th:href="@{/scroll_item}" class="btn btn-sm white rounded jscroll-next">Show More</a>
+            <div class="text-center">
+                <a th:href="@{/scroll_item}" class="btn btn-sm white rounded jscroll-next">Show More</a>
+            </div>
         </div>
     </div>
 </div>

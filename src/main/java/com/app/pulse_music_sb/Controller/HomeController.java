@@ -98,7 +98,7 @@ public class HomeController {
         if(artist == null){
             return "redirect:/";
         }
-        UserDTO artistDTO = UserDTO.toDTO(artist);
+        UserDTO artistDTO = UserDTO.toDTO(artist, userService.getMusicPopulars(artist));
         model.addAttribute("artist", artistDTO);
 
         List<Music> likedMusic = userService.getUserLikedMusic(customUserDetail.getUser().getId());
@@ -108,6 +108,26 @@ public class HomeController {
         model.addAttribute("zeroLike", likedMusic.size() == 0 ? true : false);
         model.addAttribute("likes", likedMusic);
         return "Layouts/Home/artist_detail";
+    }
+
+    @GetMapping("/track/{id}")
+    public String track(@AuthenticationPrincipal CustomUserDetail customUserDetail, @PathVariable String id, Model model) {
+        Music music = musicService.findById(id);
+        return "Layouts/Home/artist_detail";
+    }
+
+    @GetMapping("/profile")
+    public String profile(@AuthenticationPrincipal CustomUserDetail customUserDetail, Model model) {
+        User user = userService.findById(customUserDetail.getId());
+        model.addAttribute("profile", UserDTO.toDTO(user, null));
+
+        List<Music> likedMusic = userService.getUserLikedMusic(customUserDetail.getUser().getId());
+        if (likedMusic == null) {
+            likedMusic = new ArrayList<>(); // Ensure it's not null
+        }
+        model.addAttribute("zeroLike", likedMusic.size() == 0 ? true : false);
+        model.addAttribute("likes", likedMusic);
+        return "Layouts/Home/profile";
     }
 
     @GetMapping("/scroll_item")

@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @EntityListeners(AuditingEntityListener.class)
-public class Playlist extends AbstractEntity {
+public class Album extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -22,16 +22,16 @@ public class Playlist extends AbstractEntity {
 
     @ManyToMany
     @JoinTable(
-            name = "playlist_type",
-            joinColumns = @JoinColumn(name = "playlist_id"),
+            name = "album_type",
+            joinColumns = @JoinColumn(name = "album_id"),
             inverseJoinColumns = @JoinColumn(name = "music_type_id")
     )
-    private List<MusicType> playlistTypes;
+    private List<MusicType> albumTypes;
 
     @ManyToMany
     @JoinTable(
-            name = "playlists",
-            joinColumns = @JoinColumn(name = "playlist_id"),
+            name = "albums",
+            joinColumns = @JoinColumn(name = "album_id"),
             inverseJoinColumns = @JoinColumn(name = "music_id")
     )
     private List<Music> musics;

@@ -61,6 +61,11 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public List<Music> getMusicPopulars(User user) {
+        return userRepository.findTop4ByUserIdOrderByPlayCountDesc(user.getId());
+    }
+
+    @Override
     public User likeMusic(String userId, String musicId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         Music music = musicRepository.findById(musicId).orElseThrow(() -> new RuntimeException("Music not found"));

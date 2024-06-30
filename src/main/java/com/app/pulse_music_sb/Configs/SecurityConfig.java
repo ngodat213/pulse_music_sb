@@ -33,7 +33,9 @@ public class SecurityConfig {
                                 UserRole.ARTIST.getAuthority(),
                                 UserRole.ADMIN.getAuthority()
                         )
-                        .requestMatchers(ManagerRouter.AdminMatchers).hasAuthority(UserRole.ADMIN.getAuthority())
+                        .requestMatchers(ManagerRouter.AdminMatchers).hasAnyAuthority(
+                                UserRole.ARTIST.getAuthority(),
+                                UserRole.ADMIN.getAuthority())
                         .anyRequest().permitAll()
                 ).formLogin(AbstractConfiguredSecurityBuilder
                         ->AbstractConfiguredSecurityBuilder

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<div class="tab-pane active" id="track" th:fragment="profile_track(tracks)">
+    <div class="row item-list item-list-by m-b"  th:each="track : ${tracks}">
+        <div class="col-xs-12">
+            <div class="item r" data-id="item-7" th:data-src="${track.mp3.url}">
+                <div class="item-media">
+                    <a href="track.detail.html" class="item-media-content" th:style="'background-image: url(' + ${track.image.url} + ')'"></a>
+                    <div class="item-overlay center">
+                        <button class="btn-playpause">Play</button>
+                    </div>
+                </div>
+                <div class="item-info">
+                    <div class="item-overlay bottom text-right">
+                        <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                        <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                        <div class="dropdown-menu pull-right black lt"></div>
+                    </div>
+                    <div class="item-title text-ellipsis">
+                        <a href="track.detail.html" th:text="${track.title}"></a>
+                    </div>
+                    <div class="item-author text-sm text-ellipsis hide">
+                        <a class="text-muted" th:text="${track.user.fullName}"></a>
+                    </div>
+                    <div class="item-meta text-sm text-muted">
+                        <span class="item-meta-category">
+<!--                            <a href="browse.html" class="label" th:text="${track.musicType.typeName}">Pop</a>-->
+                        </span>
+                        <span class="item-meta-date text-xs">05.05.2016</span>
+                    </div>
+                    <div class="item-except visible-list text-sm text-muted h-2x m-t-sm" th:text="${track.description}">
+                    </div>
+                    <div class="item-action visible-list m-t-sm">
+                        <a href="#" class="btn btn-xs white">Edit</a>
+                        <a href="#" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="btn btn-sm white rounded">Show More</a>
+</div>
+</html>

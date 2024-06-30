@@ -3,9 +3,7 @@
       layout:decorate="~{_layout.html}">
 <body>
 <div layout:fragment="content">
-    <div class="col-lg-9 b-r no-border-md" >
-        <div th:insert="Fragments/chart :: artists_content(${musics}, ${types}, ${zeroLike})"></div>
-    </div>
+    <div th:insert="Fragments/chart :: artists_content(${musics}, ${types}, ${zeroLike})"></div>
     <div class="col-lg-3 w-xxl w-auto-md" th:if="${likes != null && !likes.isEmpty()}" >
         <div th:insert="Fragments/likes :: like_sidebar(${likes})"></div>
     </div>

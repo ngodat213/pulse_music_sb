@@ -1,6 +1,7 @@
 package com.app.pulse_music_sb.Repository;
 
 import com.app.pulse_music_sb.Enums.UserRole;
+import com.app.pulse_music_sb.Models.Music;
 import com.app.pulse_music_sb.Models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,4 +20,6 @@ public interface UserRepository extends JpaRepository<User, String> {
     User findByToken(String token);
     boolean existsByEmail(String email);
     List<User> findAllByRole(UserRole role);
+    @Query("SELECT m FROM Music m WHERE m.user.id = :userId ORDER BY m.playCount DESC")
+    List<Music> findTop4ByUserIdOrderByPlayCountDesc(String userId);
 }
