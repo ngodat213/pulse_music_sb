@@ -6,9 +6,7 @@
 <div layout:fragment="content">
     <div th:replace="~{/Fragments/artist.info :: artist_info(${artist})}"></div>
     <div class="row-col">
-        <div class="col-lg-9 b-r no-border-md">
-            <div th:replace="~{/Fragments/artist.nav :: artist_nav(${artist})}"></div>
-        </div>
+        <div th:replace="~{/Fragments/artist.nav :: artist_nav(${artist})}"></div>
         <div class="col-lg-3 w-xxl w-auto-md" th:if="${likes != null && !likes.isEmpty()}">
             <div th:insert="~{/Fragments/likes :: like_sidebar(${likes})}"></div>
         </div>

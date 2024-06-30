@@ -17,7 +17,7 @@
                         <div class="dropdown-menu pull-right black lt"></div>
                     </div>
                     <div class="item-title text-ellipsis">
-                        <a href="track.detail.html" th:text="${playlist.title}">Pull Up</a>
+                        <a href="track.detail.html" th:text="${playlist.title}"></a>
                     </div>
                     <div class="item-author text-sm text-ellipsis hide">
                         <a th:href="@{/artist_detail/{id}(id=${playlist.user.id})}" class="text-muted" th:text="${playlist.user.fullName}"></a>

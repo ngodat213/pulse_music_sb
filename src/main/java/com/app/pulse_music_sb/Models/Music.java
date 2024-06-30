@@ -41,13 +41,9 @@ public class Music extends AbstractEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToMany
-    @JoinTable(
-            name = "MusicTypes",
-            joinColumns = @JoinColumn(name = "music_id"),
-            inverseJoinColumns = @JoinColumn(name = "music_type_id")
-    )
-    private List<MusicType> musicTypes;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "music_type_id", referencedColumnName = "id")
+    private MusicType musicType;
 
     @ManyToMany(mappedBy = "userLiked")
     private List<User> likedByUsers;

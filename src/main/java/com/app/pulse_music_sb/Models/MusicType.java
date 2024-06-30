@@ -17,9 +17,6 @@ import java.util.List;
 public class MusicType extends AbstractEntity {
     private String typeName;
 
-    @ManyToMany(mappedBy = "musicTypes")
-    private List<Music> music;
-
     @ManyToMany(mappedBy = "userTypes")
     private List<User> users;
 
