@@ -20,6 +20,8 @@
     </div>
     <div class="tab-content">
       <div th:replace="~{/Fragments/profile.track :: profile_track(${profile.tracks})}"></div>
+      <div th:replace="~{/Fragments/profile.playlist :: profile_playlist(${profile.playlists})}"></div>
+      <div th:replace="~{/Fragments/profile.like :: profile_like(${profile.likes})}"></div>
       <div class="tab-pane" id="profile">
         <form>
           <div class="form-group row">

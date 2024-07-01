@@ -20,6 +20,7 @@ public class UserDTO {
     private List<Playlist> playlists;
     private List<Music> populars;
     private List<Album> albums;
+    private List<Music> likes;
 
     public static UserDTO toDTO(User user, List<Music> populars) {
         UserDTO userDTO = new UserDTO();
@@ -32,6 +33,7 @@ public class UserDTO {
         userDTO.playlists = user.getPlayLists();
         userDTO.albums = user.getAlbums();
         userDTO.populars = populars;
+        userDTO.likes = user.getUserLiked();
         return userDTO;
     }
 }

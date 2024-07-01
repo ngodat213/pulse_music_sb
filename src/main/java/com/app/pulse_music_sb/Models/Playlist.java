@@ -19,6 +19,9 @@ public class Playlist extends AbstractEntity {
 
     private String title;
     private String description;
+    private int duration;
+    private int playCount;
+    private int heartCount;
 
     @ManyToMany
     @JoinTable(
