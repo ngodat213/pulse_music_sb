@@ -13,7 +13,7 @@ public class ManagerRouter {
             "/dashboard/**"
     };
 
-    public static final String rememberMeKey = "Freal";
+    public static final String rememberMeKey = "Pulse";
     public static final int rememberMeTimeExpired = 24 * 60 * 60;
 
     public static final String loginPage = "/login";
