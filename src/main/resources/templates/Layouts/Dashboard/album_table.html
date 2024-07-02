@@ -47,15 +47,17 @@
                                     <table class="table lms_table_active ">
                                         <thead>
                                         <tr>
-                                            <th scope="col">Type name</th>
-                                            <th scope="col">Songs</th>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Description</th>
+                                            <th scope="col">Musics</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="type : ${types}">
-                                            <td th:text="${type.musicType.typeName}"></td>
+                                        <tr th:each="album : ${albums}">
+                                            <td th:text="${album.title}"></td>
+                                            <td th:text="${type.description}"></td>
                                             <td th:text="${type.musics.size()}"></td>
                                             <td><a href="#" th:class=" ${!type.musicType.isDeleted()} ? 'status_btn' : 'status_btn bg-danger'"
                                                    th:text="${!type.musicType.isDeleted()} ? Active : Unlock"></a>

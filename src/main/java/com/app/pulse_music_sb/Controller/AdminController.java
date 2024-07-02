@@ -5,9 +5,9 @@ import com.app.pulse_music_sb.Const.ToastConstants;
 import com.app.pulse_music_sb.Models.Music;
 import com.app.pulse_music_sb.Models.MusicType;
 import com.app.pulse_music_sb.Models.User;
-import com.app.pulse_music_sb.Request.Request.RequestCreateMusic;
-import com.app.pulse_music_sb.Request.Request.RequestMusicType;
-import com.app.pulse_music_sb.Request.Request.RequestUpdateMusic;
+import com.app.pulse_music_sb.Request.Request.*;
+import com.app.pulse_music_sb.Service.AlbumService;
+import com.app.pulse_music_sb.Service.Interface.IAlbumService;
 import com.app.pulse_music_sb.Service.Interface.MusicService;
 import com.app.pulse_music_sb.Service.Interface.MusicTypeService;
 import com.app.pulse_music_sb.Service.UserService;
@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -35,6 +36,8 @@ public class AdminController {
     private UserService userService;
     @Autowired
     private MusicTypeService musicTypeService;
+    @Autowired
+    private IAlbumService albumService;
 
     @GetMapping("")
     public String dashboard (){
@@ -60,8 +63,9 @@ public class AdminController {
                                   @RequestParam(defaultValue = "createdAt") String sortBy,
                                   Model model){
         PaginationDTO paginationDTO = new PaginationDTO(page, limit, sortDirection, sortBy);
+        List<RequestMusicTypes> req = musicService.findAllMusicTypes(musicTypeService.findAll(paginationDTO));
         model.addAttribute("type", new RequestMusicType());
-        model.addAttribute("types", musicTypeService.findAll(paginationDTO));
+        model.addAttribute("types", req);
         return "Layouts/Dashboard/music_type_table";
     }
 
@@ -77,6 +81,20 @@ public class AdminController {
         model.addAttribute("musics", musicService.findAllBy(paginationDTO));
         model.addAttribute("types", musicTypeService.findAll(paginationDTO));
         return "Layouts/Dashboard/music_table";
+    }
+
+    @GetMapping("/album_table")
+    public String album_table(@RequestParam(defaultValue = "1") int page,
+                              @RequestParam(defaultValue = "10") int limit,
+                              @RequestParam(defaultValue = "desc", name = "sort") String sortDirection,
+                              @RequestParam(defaultValue = "createdAt") String sortBy,
+                              Model model){
+        PaginationDTO paginationDTO = new PaginationDTO(page, limit, sortDirection, sortBy);
+        model.addAttribute("types", musicTypeService.findAll(paginationDTO));
+        model.addAttribute("musics", musicService.findAllBy(paginationDTO));
+        model.addAttribute("album", new RequestCreateAlbum());
+        model.addAttribute("albums", albumService.findAllBy(paginationDTO));
+        return "Layouts/Dashboard/album_table";
     }
     // API
     // ----------------------==MUSIC TYPE==---------------------- //
