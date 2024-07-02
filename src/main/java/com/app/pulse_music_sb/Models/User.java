@@ -1,5 +1,6 @@
 package com.app.pulse_music_sb.Models;
 import com.app.pulse_music_sb.Const.Constants;
+import com.app.pulse_music_sb.Enums.LoginType;
 import com.app.pulse_music_sb.Enums.UserRole;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -26,7 +27,7 @@ public class User{
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(nullable = false, length = 80)
+    @Column(nullable = true, length = 80)
     @Size.List({
             @Size(min = 8, message = "Password too short"),
             @Size(max = 80, message = "Password too long")
@@ -50,6 +51,9 @@ public class User{
 
     @Enumerated(EnumType.STRING)
     private UserRole role = UserRole.USER;
+
+    @Enumerated(EnumType.STRING)
+    private LoginType loginType;
 
     @CreatedDate
     private LocalDateTime createdAt;

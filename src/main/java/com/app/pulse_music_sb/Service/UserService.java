@@ -90,7 +90,7 @@ public class UserService implements IUserService {
 
     @Override
     public User register(RequestRegisterUser req) {
-        if(!userRepository.existsByEmail(req.getEmail())){
+        if(!userRepository.existsByEmail(req.getEmail()) && !req.getPassword().isEmpty()){
             if(checkPassword(req.getPassword(), req.getConfirmPassword())) {
                 req.setPassword(encodePassword(req.getPassword()));
 
