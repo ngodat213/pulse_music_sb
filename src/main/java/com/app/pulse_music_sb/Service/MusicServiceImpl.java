@@ -2,9 +2,11 @@ package com.app.pulse_music_sb.Service;
 
 import com.app.pulse_music_sb.Models.CloudStorage;
 import com.app.pulse_music_sb.Models.Music;
+import com.app.pulse_music_sb.Models.MusicType;
 import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Repository.MusicRepository;
 import com.app.pulse_music_sb.Request.Request.RequestCreateMusic;
+import com.app.pulse_music_sb.Request.Request.RequestMusicTypes;
 import com.app.pulse_music_sb.Request.Request.RequestUpdateMusic;
 import com.app.pulse_music_sb.Service.Interface.MusicService;
 import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -102,5 +105,14 @@ public class MusicServiceImpl implements MusicService {
     @Override
     public void deleteById(String id) {
         musicRepository.deleteById(id);
+    }
+
+    @Override
+    public List<RequestMusicTypes> findAllMusicTypes(Page<MusicType> types) {
+        List<RequestMusicTypes> res = new ArrayList<>();
+        for (MusicType type: types) {
+            res.add(new RequestMusicTypes(type, musicRepository.findByMusicType(type)));
+        }
+        return res;
     }
 }

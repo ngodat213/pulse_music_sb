@@ -1,5 +1,6 @@
 package com.app.pulse_music_sb.Models;
 
+import com.app.pulse_music_sb.Const.Constants;
 import jakarta.persistence.EntityListeners;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,9 +15,6 @@ import java.util.Collections;
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public class CustomUserDetail implements UserDetails{
-    private String link = "https://res.cloudinary.com/duhncgkpo/image/upload/v1717508494/";
-    private String defaultPublicIdAvatar = "Freal/public/zmhc6q9km7psp7eymp8w";
-    private String extensionImage = ".png";
     private User user;
     public CustomUserDetail(User user) {
         this.user = user;
@@ -41,7 +39,7 @@ public class CustomUserDetail implements UserDetails{
         if(user.getAvatar()!=null){
             return user.getAvatar().getUrl();
         }
-        return link + defaultPublicIdAvatar + extensionImage;
+        return Constants.DEFAULT_AVATAR;
     }
 
     public String getId(){

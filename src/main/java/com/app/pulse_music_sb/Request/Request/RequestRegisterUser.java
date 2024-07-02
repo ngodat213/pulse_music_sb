@@ -1,5 +1,6 @@
 package com.app.pulse_music_sb.Request.Request;
 
+import com.app.pulse_music_sb.Enums.LoginType;
 import com.app.pulse_music_sb.Enums.UserRole;
 import com.app.pulse_music_sb.Models.User;
 import jakarta.validation.constraints.Email;
@@ -36,6 +37,7 @@ public class RequestRegisterUser {
         user.setPassword(password);
         user.setEmail(email);
         user.setEnabled(true);
+        user.setLoginType(LoginType.DEFAULT);
         user.setRole(UserRole.USER);
         return user;
     }
