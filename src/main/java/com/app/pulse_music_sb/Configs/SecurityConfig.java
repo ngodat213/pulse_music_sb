@@ -54,6 +54,7 @@ public class SecurityConfig {
                         .userInfoEndpoint(userInfoEndpoint ->
                                 userInfoEndpoint.userService(customOAuth2UserService)
                         )
+                        .successHandler(new OAuth2HandleSuccessLogin())
                 ).rememberMe(rememberMe -> rememberMe.key(ManagerRouter.rememberMeKey)
                         .rememberMeCookieName(ManagerRouter.rememberMeKey)
                         .tokenValiditySeconds(ManagerRouter.rememberMeTimeExpired)

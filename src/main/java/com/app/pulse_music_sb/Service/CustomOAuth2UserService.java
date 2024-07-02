@@ -24,17 +24,30 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
 
+        String registrationId = userRequest.getClientRegistration().getRegistrationId();
+        LoginType loginType = getLoginType(registrationId);
+
         String email = oAuth2User.getAttribute("email");
         User user = userRepository.findByEmail(email);
         if (user == null) {
             user = new User();
             user.setEmail(email);
             user.setFullName(oAuth2User.getAttribute("name"));
-            user.setLoginType(LoginType.GOOGLE);
+            user.setLoginType(loginType);
             user.setRole(UserRole.USER);
             userRepository.save(user);
         }
 
         return new CustomOAuth2User(oAuth2User, user);
+    }
+
+    private LoginType getLoginType(String registrationId) {
+        if ("google".equalsIgnoreCase(registrationId)) {
+            return LoginType.GOOGLE;
+        } else if ("facebook".equalsIgnoreCase(registrationId)) {
+            return LoginType.FACEBOOK;
+        } else {
+            throw new IllegalArgumentException("Unsupported login type: " + registrationId);
+        }
     }
 }
