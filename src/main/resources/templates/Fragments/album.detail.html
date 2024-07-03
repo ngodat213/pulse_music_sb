@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<div class="padding b-b" th:fragment="album_detail(album)">
+    <div class="row-col">
+        <div class="col-sm w w-auto-xs m-b">
+            <div class="item w r">
+                <div class="item-media">
+                    <div class="item-media-content" th:style="'background-image: url(' + ${album.image.url} + ')'"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="p-l-md no-padding-xs">
+                <div class="page-title">
+                    <h1 class="inline" th:text="${album.title}"></h1>
+                </div>
+                <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis" th:text="${album.description}"></p>
+                <div class="item-action m-b">
+                    <a class="btn btn-icon white rounded btn-share pull-right" data-toggle="modal" data-target="#share-modal"><i class="fa fa-share-alt"></i></a>
+                    <button class="btn-playpause text-primary m-r-sm"></button>
+                    <span class="text-muted" th:text="${album.playCount}"></span>
+                    <a class="btn btn-icon rounded btn-favorite"><i class="fa fa-heart-o"></i></a>
+                    <span class="text-muted" th:text="${album.heartCount}"></span>
+                    <div class="inline dropdown m-l-xs">
+                        <a class="btn btn-icon rounded btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                        <div class="dropdown-menu pull-right black lt"></div>
+                    </div>
+                </div>
+                <div class="item-meta">
+                    <a class="btn btn-xs rounded white">Pop</a>
+                    <a class="btn btn-xs rounded white">Happy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

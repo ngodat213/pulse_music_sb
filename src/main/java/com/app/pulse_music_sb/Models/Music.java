@@ -57,4 +57,10 @@ public class Music extends AbstractEntity {
         }
         return 0;
     }
+
+    public String getFormatTime(){
+        int minutes = duration / 60;
+        int seconds = duration % 60;
+        return String.format("%d:%d", minutes, seconds);
+    }
 }

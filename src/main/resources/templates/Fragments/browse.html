@@ -28,7 +28,7 @@
                 <div th:each="music : ${musics}" class="col-xs-4 col-sm-4 col-md-3">
                     <div class="item r" th:data-id="${music.id}" th:data-src="${music.mp3.url}">
                         <div class="item-media">
-                            <a href="track.detail.html" class="item-media-content" th:style="'background-image: url(' + ${music.image.url} + ')'"></a>
+                            <a href="../Layouts/Home/album.detail.html" class="item-media-content" th:style="'background-image: url(' + ${music.image.url} + ')'"></a>
                             <div class="item-overlay center">
                                 <button class="btn-playpause">Play</button>
                             </div>
@@ -40,7 +40,7 @@
                                 <div class="dropdown-menu pull-right black lt"></div>
                             </div>
                             <div class="item-title text-ellipsis">
-                                <a href="track.detail.html" th:text="${music.title}"></a>
+                                <a href="../Layouts/Home/album.detail.html" th:text="${music.title}"></a>
                             </div>
                             <div class="item-author text-sm text-ellipsis">
                                 <a href="artist.detail.html" class="text-muted" th:text="${music.user.fullName}"></a>

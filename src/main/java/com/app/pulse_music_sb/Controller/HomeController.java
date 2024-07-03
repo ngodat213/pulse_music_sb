@@ -5,6 +5,7 @@ import com.app.pulse_music_sb.Models.Music;
 import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
 import com.app.pulse_music_sb.Request.DTO.UserDTO;
+import com.app.pulse_music_sb.Service.AlbumService;
 import com.app.pulse_music_sb.Service.Interface.MusicTypeService;
 import com.app.pulse_music_sb.Service.UserService;
 import org.springframework.ui.Model;
@@ -26,6 +27,8 @@ public class HomeController {
     private MusicTypeService musicTypeService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private AlbumService albumService;
 
     @GetMapping("/")
     public String home(@AuthenticationPrincipal CustomUserDetails customUserDetail, Model model) {
@@ -111,6 +114,12 @@ public class HomeController {
         model.addAttribute("albums", userService.getAlbumsByUserId(customUserDetail.getId()));
         model.addAttribute("tracks", userService.getTracksByUserId(customUserDetail.getId()));
         return "Layouts/Home/profile";
+    }
+
+    @GetMapping("/album/{id}")
+    public String albumDetail(@PathVariable String id, Model model) {
+        model.addAttribute("album", albumService.findById(id).get());
+        return "Layouts/Home/album.detail";
     }
 
     @GetMapping("/scroll_item")
