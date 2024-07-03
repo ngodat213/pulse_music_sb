@@ -1,6 +1,8 @@
 package com.app.pulse_music_sb.Service;
 
+import com.app.pulse_music_sb.Models.Album;
 import com.app.pulse_music_sb.Models.Music;
+import com.app.pulse_music_sb.Models.Playlist;
 import com.app.pulse_music_sb.Repository.MusicRepository;
 import com.app.pulse_music_sb.Request.Request.RequestRegisterUser;
 import com.app.pulse_music_sb.Enums.UserRole;
@@ -66,6 +68,21 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public List<Album> getAlbumsByUserId(String userId) {
+        return userRepository.findAllAlbumsByUserId(userId);
+    }
+
+    @Override
+    public List<Music> getTracksByUserId(String userId) {
+        return userRepository.findAllTracksByUserId(userId);
+    }
+
+    @Override
+    public List<Playlist> getPlaylistsByUserId(String userId) {
+        return userRepository.findAllPlaylistsByUserId(userId);
+    }
+
+    @Override
     public User likeMusic(String userId, String musicId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         Music music = musicRepository.findById(musicId).orElseThrow(() -> new RuntimeException("Music not found"));
@@ -75,7 +92,7 @@ public class UserService implements IUserService {
 
     @Override
     public User findById(String id) {
-        return userRepository.findById(id).get();
+        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     @Override

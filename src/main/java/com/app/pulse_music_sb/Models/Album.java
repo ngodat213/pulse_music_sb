@@ -21,6 +21,13 @@ public class Album extends AbstractEntity {
 
     private String title;
     private String description;
+    private int durationInSeconds;
+    private int playCount;
+    private int heartCount;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id", referencedColumnName = "id")
+    private CloudStorage image;
 
     @ManyToMany
     @JoinTable(
@@ -37,4 +44,8 @@ public class Album extends AbstractEntity {
             inverseJoinColumns = @JoinColumn(name = "music_id")
     )
     private List<Music> musics;
+
+    public Music getFist(){
+        return musics.getFirst();
+    }
 }

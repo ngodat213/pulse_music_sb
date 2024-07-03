@@ -1,6 +1,8 @@
 package com.app.pulse_music_sb.Service.Interface;
 
+import com.app.pulse_music_sb.Models.Album;
 import com.app.pulse_music_sb.Models.Music;
+import com.app.pulse_music_sb.Models.Playlist;
 import com.app.pulse_music_sb.Request.Request.RequestRegisterUser;
 import com.app.pulse_music_sb.Request.Request.RequestPasswordChange;
 import com.app.pulse_music_sb.Request.Request.RequestPasswordReset;
@@ -19,6 +21,12 @@ public interface IUserService extends UserDetailsService {
     List<Music> getUserLikedMusic(String userId);
 
     List<Music> getMusicPopulars(User user);
+
+    List<Album> getAlbumsByUserId(String userId);
+
+    List<Music> getTracksByUserId(String userId);
+
+    List<Playlist> getPlaylistsByUserId(String userId);
 
     User likeMusic(String userId, String musicId);
 

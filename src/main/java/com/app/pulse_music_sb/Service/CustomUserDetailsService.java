@@ -6,8 +6,6 @@ import com.app.pulse_music_sb.Models.CustomUserDetails;
 import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -15,9 +13,6 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class CustomUserDetailsService extends DefaultOAuth2UserService implements UserDetailsService {
@@ -70,17 +65,5 @@ public class CustomUserDetailsService extends DefaultOAuth2UserService implement
         user.setLoginType(loginType);
         user.setRole(UserRole.USER);
         return userRepository.save(user);
-    }
-
-    public List<GrantedAuthority> buildRolesFromRole(String role) {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        String roles = "ADMIN,PARTNER,USER";
-        int index = roles.indexOf(role);
-        String substring = roles.substring(index);
-        String[] authString = substring.split(",");
-        for (String auth : authString) {
-            authorities.add(new SimpleGrantedAuthority(auth));
-        }
-        return authorities;
     }
 }

@@ -11,6 +11,9 @@
           <a class="nav-link" href="#" data-toggle="tab" data-target="#playlist">Playlists</a>
         </li>
         <li class="nav-item m-r inline">
+          <a class="nav-link" href="#" data-toggle="tab" data-target="#album">Albums</a>
+        </li>
+        <li class="nav-item m-r inline">
           <a class="nav-link" href="#" data-toggle="tab" data-target="#like">Likes</a>
         </li>
         <li class="nav-item m-r inline">
@@ -19,9 +22,10 @@
       </ul>
     </div>
     <div class="tab-content">
-      <div th:replace="~{/Fragments/profile.track :: profile_track(${profile.tracks})}"></div>
-      <div th:replace="~{/Fragments/profile.playlist :: profile_playlist(${profile.playlists})}"></div>
-      <div th:replace="~{/Fragments/profile.like :: profile_like(${profile.likes})}"></div>
+      <div th:replace="~{/Fragments/profile.track :: profile_track(${tracks})}"></div>
+      <div th:replace="~{/Fragments/profile.playlist :: profile_playlist(${playlists})}"></div>
+      <div th:replace="~{/Fragments/profile.album :: profile_album(${albums})}"></div>
+      <div th:replace="~{/Fragments/profile.like :: profile_like(${likes})}"></div>
       <div class="tab-pane" id="profile">
         <form>
           <div class="form-group row">

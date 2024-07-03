@@ -111,12 +111,19 @@ public class AdminController {
 
     @PostMapping("/album_table")
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> createAlbum(@RequestBody RequestCreateAlbum createAlbum) {
+    public ResponseEntity<Map<String, Object>> createAlbum(@ModelAttribute RequestCreateAlbum createAlbum,
+                                                           @RequestParam("image") MultipartFile image) {
         try {
-            Album savedAlbum = albumService.save(createAlbum);
+            Map<String, Object> response = new HashMap<>();
+            if (!image.getContentType().startsWith("image/")) {
+                response.put("status", "error");
+                response.put("message", "Unsupported image format");
+                return ResponseEntity.badRequest().body(response);
+            }
+
+            Album savedAlbum = albumService.save(createAlbum, image);
             return ResponseEntity.ok(Map.of("status", "success", "Album", savedAlbum));
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("status", "error", "message", e.getMessage()));
         }

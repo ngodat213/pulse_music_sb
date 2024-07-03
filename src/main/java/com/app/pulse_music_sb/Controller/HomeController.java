@@ -7,7 +7,6 @@ import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
 import com.app.pulse_music_sb.Request.DTO.UserDTO;
 import com.app.pulse_music_sb.Service.Interface.MusicTypeService;
 import com.app.pulse_music_sb.Service.UserService;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.ui.Model;
 import com.app.pulse_music_sb.Service.Interface.MusicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,15 +100,16 @@ public class HomeController {
 
     @GetMapping("/track/{id}")
     public String track(@AuthenticationPrincipal CustomUserDetails customUserDetail, @PathVariable String id, Model model) {
-        Music music = musicService.findById(id);
         return "Layouts/Home/artist_detail";
     }
 
     @GetMapping("/profile")
     public String profile(@AuthenticationPrincipal CustomUserDetails customUserDetail, Model model) {
-        List<Music> likedMusic = userService.getUserLikedMusic(customUserDetail.getId());
         model.addAttribute("profile", UserDTO.toDTO(customUserDetail.getUser(), null));
-        model.addAttribute("likes", likedMusic != null ? likedMusic : new ArrayList<>());
+        model.addAttribute("likes", userService.getUserLikedMusic(customUserDetail.getId()));
+        model.addAttribute("playlists", userService.getPlaylistsByUserId(customUserDetail.getId()));
+        model.addAttribute("albums", userService.getAlbumsByUserId(customUserDetail.getId()));
+        model.addAttribute("tracks", userService.getTracksByUserId(customUserDetail.getId()));
         return "Layouts/Home/profile";
     }
 
