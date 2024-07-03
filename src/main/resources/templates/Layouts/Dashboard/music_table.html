@@ -413,7 +413,6 @@
             event.preventDefault(); // Prevent the form from submitting via the browser
             var form = $('#createMusicForm')[0];
             var formData = new FormData(form);
-
             $.ajax({
                 type: 'POST',
                 url: '/dashboard/music_table',

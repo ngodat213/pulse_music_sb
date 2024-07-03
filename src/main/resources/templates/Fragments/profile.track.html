@@ -3,7 +3,7 @@
 <div class="tab-pane active" id="track" th:fragment="profile_track(tracks)">
     <div class="row item-list item-list-by m-b"  th:each="track : ${tracks}">
         <div class="col-xs-12">
-            <div class="item r" data-id="item-7" th:data-src="${track.mp3.url}">
+            <div class="item r" th:data-id="${track.id}" th:data-src="${track.mp3.url}">
                 <div class="item-media">
                     <a href="track.detail.html" class="item-media-content" th:style="'background-image: url(' + ${track.image.url} + ')'"></a>
                     <div class="item-overlay center">
@@ -26,7 +26,7 @@
                         <span class="item-meta-category">
 <!--                            <a href="browse.html" class="label" th:text="${track.musicType.typeName}">Pop</a>-->
                         </span>
-                        <span class="item-meta-date text-xs">05.05.2016</span>
+                        <span class="item-meta-date text-xs" th:text=""></span>
                     </div>
                     <div class="item-except visible-list text-sm text-muted h-2x m-t-sm" th:text="${track.description}">
                     </div>

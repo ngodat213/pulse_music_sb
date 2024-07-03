@@ -1,21 +1,18 @@
 package com.app.pulse_music_sb.Configs;
 
-import com.app.pulse_music_sb.Service.CustomOAuth2UserService;
-import com.app.pulse_music_sb.Service.CustomUserDetailService;
 import com.app.pulse_music_sb.Enums.UserRole;
 import com.app.pulse_music_sb.Managers.ManagerRouter;
+import com.app.pulse_music_sb.Service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.AbstractConfiguredSecurityBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -23,10 +20,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Autowired
-    private CustomUserDetailService customUserDetailService;
-    @Autowired
-    private CustomOAuth2UserService customOAuth2UserService;
-
+    private CustomUserDetailsService customUserDetailService;
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         return http
@@ -52,9 +46,9 @@ public class SecurityConfig {
                         ->oauth2Login
                         .loginPage("/login")
                         .userInfoEndpoint(userInfoEndpoint ->
-                                userInfoEndpoint.userService(customOAuth2UserService)
+                                userInfoEndpoint.userService(customUserDetailService)
                         )
-                        .successHandler(new OAuth2HandleSuccessLogin())
+                        .successHandler(new HandleSuccessLogin())
                 ).rememberMe(rememberMe -> rememberMe.key(ManagerRouter.rememberMeKey)
                         .rememberMeCookieName(ManagerRouter.rememberMeKey)
                         .tokenValiditySeconds(ManagerRouter.rememberMeTimeExpired)

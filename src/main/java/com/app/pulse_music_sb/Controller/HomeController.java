@@ -1,15 +1,13 @@
 package com.app.pulse_music_sb.Controller;
 
-import com.app.pulse_music_sb.Models.CustomOAuth2User;
+import com.app.pulse_music_sb.Models.CustomUserDetails;
 import com.app.pulse_music_sb.Models.Music;
 import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
 import com.app.pulse_music_sb.Request.DTO.UserDTO;
 import com.app.pulse_music_sb.Service.Interface.MusicTypeService;
 import com.app.pulse_music_sb.Service.UserService;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.ui.Model;
-import com.app.pulse_music_sb.Models.CustomUserDetail;
 import com.app.pulse_music_sb.Service.Interface.MusicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -30,7 +28,7 @@ public class HomeController {
     private UserService userService;
 
     @GetMapping("/")
-    public String home(@AuthenticationPrincipal OAuth2User principal, Model model) {
+    public String home(@AuthenticationPrincipal CustomUserDetails customUserDetail, Model model) {
         PaginationDTO paginationDTO = new PaginationDTO(1, 5, "desc", "playCount");
         PaginationDTO musicsPaginationDTO = new PaginationDTO(1, 4, "desc", "playCount");
         PaginationDTO trendingPaginationDTO = new PaginationDTO(1, 10, "desc", "playCount");
@@ -40,83 +38,51 @@ public class HomeController {
         model.addAttribute("trending", musicService.findAllBy(trendingPaginationDTO));
         model.addAttribute("news", musicService.findAllBy(newPaginationDTO));
 
-        if (principal instanceof CustomOAuth2User) {
-            CustomOAuth2User customOAuth2User = (CustomOAuth2User) principal;
-            List<Music> likedMusic = userService.getUserLikedMusic(customOAuth2User.getUser().getId());
-            model.addAttribute("likes", likedMusic != null ? likedMusic : new ArrayList<>());
-        } else if (principal instanceof CustomUserDetail) {
-            CustomUserDetail customUserDetail = (CustomUserDetail) principal;
-            List<Music> likedMusic = userService.getUserLikedMusic(customUserDetail.getUser().getId());
-            model.addAttribute("likes", likedMusic != null ? likedMusic : new ArrayList<>());
-        } else {
-            model.addAttribute("likes", new ArrayList<Music>());
-        }
+        List<Music> likedMusic = userService.getUserLikedMusic(customUserDetail.getId());
+        model.addAttribute("profile", UserDTO.toDTO(customUserDetail.getUser(), null));
+        model.addAttribute("likes", likedMusic != null ? likedMusic : new ArrayList<>());
         return "Layouts/Home/index";
     }
 
     @GetMapping("/chart")
-    public String chart(@AuthenticationPrincipal OAuth2User principal, Model model) {
+    public String chart(@AuthenticationPrincipal CustomUserDetails customUserDetail, Model model) {
         PaginationDTO typePaginationDTO = new PaginationDTO(1, 100, "desc", "createdAt");
         model.addAttribute("types", musicTypeService.findAll(typePaginationDTO));
         model.addAttribute("musics", musicService.findAll());
 
-        if (principal instanceof CustomOAuth2User) {
-            CustomOAuth2User customOAuth2User = (CustomOAuth2User) principal;
-            List<Music> likedMusic = userService.getUserLikedMusic(customOAuth2User.getUser().getId());
-            model.addAttribute("likes", likedMusic != null ? likedMusic : new ArrayList<>());
-        } else if (principal instanceof CustomUserDetail) {
-            CustomUserDetail customUserDetail = (CustomUserDetail) principal;
-            List<Music> likedMusic = userService.getUserLikedMusic(customUserDetail.getUser().getId());
-            model.addAttribute("likes", likedMusic != null ? likedMusic : new ArrayList<>());
-        } else {
-            model.addAttribute("likes", new ArrayList<Music>());
-        }
+        List<Music> likedMusic = userService.getUserLikedMusic(customUserDetail.getId());
+        model.addAttribute("profile", UserDTO.toDTO(customUserDetail.getUser(), null));
+        model.addAttribute("likes", likedMusic != null ? likedMusic : new ArrayList<>());
         return "Layouts/Home/chart";
     }
 
     @GetMapping("/browse")
-    public String browser(@AuthenticationPrincipal OAuth2User principal, Model model) {
+    public String browser(@AuthenticationPrincipal CustomUserDetails customUserDetail, Model model) {
         PaginationDTO typePaginationDTO = new PaginationDTO(1, 100, "desc", "createdAt");
         model.addAttribute("types", musicTypeService.findAll(typePaginationDTO));
         model.addAttribute("musics", musicService.findAll());
 
-        if (principal instanceof CustomOAuth2User) {
-            CustomOAuth2User customOAuth2User = (CustomOAuth2User) principal;
-            List<Music> likedMusic = userService.getUserLikedMusic(customOAuth2User.getUser().getId());
-            model.addAttribute("likes", likedMusic != null ? likedMusic : new ArrayList<>());
-        } else if (principal instanceof CustomUserDetail) {
-            CustomUserDetail customUserDetail = (CustomUserDetail) principal;
-            List<Music> likedMusic = userService.getUserLikedMusic(customUserDetail.getUser().getId());
-            model.addAttribute("likes", likedMusic != null ? likedMusic : new ArrayList<>());
-        } else {
-            model.addAttribute("likes", new ArrayList<Music>());
-        }
+        List<Music> likedMusic = userService.getUserLikedMusic(customUserDetail.getId());
+        model.addAttribute("profile", UserDTO.toDTO(customUserDetail.getUser(), null));
+        model.addAttribute("likes", likedMusic != null ? likedMusic : new ArrayList<>());
         return "Layouts/Home/browse";
     }
 
 
     @GetMapping("/artist")
-    public String artist(@AuthenticationPrincipal OAuth2User principal, Model model) {
+    public String artist(@AuthenticationPrincipal CustomUserDetails customUserDetail, Model model) {
         String[] artistType = {"By name", "By songs"};
         model.addAttribute("types", artistType);
         model.addAttribute("artists", userService.getArtists());
 
-        if (principal instanceof CustomOAuth2User) {
-            CustomOAuth2User customOAuth2User = (CustomOAuth2User) principal;
-            List<Music> likedMusic = userService.getUserLikedMusic(customOAuth2User.getUser().getId());
-            model.addAttribute("likes", likedMusic != null ? likedMusic : new ArrayList<>());
-        } else if (principal instanceof CustomUserDetail) {
-            CustomUserDetail customUserDetail = (CustomUserDetail) principal;
-            List<Music> likedMusic = userService.getUserLikedMusic(customUserDetail.getUser().getId());
-            model.addAttribute("likes", likedMusic != null ? likedMusic : new ArrayList<>());
-        } else {
-            model.addAttribute("likes", new ArrayList<Music>());
-        }
+        List<Music> likedMusic = userService.getUserLikedMusic(customUserDetail.getId());
+        model.addAttribute("profile", UserDTO.toDTO(customUserDetail.getUser(), null));
+        model.addAttribute("likes", likedMusic != null ? likedMusic : new ArrayList<>());
         return "Layouts/Home/artist";
     }
 
     @GetMapping("/artist_detail/{id}")
-    public String artist_detail(@AuthenticationPrincipal OAuth2User principal,
+    public String artist_detail(@AuthenticationPrincipal CustomUserDetails customUserDetail,
                                 @PathVariable String id,
                                 Model model) {
         User artist = userService.findById(id);
@@ -126,52 +92,29 @@ public class HomeController {
         UserDTO artistDTO = UserDTO.toDTO(artist, userService.getMusicPopulars(artist));
         model.addAttribute("artist", artistDTO);
 
-        if (principal instanceof CustomOAuth2User) {
-            CustomOAuth2User customOAuth2User = (CustomOAuth2User) principal;
-            List<Music> likedMusic = userService.getUserLikedMusic(customOAuth2User.getUser().getId());
-            model.addAttribute("likes", likedMusic != null ? likedMusic : new ArrayList<>());
-        } else if (principal instanceof CustomUserDetail) {
-            CustomUserDetail customUserDetail = (CustomUserDetail) principal;
-            List<Music> likedMusic = userService.getUserLikedMusic(customUserDetail.getUser().getId());
-            model.addAttribute("likes", likedMusic != null ? likedMusic : new ArrayList<>());
-        } else {
-            model.addAttribute("likes", new ArrayList<Music>());
-        }
+        List<Music> likedMusic = userService.getUserLikedMusic(customUserDetail.getId());
+        model.addAttribute("profile", UserDTO.toDTO(customUserDetail.getUser(), null));
+        model.addAttribute("likes", likedMusic != null ? likedMusic : new ArrayList<>());
         return "Layouts/Home/artist_detail";
     }
 
     @GetMapping("/track/{id}")
-    public String track(@AuthenticationPrincipal OAuth2User principal, @PathVariable String id, Model model) {
-        Music music = musicService.findById(id);
+    public String track(@AuthenticationPrincipal CustomUserDetails customUserDetail, @PathVariable String id, Model model) {
         return "Layouts/Home/artist_detail";
     }
 
     @GetMapping("/profile")
-    public String profile(@AuthenticationPrincipal OAuth2User principal, Model model) {
-        if (principal instanceof CustomOAuth2User) {
-            CustomOAuth2User customOAuth2User = (CustomOAuth2User) principal;
-
-            User user = userService.findById(customOAuth2User.getUser().getId());
-            model.addAttribute("profile", UserDTO.toDTO(user, null));
-
-            List<Music> likedMusic = userService.getUserLikedMusic(customOAuth2User.getUser().getId());
-            model.addAttribute("likes", likedMusic != null ? likedMusic : new ArrayList<>());
-        } else if (principal instanceof CustomUserDetail) {
-            CustomUserDetail customUserDetail = (CustomUserDetail) principal;
-
-            User user = userService.findById(customUserDetail.getUser().getId());
-            model.addAttribute("profile", UserDTO.toDTO(user, null));
-
-            List<Music> likedMusic = userService.getUserLikedMusic(customUserDetail.getUser().getId());
-            model.addAttribute("likes", likedMusic != null ? likedMusic : new ArrayList<>());
-        } else {
-            model.addAttribute("likes", new ArrayList<Music>());
-        }
+    public String profile(@AuthenticationPrincipal CustomUserDetails customUserDetail, Model model) {
+        model.addAttribute("profile", UserDTO.toDTO(customUserDetail.getUser(), null));
+        model.addAttribute("likes", userService.getUserLikedMusic(customUserDetail.getId()));
+        model.addAttribute("playlists", userService.getPlaylistsByUserId(customUserDetail.getId()));
+        model.addAttribute("albums", userService.getAlbumsByUserId(customUserDetail.getId()));
+        model.addAttribute("tracks", userService.getTracksByUserId(customUserDetail.getId()));
         return "Layouts/Home/profile";
     }
 
     @GetMapping("/scroll_item")
-    public String scroll_item(@AuthenticationPrincipal OAuth2User principal, Model model) {
+    public String scroll_item(@AuthenticationPrincipal CustomUserDetails customUserDetail, Model model) {
         model.addAttribute("musics", musicService.findAll());
         return "Layouts/Home/scroll.item";
     }

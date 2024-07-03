@@ -1,10 +1,8 @@
 package com.app.pulse_music_sb.Request.Request;
 
 import com.app.pulse_music_sb.Models.Album;
-import com.app.pulse_music_sb.Models.Music;
-import com.app.pulse_music_sb.Models.MusicType;
-import com.app.pulse_music_sb.Models.User;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -14,19 +12,19 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RequestCreateAlbum {
-    private User user;
+    private String userId;
     private String title;
     private String description;
-    private List<MusicType> albumTypes;
-    private List<Music> musics;
+    private List<String> albumTypes;
+    private List<String> musics;
+    private MultipartFile image;
 
     public Album toEntity(){
         Album res = new Album();
-        res.setUser(user);
         res.setTitle(title);
         res.setDescription(description);
-        res.setAlbumTypes(albumTypes);
-        res.setMusics(musics);
+        res.setPlayCount(0);
+        res.setHeartCount(0);
         return res;
     }
 }

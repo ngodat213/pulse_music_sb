@@ -2,7 +2,7 @@
 <html lang="en">
 <div class="row m-b" th:fragment="artist_album(albums)">
     <div class="col-xs-4 col-sm-4 col-md-3" th:each="album : ${albums}">
-        <div class="item r" data-id="item-10" th:data-src="${album.mp3.url}">
+        <div class="item r" th:data-id="${album.id}" th:data-src="${album.mp3.url}">
             <div class="item-media">
                 <a href="track.detail.html" class="item-media-content" th:style="'background-image: url(' + ${album.image.url} + ')'"></a>
                 <div class="item-overlay center">

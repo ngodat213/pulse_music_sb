@@ -1,19 +1,15 @@
 package com.app.pulse_music_sb.Controller;
 
-import com.app.pulse_music_sb.Models.CustomUserDetail;
+import com.app.pulse_music_sb.Models.CustomUserDetails;
 import com.app.pulse_music_sb.Request.Request.RequestRegisterUser;
-import com.app.pulse_music_sb.Request.Request.RequestPasswordChange;
-import com.app.pulse_music_sb.Request.Request.RequestPasswordReset;
 import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Service.UserService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -55,7 +51,7 @@ public class AuthController {
      * @method: GET
      */
     @GetMapping("/me")
-    public String GetCurrentUser(@AuthenticationPrincipal CustomUserDetail customUserDetail, Model model){
+    public String GetCurrentUser(@AuthenticationPrincipal CustomUserDetails customUserDetail, Model model){
         User user = userService.currentUser();
         model.addAttribute("user", user);
         return "Layouts/Auth/Me";
@@ -66,7 +62,7 @@ public class AuthController {
      * @method: GET
      */
     @GetMapping("/change_password")
-    public String  ChangePassword(@AuthenticationPrincipal CustomUserDetail customUserDetail, Model model){
+    public String  ChangePassword(@AuthenticationPrincipal CustomUserDetails customUserDetail, Model model){
         model.addAttribute("user", customUserDetail.getUser());
         return "Layout/Auth/changepassword";
     }
@@ -76,7 +72,7 @@ public class AuthController {
      * @method: POST
      */
     @PostMapping("change_password")
-    public String SavePassword(@AuthenticationPrincipal CustomUserDetail customUserDetail,
+    public String SavePassword(@AuthenticationPrincipal CustomUserDetails customUserDetail,
                                @RequestParam("oldpassword") String oldPassword,
                                @RequestParam("newpassword") String newpassword){
         User user = customUserDetail.getUser();

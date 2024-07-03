@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MusicServiceImpl implements MusicService {
@@ -114,5 +115,12 @@ public class MusicServiceImpl implements MusicService {
             res.add(new RequestMusicTypes(type, musicRepository.findByMusicType(type)));
         }
         return res;
+    }
+
+    @Override
+    public List<Music> findByIds(List<String> ids) {
+        return ids.stream()
+                .map(id -> musicRepository.findById(id).orElseThrow(() -> new RuntimeException("Music not found")))
+                .collect(Collectors.toList());
     }
 }

@@ -19,4 +19,5 @@ public interface MusicService {
     Music update(String id, RequestUpdateMusic request, MultipartFile image, MultipartFile mp3);
     void deleteById(String id);
     List<RequestMusicTypes> findAllMusicTypes(Page<MusicType> types);
+    List<Music> findByIds(List<String> ids);
 }
