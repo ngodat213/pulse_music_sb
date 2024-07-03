@@ -7,6 +7,7 @@ import com.app.pulse_music_sb.Request.Request.RequestPasswordReset;
 import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.List;
 

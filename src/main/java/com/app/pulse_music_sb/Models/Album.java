@@ -2,15 +2,17 @@ package com.app.pulse_music_sb.Models;
 
 import com.app.pulse_music_sb.Common.AbstractEntity;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
-@EqualsAndHashCode(callSuper = true)
 @EntityListeners(AuditingEntityListener.class)
 public class Album extends AbstractEntity {
     @ManyToOne

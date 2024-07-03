@@ -5,7 +5,7 @@
     <!--        <h6 class="text text-muted" th:text="${sizeLikes} + ' Likes'"></h6>-->
     <div class="row item-list item-list-sm m-b">
         <div class="col-xs-12" th:each="music : ${likes}">
-            <div class="item r" data-id="item-9" th:data-src="${music.mp3.url}">
+            <div class="item r" th:data-id="${music.id}" th:data-src="${music.mp3.url}">
                 <div class="item-media">
                     <a href="track.detail.html" class="item-media-content" th:style="'background-image: url(' + ${music.image.url} + ')'"></a>
                 </div>

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <div class="padding b-b" th:fragment="profile_info(profile)">
     <div class="row-col">
         <div class="col-sm w w-auto-xs m-b">
             <div class="item w rounded">
-                <div class="item-media">
-                    <div class="item-media-content" th:style="'background-image: url(' + ${profile.avatarUrl} + ')'"></div>
+                <div class="item-media" sec:authorize="isAuthenticated()">
+                    <div class="item-media-content" th:style="'background-image: url(' + ${#authentication.principal.getAvatar()} + ')'"></div>
                 </div>
             </div>
         </div>
         <div class="col-sm">
             <div class="p-l-md no-padding-xs">
                 <h1 class="page-title">
-                    <span class="h1 _800" th:text="${profile.fullname}"></span>
+                    <span class="h1 _800" th:text="${profile.fullName}"></span>
                 </h1>
                 <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis" th:if="${profile.bio != null || profile.bio != ''}" th:text="${profile.bio}"></p>
                 <div class="item-action m-b">

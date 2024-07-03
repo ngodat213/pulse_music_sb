@@ -2,7 +2,7 @@
 <html lang="en">
 <div th:fragment="artist_popular(populars)" class="row item-list item-list-md item-list-li m-b" id="tracks">
     <div class="col-md-12 col-lg-6" th:each="popular : ${populars}">
-        <div class="item r" data-id="item-3" th:data-src="${popular.mp3.url}">
+        <div class="item r" th:data-id="${popular.id}" th:data-src="${popular.mp3.url}">
             <div class="item-media">
                 <a href="track.detail.html" class="item-media-content" th:style="'background-image: url(' + ${popular.image.url} + ')'"></a>
                 <div class="item-overlay center">

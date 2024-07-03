@@ -18,7 +18,7 @@
         </div>
         <div class="row item-list item-list-md item-list-li m-b">
             <div class="col-xs-12" th:each="chart : ${charts}">
-                <div class="item r" data-id="item-8" data-src="http://api.soundcloud.com/tracks/236288744/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+                <div class="item r" th:data-id="${chart.id}" data-src="http://api.soundcloud.com/tracks/236288744/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
                     <div class="item-media">
                         <a href="track.detail.html" class="item-media-content" th:style="'background-image: url(' + ${chart.image.url} + ')'"> ></a>
                         <div class="item-overlay center">

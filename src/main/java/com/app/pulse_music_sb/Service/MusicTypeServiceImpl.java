@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MusicTypeServiceImpl implements MusicTypeService {
@@ -48,5 +49,12 @@ public class MusicTypeServiceImpl implements MusicTypeService {
     @Override
     public boolean existsById(String id) {
         return musicTypeRepository.existsById(id);
+    }
+
+    @Override
+    public List<MusicType> findByIds(List<String> ids) {
+        return ids.stream()
+                .map(id -> musicTypeRepository.findById(id).orElseThrow(() -> new RuntimeException("MusicType not found")))
+                .collect(Collectors.toList());
     }
 }

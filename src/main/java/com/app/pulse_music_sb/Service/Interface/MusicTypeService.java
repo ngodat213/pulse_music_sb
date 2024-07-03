@@ -14,4 +14,5 @@ public interface MusicTypeService {
     MusicType update(MusicType musicType);
     void deleteById(String id);
     boolean existsById(String id);
+    List<MusicType> findByIds(List<String> ids);
 }

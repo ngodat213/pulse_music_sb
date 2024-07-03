@@ -408,48 +408,36 @@
 <script src="https://kit.fontawesome.com/99cbdec5b3.js" crossorigin="anonymous"></script>
 <!--add-->
 <script>
-    $(document).ready(function () {
-        $('#createMusicForm').submit(function (event) {
-            event.preventDefault(); // Prevent the form from submitting via the browser
-            var form = $('#createMusicForm')[0];
-            var formData = new FormData(form);
+    $(document).ready(function() {
+        $('#createAlbumForm').on('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            var formData = {
+                userId: {
+                    id: $('#userId').val()
+                },
+                title: $('#title').val(),
+                description: $('#description').val(),
+                albumTypes: $('#albumTypes').val().map(function(id) { return { id: id }; }),
+                musics: $('#musics').val().map(function(id) { return { id: id }; })
+            };
 
+            // Send AJAX request
             $.ajax({
                 type: 'POST',
-                url: '/dashboard/music_table',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (response) {
-                    console.log("success");
-                    if (response.status === 'success') {
-                        $('#createMusicModal').modal('hide');
-                        window.location.href = '/dashboard/music_table';
+                url: '/dashboard/album_table',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function(response) {
+                    if (response.status === "success") {
+                        alert('Album created successfully!');
+                        location.reload(); // Reload the page to reflect changes
                     } else {
-                        $('#formErrors').show();
-                        var errorList = $('#errorList');
-                        errorList.empty();
-                        if (response.errors) {
-                            response.errors.forEach(function (error) {
-                                errorList.append('<li>' + error.defaultMessage + '</li>');
-                            });
-                        } else if (response.message) {
-                            errorList.append('<li>' + response.message + '</li>');
-                        }
+                        alert('Failed to create album: ' + response.message);
                     }
                 },
-                error: function (response) {
-                    console.log(response.responseJSON.message)
-                    $('#formErrors').show();
-                    var errorList = $('#errorList');
-                    errorList.empty();
-                    if (response.responseJSON.errors) {
-                        response.responseJSON.errors.forEach(function (error) {
-                            errorList.append('<li>' + error.defaultMessage + '</li>');
-                        });
-                    } else if (response.responseJSON.message) {
-                        errorList.append('<li>' + response.responseJSON.message + '</li>');
-                    }
+                error: function(xhr, status, error) {
+                    console.log('AJAX Error:', error);
+                    alert('Error creating album: ' + xhr.responseText);
                 }
             });
         });

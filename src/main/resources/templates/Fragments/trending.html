@@ -13,7 +13,7 @@
     }"
         th:fragment="trending(musics)"
 >
-    <div th:each="music : ${carousels}" class="item r" th:data-id="'item-' + ${music.id}" th:data-src="${music.mp3.url}">
+    <div th:each="music : ${carousels}" class="item r" th:data-id="${music.id}" th:data-src="${music.mp3.url}">
         <div class="item-media item-media-4by3">
             <a href="track.detail.html" class="item-media-content" th:style="'background-image: url(' + ${music.image.getUrl()} + ')'"></a>
             <div class="item-overlay center">

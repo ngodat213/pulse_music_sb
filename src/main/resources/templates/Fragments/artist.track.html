@@ -3,7 +3,7 @@
 <div class="tab-pane" id="tab_2" th:fragment="artist_track(tracks)">
     <div class="row m-b">
         <div class="col-xs-4 col-sm-4 col-md-3" th:each="track : ${tracks}">
-            <div class="item r" data-id="item-3" th:data-src="${track.mp3.url}">
+            <div class="item r" th:data-id="${track.id}" th:data-src="${track.mp3.url}">
                 <div class="item-media">
                     <a href="track.detail.html" class="item-media-content" th:style="'background-image: url(' + ${track.image.url} + ')'"></a>
                     <div class="item-overlay center">
