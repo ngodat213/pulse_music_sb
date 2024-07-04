@@ -2,9 +2,9 @@
 <html lang="en">
 <div class="row m-b" th:fragment="artist_album(albums)">
     <div class="col-xs-4 col-sm-4 col-md-3" th:each="album : ${albums}">
-        <div class="item r" th:data-id="${album.id}" th:data-src="${album.mp3.url}">
+        <div class="item r" th:data-id="${album.musics.getFirst().id}" th:data-src="${album.musics.getFirst().mp3.url}">
             <div class="item-media">
-                <a href="../Layouts/Home/album.detail.html" class="item-media-content" th:style="'background-image: url(' + ${album.image.url} + ')'"></a>
+                <a th:href="@{/album/{id}(id=${album.id})}" class="item-media-content" th:style="'background-image: url(' + ${album.image.url} + ')'"></a>
                 <div class="item-overlay center">
                     <button class="btn-playpause">Play</button>
                 </div>
@@ -19,12 +19,12 @@
                     <a href="../Layouts/Home/album.detail.html" th:text="${album.title}">The Open Road</a>
                 </div>
                 <div class="item-author text-sm text-ellipsis hide">
-                    <a th:href="@{/artist_detail/{id}(id=${album.user.id})}" class="text-muted" th:text="${popular.user.fullName}"></a>
+                    <a th:href="@{/artist_detail/{id}(id=${album.user.id})}" class="text-muted" th:text="${album.user.fullName}"></a>
                 </div>
                 <div class="item-meta text-sm text-muted">
                             <span class="item-meta-stats text-xs">
-                                <i class="fa fa-play text-muted" th:text="${popular.playCount}"></i>
-                                <i class="fa fa-heart m-l-sm text-muted" th:text="${popular.heartCount}"></i>
+                                <i class="fa fa-play text-muted" th:text="${album.playCount}"></i>
+                                <i class="fa fa-heart m-l-sm text-muted" th:text="${album.heartCount}"></i>
                             </span>
                 </div>
             </div>

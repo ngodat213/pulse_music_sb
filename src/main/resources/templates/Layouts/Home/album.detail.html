@@ -4,7 +4,7 @@
 <body>
 <div layout:fragment="content">
     <div th:replace="~{/Fragments/album.detail :: album_detail(${album})}"></div>
-    <div th:insert="Fragments/album.music :: album_music(${album})"></div>
+    <div th:replace="~{/Fragments/album.music :: album_music(${album})}"></div>
 </div>
 <script th:src="@{/scripts/app.min.js}"></script>
 </body>

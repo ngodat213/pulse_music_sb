@@ -20,7 +20,7 @@
                         <a href="../Layouts/Home/album.detail.html" th:text="${album.title}"></a>
                     </div>
                     <div class="item-author text-sm text-ellipsis hide">
-                        <a href="artist.detail.html" class="text-muted" th:text="${album.user.fullName}"></a>
+                        <a th:href="@{/artist_detail/{id}(id=${album.user.id})}" class="text-muted" th:text="${album.user.fullName}"></a>
                     </div>
                     <div class="item-meta text-sm text-muted">
                         <span class="item-meta-stats text-xs">
