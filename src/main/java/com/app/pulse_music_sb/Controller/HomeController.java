@@ -2,22 +2,24 @@ package com.app.pulse_music_sb.Controller;
 
 import com.app.pulse_music_sb.Models.CustomUserDetails;
 import com.app.pulse_music_sb.Models.Music;
+import com.app.pulse_music_sb.Models.MusicType;
 import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
 import com.app.pulse_music_sb.Request.DTO.UserDTO;
 import com.app.pulse_music_sb.Service.AlbumService;
 import com.app.pulse_music_sb.Service.Interface.MusicTypeService;
 import com.app.pulse_music_sb.Service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import com.app.pulse_music_sb.Service.Interface.MusicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class HomeController {
@@ -126,5 +128,17 @@ public class HomeController {
     public String scroll_item(@AuthenticationPrincipal CustomUserDetails customUserDetail, Model model) {
         model.addAttribute("musics", musicService.findAll());
         return "Layouts/Home/scroll.item";
+    }
+
+    @GetMapping("/get_first_music")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> getFirstMusic() {
+        return ResponseEntity.ok(Map.of("status", "success", "mepPlaylistTracks", musicService.getPlaylistTrack()));
+    }
+
+    @GetMapping("/get_next_music")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> getNextMusic() {
+        return ResponseEntity.ok(Map.of("status", "success", "randomMusic", musicService.getRandomTrack()));
     }
 }

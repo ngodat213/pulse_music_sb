@@ -2,6 +2,7 @@ package com.app.pulse_music_sb.Service.Interface;
 
 import com.app.pulse_music_sb.Models.Music;
 import com.app.pulse_music_sb.Models.MusicType;
+import com.app.pulse_music_sb.Request.DTO.PlaylistTrackDTO;
 import com.app.pulse_music_sb.Request.Request.RequestCreateMusic;
 import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
 import com.app.pulse_music_sb.Request.Request.RequestMusicTypes;
@@ -20,4 +21,6 @@ public interface MusicService {
     void deleteById(String id);
     List<RequestMusicTypes> findAllMusicTypes(Page<MusicType> types);
     List<Music> findByIds(List<String> ids);
+    PlaylistTrackDTO getPlaylistTrack();
+    PlaylistTrackDTO getRandomTrack();
 }
