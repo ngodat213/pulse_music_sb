@@ -3,18 +3,18 @@
       layout:decorate="~{_layout.html}">
 <body>
 <div layout:fragment="content">
-    <div class="col-lg-9 b-r no-border-md">
-        <div class="padding">
-            <h2 class="widget-title h4 m-b">Treading</h2>
-            <div th:insert="Fragments/trending :: trending(${musics})"></div>
-            <h2 class="widget-title h4 m-b">New</h2>
-            <div th:insert="Fragments/new :: new(${news})"></div>
-            <h2 class="widget-title h4 m-b">Recommend for you</h2>
-            <!--                            <div th:insert="Fragments/new :: new(${news})"></div>-->
+    <div class="row-col">
+        <div class="col-lg-9 b-r no-border-md">
+            <div class="padding">
+                <h2 class="widget-title h4 m-b">Treading</h2>
+                <div th:replace="~{Fragments/trending :: trending(${musics})}"></div>
+                <h2 class="widget-title h4 m-b">New</h2>
+                <div th:replace="~{Fragments/new :: new(${news})}"></div>
+                <h2 class="widget-title h4 m-b">Recommend for you</h2>
+                <!--                            <div th:insert="Fragments/new :: new(${news})"></div>-->
+            </div>
         </div>
-    </div>
-    <div class="col-lg-3 w-xxl w-auto-md" th:if="${likes != null && !likes.isEmpty()}" >
-        <div th:insert="Fragments/likes :: like_sidebar(${likes})"></div>
+        <div th:replace="~{/Fragments/likes :: like_sidebar(${likes})}"></div>
     </div>
 </div>
 <script th:src="@{/scripts/app.min.js}"></script>

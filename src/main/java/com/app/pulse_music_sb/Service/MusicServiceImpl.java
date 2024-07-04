@@ -5,6 +5,9 @@ import com.app.pulse_music_sb.Models.Music;
 import com.app.pulse_music_sb.Models.MusicType;
 import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Repository.MusicRepository;
+import com.app.pulse_music_sb.Request.DTO.MetaDTO;
+import com.app.pulse_music_sb.Request.DTO.PlaylistTrackDTO;
+import com.app.pulse_music_sb.Request.DTO.ThumbDTO;
 import com.app.pulse_music_sb.Request.Request.RequestCreateMusic;
 import com.app.pulse_music_sb.Request.Request.RequestMusicTypes;
 import com.app.pulse_music_sb.Request.Request.RequestUpdateMusic;
@@ -20,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -122,5 +126,18 @@ public class MusicServiceImpl implements MusicService {
         return ids.stream()
                 .map(id -> musicRepository.findById(id).orElseThrow(() -> new RuntimeException("Music not found")))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public PlaylistTrackDTO getPlaylistTrack() {
+        return musicRepository.findTopLikedMusic().get().toDTO();
+    }
+
+    @Override
+    public PlaylistTrackDTO getRandomTrack() {
+        List<Music> musics = findAll();
+        Random rand = new Random();
+        Music randomElement = musics.get(rand.nextInt(musics.size()));
+        return randomElement.toDTO();
     }
 }

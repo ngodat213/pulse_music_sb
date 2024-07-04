@@ -48,4 +48,10 @@ public class Album extends AbstractEntity {
     public Music getFist(){
         return musics.getFirst();
     }
+
+    public String getFormatTime(){
+        int minutes = durationInSeconds / 60;
+        int seconds = durationInSeconds % 60;
+        return String.format("%d min %d sec", minutes, seconds);
+    }
 }
