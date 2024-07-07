@@ -90,7 +90,7 @@ public class AuthController {
      */
     @GetMapping("forgot_password")
     public String ForgotPassword(){
-        return "Layout/Auth/forgotpassword";
+        return "Layouts/Auth/forgot_password";
     }
 
     /**
