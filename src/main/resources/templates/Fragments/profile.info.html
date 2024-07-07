@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <div class="padding b-b" th:fragment="profile_info(profile)">
-    <div class="row-col">
+    <div class="row-col" sec:authorize="isAuthenticated()">
         <div class="col-sm w w-auto-xs m-b">
             <div class="item w rounded">
-                <div class="item-media" sec:authorize="isAuthenticated()">
+                <div class="item-media" >
                     <div class="item-media-content" th:style="'background-image: url(' + ${#authentication.principal.getAvatar()} + ')'"></div>
                 </div>
             </div>
@@ -17,7 +17,23 @@
                 <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis" th:if="${profile.bio != null || profile.bio != ''}" th:text="${profile.bio}"></p>
                 <div class="item-action m-b">
                     <a href="#" class="btn btn-sm rounded primary">Upload</a>
-                    <a href="#" class="btn btn-sm rounded white">Edit Profile</a>
+                    <!-- Button to Open the Modal -->
+                    <button id="openModalBtn" class="btn btn-sm rounded white">Edit Profile</button>
+                </div>
+                <div id="profileModal" class="modal-profile">
+                    <!-- Modal content -->
+                    <div class="modal-profile-content">
+                        <span class="close">&times;</span>
+                        <div class="profile-details">
+                            <img id="profileImage" th:src="${#authentication.principal.getAvatar()}" alt="Profile Image" class="profile-image">
+                            <input type="file" id="imageInput" style="display: none;">
+                            <div class="form-group">
+                                <input class="form-control" type="text" id="username" th:value="${#authentication.principal.getFullName()}">
+                            </div>
+                            <button id="saveBtn" class="btn btn-lg black p-x-lg">Save</button>
+                        </div>
+                        <p class="disclaimer">By proceeding, you agree to give Pulse access to the image you choose to upload. Please make sure you have the right to upload the image.</p>
+                    </div>
                 </div>
                 <div class="block clearfix m-b">
                     <span th:text="${albums.size()}"></span>
@@ -28,4 +44,8 @@
         </div>
     </div>
 </div>
+<script>
+
+</script>
 </html>
+

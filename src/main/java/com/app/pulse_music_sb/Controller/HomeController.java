@@ -2,7 +2,6 @@ package com.app.pulse_music_sb.Controller;
 
 import com.app.pulse_music_sb.Models.CustomUserDetails;
 import com.app.pulse_music_sb.Models.Music;
-import com.app.pulse_music_sb.Models.MusicType;
 import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
 import com.app.pulse_music_sb.Request.DTO.UserDTO;
@@ -16,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -140,5 +140,14 @@ public class HomeController {
     @ResponseBody
     public ResponseEntity<Map<String, Object>> getNextMusic() {
         return ResponseEntity.ok(Map.of("status", "success", "randomMusic", musicService.getRandomTrack()));
+    }
+
+    @PostMapping("/profile_change")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> updateProfile(@AuthenticationPrincipal CustomUserDetails customUserDetails,
+                                                             @RequestParam("username") String username,
+                                                             @RequestParam(value = "avatar", required = false) MultipartFile avatar) {
+        User isUpdated = userService.updateAvatarAndFullName(customUserDetails.getId() ,username, avatar);
+        return ResponseEntity.ok().body(Map.of("success", isUpdated != null ? true : false));
     }
 }

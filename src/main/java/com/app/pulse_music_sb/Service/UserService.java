@@ -1,14 +1,11 @@
 package com.app.pulse_music_sb.Service;
 
-import com.app.pulse_music_sb.Models.Album;
-import com.app.pulse_music_sb.Models.Music;
-import com.app.pulse_music_sb.Models.Playlist;
+import com.app.pulse_music_sb.Models.*;
 import com.app.pulse_music_sb.Repository.MusicRepository;
 import com.app.pulse_music_sb.Request.Request.RequestRegisterUser;
 import com.app.pulse_music_sb.Enums.UserRole;
 import com.app.pulse_music_sb.Exceptions.DuplicateResourceException;
 import com.app.pulse_music_sb.Exceptions.ResourceNotFoundException;
-import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Repository.UserRepository;
 import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
 import com.app.pulse_music_sb.Service.Interface.IUserService;
@@ -21,15 +18,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -43,6 +37,8 @@ public class UserService implements IUserService {
     private MusicRepository musicRepository;
 
     private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private CloudService cloudService;
 
     @Override
     public List<User> getAll(PaginationDTO paginationDTO) {
@@ -80,6 +76,18 @@ public class UserService implements IUserService {
     @Override
     public List<Playlist> getPlaylistsByUserId(String userId) {
         return userRepository.findAllPlaylistsByUserId(userId);
+    }
+
+    @Override
+    public User updateAvatarAndFullName(String userId, String fullName, MultipartFile file) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        if(user.getAvatar() != null){
+            cloudService.deleteProductImage(user.getAvatar().getPublicId());
+        }
+        CloudStorage avatar = cloudService.uploadFile(file, false);
+        user.setAvatar(avatar);
+        user.setFullName(fullName);
+        return userRepository.saveAndFlush(user);
     }
 
     @Override

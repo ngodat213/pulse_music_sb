@@ -22,8 +22,8 @@ public class SecurityConfig {
     @Autowired
     private CustomUserDetailsService customUserDetailService;
     @Bean
-    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
-        return http
+    public SecurityFilterChain configure(HttpSecurity https) throws Exception {
+        return https
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request->request
@@ -44,7 +44,7 @@ public class SecurityConfig {
                         .permitAll()
                 ).oauth2Login(oauth2Login
                         ->oauth2Login
-                        .loginPage("/login")
+                        .loginPage(ManagerRouter.loginPage)
                         .userInfoEndpoint(userInfoEndpoint ->
                                 userInfoEndpoint.userService(customUserDetailService)
                         )
