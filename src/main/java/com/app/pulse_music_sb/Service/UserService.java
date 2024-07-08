@@ -189,11 +189,6 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User getUserByUsername(String email) {
-        return userRepository.findByEmail(email);
-    }
-
-    @Override
     public void UpdateFailCount(User user){
         int count = userRepository.countFailByEmail(user.getEmail());
         if(user.getLockExpired().getTime()<System.currentTimeMillis()){
@@ -222,15 +217,21 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void GenTokenResetPassword(User user){
-        user.setTokenResetPassword(GenToken(45));
+    public String GenTokenResetPassword(User user){
+        user.setTokenResetPassword(GenToken(5));
         user.setTokenResetPasswordExpired(new Date(System.currentTimeMillis()+1000*60*10));
         userRepository.save(user);
+        return user.getTokenResetPassword();
     }
 
     @Override
-    public String GenToken(int Length){
-        return "1111";
+    public String GenToken(int length) {
+        StringBuilder token = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            int digit = (int) (Math.random() * 10); // Generates a random digit between 0 and 9
+            token.append(digit);
+        }
+        return token.toString();
     }
 
     @Override

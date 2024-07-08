@@ -9,7 +9,7 @@ public class ManagerRouter {
             "/artist_detail/**",
             "/profile",
             "/album/**",
-            "/profile_change"
+            "/profile_change",
     };
 
     public static final String[] ArtistsMatchers = {

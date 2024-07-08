@@ -3,6 +3,7 @@ package com.app.pulse_music_sb.Controller;
 import com.app.pulse_music_sb.Models.CustomUserDetails;
 import com.app.pulse_music_sb.Request.Request.RequestRegisterUser;
 import com.app.pulse_music_sb.Models.User;
+import com.app.pulse_music_sb.Service.MailService;
 import com.app.pulse_music_sb.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AuthController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private MailService mailService;
 
     /**
      * @layout: <a href="https://localhost:8080/register">...</a>
@@ -101,7 +104,9 @@ public class AuthController {
     public String ForgotPassword(@RequestParam("email") String email){
         User user = userService.getUserByEmail(email);
         if(user != null){
-            userService.GenTokenResetPassword(user);
+            String token = userService.GenTokenResetPassword(user);
+            String url = "http://localhost:8080/reset_password?token="+token;
+            mailService.SendForgotPassword(user.getEmail(), url);
         }
         return "redirect:/forgot_password";
     }
@@ -116,17 +121,21 @@ public class AuthController {
         if(user != null){
             model.addAttribute("user", user);
         }
-        return "Layout/Auth/reset_password";
+        return "Layouts/Auth/reset_password";
     }
 
     /**
      * @layout: <a href="https://localhost:8080/reset_password">...</a>
      * @method: POST
      */
-    @PostMapping("/resetpassword")
-    public String ResetPassword_Save(@RequestParam("username") String username,
-                                     @RequestParam("password") String password){
-        User user = userService.getUserByUsername(username);
+    @PostMapping("/reset_password_submit")
+    public String ResetPassword_Save(@RequestParam("email") String email,
+                                     @RequestParam("password") String password,
+                                     @RequestParam("confirm_password") String confirmPassword){
+        if(!password.equals(confirmPassword)){
+            return "redirect:/reset_password?error";
+        }
+        User user = userService.getUserByEmail(email);
         userService.UpdatePassword(user,password);
         userService.ResetDateForgotPassword(user);
         return "redirect:/login";
