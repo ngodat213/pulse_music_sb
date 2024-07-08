@@ -48,7 +48,6 @@ public class UserService implements IUserService {
 
     @Override
     public List<User> getArtists(){
-        System.out.println(UserRole.ARTIST.getAuthority());
         return userRepository.findAllByRole(UserRole.ARTIST);
     }
 

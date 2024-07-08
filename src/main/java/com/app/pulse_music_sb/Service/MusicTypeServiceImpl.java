@@ -21,9 +21,14 @@ public class MusicTypeServiceImpl implements MusicTypeService {
     private PaginationService paginationService;
 
     @Override
-    public Page<MusicType> findAll(PaginationDTO paginationDTO) {
+    public Page<MusicType> findAllBy(PaginationDTO paginationDTO) {
         Pageable pageable = paginationService.getPageable(paginationDTO);
         return musicTypeRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<MusicType> findAll() {
+        return musicTypeRepository.findAll();
     }
 
     @Override

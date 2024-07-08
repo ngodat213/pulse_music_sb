@@ -16,7 +16,9 @@
                 </h1>
                 <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis" th:if="${profile.bio != null || profile.bio != ''}" th:text="${profile.bio}"></p>
                 <div class="item-action m-b">
-                    <a href="#" class="btn btn-sm rounded primary">Upload</a>
+                    <a class="btn btn-sm rounded primary" data-toggle="modal" data-target="#upload-modal">
+                        Upload
+                    </a>
                     <!-- Button to Open the Modal -->
                     <button id="openModalBtn" class="btn btn-sm rounded white">Edit Profile</button>
                 </div>
@@ -44,8 +46,5 @@
         </div>
     </div>
 </div>
-<script>
-
-</script>
 </html>
 

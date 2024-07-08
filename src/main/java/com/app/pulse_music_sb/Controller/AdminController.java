@@ -4,7 +4,6 @@ import com.app.pulse_music_sb.Const.ErrorConstants;
 import com.app.pulse_music_sb.Const.ToastConstants;
 import com.app.pulse_music_sb.Models.*;
 import com.app.pulse_music_sb.Request.Request.*;
-import com.app.pulse_music_sb.Service.AlbumService;
 import com.app.pulse_music_sb.Service.Interface.IAlbumService;
 import com.app.pulse_music_sb.Service.Interface.MusicService;
 import com.app.pulse_music_sb.Service.Interface.MusicTypeService;
@@ -15,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -60,7 +58,7 @@ public class AdminController {
                                   @RequestParam(defaultValue = "createdAt") String sortBy,
                                   Model model){
         PaginationDTO paginationDTO = new PaginationDTO(page, limit, sortDirection, sortBy);
-        List<RequestMusicTypes> req = musicService.findAllMusicTypes(musicTypeService.findAll(paginationDTO));
+        List<RequestMusicTypes> req = musicService.findAllMusicTypes(musicTypeService.findAllBy(paginationDTO));
         model.addAttribute("type", new RequestMusicType());
         model.addAttribute("types", req);
         return "Layouts/Dashboard/music_type_table";
@@ -76,7 +74,7 @@ public class AdminController {
         model.addAttribute("music", new RequestCreateMusic());
         model.addAttribute("artists", userService.getAll(paginationDTO));
         model.addAttribute("musics", musicService.findAllBy(paginationDTO));
-        model.addAttribute("types", musicTypeService.findAll(paginationDTO));
+        model.addAttribute("types", musicTypeService.findAllBy(paginationDTO));
         return "Layouts/Dashboard/music_table";
     }
 
@@ -89,7 +87,7 @@ public class AdminController {
                               Model model){
         model.addAttribute("user", customUserDetail.getUser().getId());
         PaginationDTO paginationDTO = new PaginationDTO(page, limit, sortDirection, sortBy);
-        model.addAttribute("types", musicTypeService.findAll(paginationDTO));
+        model.addAttribute("types", musicTypeService.findAllBy(paginationDTO));
         model.addAttribute("musics", musicService.findAllBy(paginationDTO));
         model.addAttribute("createAlbum", new RequestCreateAlbum());
         model.addAttribute("albums", albumService.findAllBy(paginationDTO));

@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MusicTypeService {
-    Page<MusicType> findAll(PaginationDTO paginationDTO);
+    Page<MusicType> findAllBy(PaginationDTO paginationDTO);
+    List<MusicType> findAll();
     Optional<MusicType> findById(String id);
     MusicType save(MusicType musicType);
     MusicType update(MusicType musicType);

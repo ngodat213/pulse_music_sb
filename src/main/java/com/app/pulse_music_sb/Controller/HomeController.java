@@ -5,6 +5,7 @@ import com.app.pulse_music_sb.Models.Music;
 import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
 import com.app.pulse_music_sb.Request.DTO.UserDTO;
+import com.app.pulse_music_sb.Request.Request.RequestCreateMusic;
 import com.app.pulse_music_sb.Service.AlbumService;
 import com.app.pulse_music_sb.Service.Interface.MusicTypeService;
 import com.app.pulse_music_sb.Service.UserService;
@@ -52,7 +53,7 @@ public class HomeController {
     @GetMapping("/chart")
     public String chart(@AuthenticationPrincipal CustomUserDetails customUserDetail, Model model) {
         PaginationDTO typePaginationDTO = new PaginationDTO(1, 100, "desc", "createdAt");
-        model.addAttribute("types", musicTypeService.findAll(typePaginationDTO));
+        model.addAttribute("types", musicTypeService.findAllBy(typePaginationDTO));
         model.addAttribute("musics", musicService.findAll());
 
         List<Music> likedMusic = userService.getUserLikedMusic(customUserDetail.getId());
@@ -64,7 +65,7 @@ public class HomeController {
     @GetMapping("/browse")
     public String browser(@AuthenticationPrincipal CustomUserDetails customUserDetail, Model model) {
         PaginationDTO typePaginationDTO = new PaginationDTO(1, 100, "desc", "createdAt");
-        model.addAttribute("types", musicTypeService.findAll(typePaginationDTO));
+        model.addAttribute("types", musicTypeService.findAllBy(typePaginationDTO));
         model.addAttribute("musics", musicService.findAll());
 
         List<Music> likedMusic = userService.getUserLikedMusic(customUserDetail.getId());
@@ -115,6 +116,8 @@ public class HomeController {
         model.addAttribute("playlists", userService.getPlaylistsByUserId(customUserDetail.getId()));
         model.addAttribute("albums", userService.getAlbumsByUserId(customUserDetail.getId()));
         model.addAttribute("tracks", userService.getTracksByUserId(customUserDetail.getId()));
+        model.addAttribute("music", new RequestCreateMusic());
+        model.addAttribute("types", musicTypeService.findAll());
         return "Layouts/Home/profile";
     }
 

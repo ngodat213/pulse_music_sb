@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<div th:fragment="upload_modal" class="modal white lt fade" id="upload-modal" data-backdrop="false">
+    <a data-dismiss="modal" class="text-muted text-lg p-x modal-close-btn">&times;</a>
+    <div class="row-col">
+        <div class="p-a-lg h-v row-cell v-m">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <form id="createMusicForm" th:action="'/dashboard/music_table'" th:object="${music}" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            <div id="formErrors" class="mb-3 alert alert-danger" role="alert" style="display: none;">
+                                <ul id="errorList"></ul>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <label for="title" class="form-label">Title</label>
+                                    <input type="text" class="form-control" id="title" th:field="*{title}" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea class="form-control" id="description" th:field="*{description}"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="types" class="form-label">Music Types</label>
+                                <select class="form-control" id="types" th:field="*{types}" multiple>
+                                    <option th:each="type : ${types}" th:value="${type.id}" th:text="${type.typeName}"></option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="image" class="form-label">Upload Image</label>
+                                <input type="file" class="form-control" id="image" th:field="*{image}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="mp3" class="form-label">Upload MP3</label>
+                                <input type="file" class="form-control" id="mp3" th:field="*{mp3}" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#createMusicForm').submit(function (event) {
+            event.preventDefault(); // Prevent the form from submitting via the browser
+            var form = $('#createMusicForm')[0];
+            var formData = new FormData(form);
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:8080/dashboard/music_table',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    console.log("success");
+                    if (response.status === 'success') {
+                        $('#createMusicModal').modal('hide');
+                        window.location.href = '/profile';
+                    } else {
+                        $('#formErrors').show();
+                        var errorList = $('#errorList');
+                        errorList.empty();
+                        if (response.errors) {
+                            response.errors.forEach(function (error) {
+                                errorList.append('<li>' + error.defaultMessage + '</li>');
+                            });
+                        } else if (response.message) {
+                            errorList.append('<li>' + response.message + '</li>');
+                        }
+                    }
+                },
+                error: function (response) {
+                    console.log(response.responseJSON.message)
+                    $('#formErrors').show();
+                    var errorList = $('#errorList');
+                    errorList.empty();
+                    if (response.responseJSON.errors) {
+                        response.responseJSON.errors.forEach(function (error) {
+                            errorList.append('<li>' + error.defaultMessage + '</li>');
+                        });
+                    } else if (response.responseJSON.message) {
+                        errorList.append('<li>' + response.responseJSON.message + '</li>');
+                    }
+                }
+            });
+        });
+    });
+</script>
+</html>
