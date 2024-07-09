@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-public interface MusicService {
+public interface IMusicService {
     Page<Music> findAllBy(PaginationDTO paginationDTO);
     List<Music> findAll();
     Music findById(String id);
@@ -23,4 +23,5 @@ public interface MusicService {
     List<Music> findByIds(List<String> ids);
     PlaylistTrackDTO getPlaylistTrack();
     PlaylistTrackDTO getRandomTrack();
+    List<Music> searchMusic(String query);
 }

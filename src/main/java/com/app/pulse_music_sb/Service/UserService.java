@@ -90,6 +90,24 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public boolean setFavorite(String userId, String musicID) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        Music music = musicRepository.findById(musicID).orElseThrow(() -> new RuntimeException("Music not found"));
+        List<Music> likes = user.getUserLiked();
+
+        if (likes.contains(music)) {
+            likes.remove(music);
+        } else {
+            likes.add(music);
+        }
+
+        user.setUserLiked(likes);
+        userRepository.save(user);
+        return true;
+    }
+
+
+    @Override
     public User likeMusic(String userId, String musicId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         Music music = musicRepository.findById(musicId).orElseThrow(() -> new RuntimeException("Music not found"));

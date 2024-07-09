@@ -5,8 +5,8 @@ import com.app.pulse_music_sb.Const.ToastConstants;
 import com.app.pulse_music_sb.Models.*;
 import com.app.pulse_music_sb.Request.Request.*;
 import com.app.pulse_music_sb.Service.Interface.IAlbumService;
-import com.app.pulse_music_sb.Service.Interface.MusicService;
-import com.app.pulse_music_sb.Service.Interface.MusicTypeService;
+import com.app.pulse_music_sb.Service.Interface.IMusicService;
+import com.app.pulse_music_sb.Service.Interface.IMusicTypeService;
 import com.app.pulse_music_sb.Service.UserService;
 import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
 import jakarta.validation.Valid;
@@ -26,11 +26,11 @@ import java.util.*;
 @RequestMapping("/dashboard")
 public class AdminController {
     @Autowired
-    private MusicService musicService;
+    private IMusicService IMusicService;
     @Autowired
     private UserService userService;
     @Autowired
-    private MusicTypeService musicTypeService;
+    private IMusicTypeService musicTypeService;
     @Autowired
     private IAlbumService albumService;
 
@@ -58,7 +58,7 @@ public class AdminController {
                                   @RequestParam(defaultValue = "createdAt") String sortBy,
                                   Model model){
         PaginationDTO paginationDTO = new PaginationDTO(page, limit, sortDirection, sortBy);
-        List<RequestMusicTypes> req = musicService.findAllMusicTypes(musicTypeService.findAllBy(paginationDTO));
+        List<RequestMusicTypes> req = IMusicService.findAllMusicTypes(musicTypeService.findAllBy(paginationDTO));
         model.addAttribute("type", new RequestMusicType());
         model.addAttribute("types", req);
         return "Layouts/Dashboard/music_type_table";
@@ -90,7 +90,7 @@ public class AdminController {
         model.addAttribute("user", customUserDetail.getUser().getId());
         PaginationDTO paginationDTO = new PaginationDTO(page, limit, sortDirection, sortBy);
         model.addAttribute("types", musicTypeService.findAllBy(paginationDTO));
-        model.addAttribute("musics", musicService.findAllBy(paginationDTO));
+        model.addAttribute("musics", IMusicService.findAllBy(paginationDTO));
         model.addAttribute("createAlbum", new RequestCreateAlbum());
         model.addAttribute("albums", userService.getAlbumsByUserId(customUserDetail.getId()));
         return "Layouts/Dashboard/album_table";
@@ -197,7 +197,7 @@ public class AdminController {
     @GetMapping("/music_table/{id}")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> getMusic(@PathVariable String id) {
-        Music music = musicService.findById(id);
+        Music music = IMusicService.findById(id);
         if (music != null) {
             return ResponseEntity.ok(Map.of("status", "success", "music", music));
         } else {
@@ -211,9 +211,9 @@ public class AdminController {
                                                             @Validated @ModelAttribute RequestUpdateMusic request,
                                                             @RequestParam("image") MultipartFile image,
                                                             @RequestParam("mp3") MultipartFile mp3) {
-        Music existingMusic = musicService.findById(id);
+        Music existingMusic = IMusicService.findById(id);
         if (existingMusic != null) {
-            musicService.update(id, request, image, mp3);
+            IMusicService.update(id, request, image, mp3);
             return ResponseEntity.ok(Map.of("status", "success", "message", "Music updated successfully"));
         } else {
             return ResponseEntity.status(404).body(Map.of("status", "error", "message", "Music not found"));
@@ -241,7 +241,7 @@ public class AdminController {
 
         try {
             // Process your file and form data
-            musicService.save(createMusic, image, mp3);
+            IMusicService.save(createMusic, image, mp3);
             response.put("status", "success");
             response.put("message", "Music created successfully");
             return ResponseEntity.ok(response);

@@ -31,6 +31,8 @@ public interface IUserService extends UserDetailsService {
 
     User updateAvatarAndFullName(String userId, String fullName, MultipartFile file);
 
+    boolean setFavorite(String userId, String musicID);
+
     User likeMusic(String userId, String musicId);
 
     User findById(String id);
