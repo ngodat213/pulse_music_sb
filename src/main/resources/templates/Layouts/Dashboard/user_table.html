@@ -247,22 +247,22 @@
     </div>
 </div>
 <!--lock user modal-->
-<div class="modal fade" id="deleteMusicTypeModal" tabindex="-1" aria-labelledby="deleteMusicTypeModalLabel" aria-hidden="true">
+<div class="modal fade" id="lockUserModal" tabindex="-1" aria-labelledby="lockUserModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteMusicTypeModalLabel">Delete Music Type</h5>
+                <h5 class="modal-title" id="lockUserModalLabel">Lock User</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="deleteMusicTypeForm">
-                    <input type="hidden" id="deleteMusicTypeId" name="typeId" />
-                    <p>Are you sure you want to delete this music type?</p>
+                <form id="lockUserForm">
+                    <input type="hidden" id="lockUserId" name="userId" />
+                    <p>Are you sure you want to lock this user?</p>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="confirmDeleteMusicType">Delete Music Type</button>
+                <button type="button" class="btn btn-primary" id="confirmLockUser">Lock User</button>
             </div>
         </div>
     </div>
