@@ -2,6 +2,7 @@ package com.app.pulse_music_sb.Models;
 
 import com.app.pulse_music_sb.Const.Constants;
 import com.app.pulse_music_sb.Enums.LoginType;
+import com.app.pulse_music_sb.Enums.UserRole;
 import jakarta.persistence.EntityListeners;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -92,6 +93,10 @@ public class CustomUserDetails implements UserDetails, OAuth2User {
             return oAuth2User.getAttribute("email");
         }
         return user.getEmail();
+    }
+
+    public boolean isAdmin(){
+        return user.getRole().equals(UserRole.ADMIN);
     }
 
     public String getFullName() {
