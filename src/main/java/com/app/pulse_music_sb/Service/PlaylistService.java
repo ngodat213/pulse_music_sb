@@ -2,7 +2,7 @@ package com.app.pulse_music_sb.Service;
 
 import com.app.pulse_music_sb.Models.Playlist;
 import com.app.pulse_music_sb.Repository.PlaylistRepository;
-import com.app.pulse_music_sb.Service.Interface.PlaylistService;
+import com.app.pulse_music_sb.Service.Interface.IPlaylistService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class PlaylistServiceImpl implements PlaylistService {
+public class PlaylistService implements IPlaylistService {
     @Autowired
     private PlaylistRepository playlistRepository;
 

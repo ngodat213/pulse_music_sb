@@ -31,6 +31,8 @@ public interface IUserService extends UserDetailsService {
 
     User updateAvatarAndFullName(String userId, String fullName, MultipartFile file);
 
+    boolean setFavorite(String userId, String musicID);
+
     User likeMusic(String userId, String musicId);
 
     User findById(String id);
@@ -47,8 +49,6 @@ public interface IUserService extends UserDetailsService {
 
     User currentUser();
 
-    User getUserByUsername(String email);
-
     void UpdateFailCount(User user);
 
     boolean checkOldPassword(User authenticatedUser, String oldPassword);
@@ -61,7 +61,7 @@ public interface IUserService extends UserDetailsService {
 
     User getUserByEmail(String email);
 
-    void GenTokenResetPassword(User user);
+    String GenTokenResetPassword(User user);
 
     String GenToken(int Length);
 

@@ -12,4 +12,9 @@ public interface MusicRepository extends JpaRepository<Music, String> {
     List<Music> findByMusicType(MusicType type);
     @Query(value = "SELECT * FROM Music ORDER BY play_count DESC LIMIT 1", nativeQuery = true)
     Optional<Music> findTopLikedMusic();
+
+    @Query("SELECT p FROM Music p WHERE " +
+            "p.title LIKE CONCAT('%',:query, '%')" +
+            "Or p.description LIKE CONCAT('%', :query, '%')")
+    List<Music> searchMusics(String query);
 }

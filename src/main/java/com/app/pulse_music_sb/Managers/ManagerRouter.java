@@ -9,15 +9,17 @@ public class ManagerRouter {
             "/artist_detail/**",
             "/profile",
             "/album/**",
-            "/profile_change"
+            "/profile_change",
     };
 
     public static final String[] ArtistsMatchers = {
-            "/", "/browse", "/artist", "/chart"
+            "/dashboard/artist_table/**",
+            "/dashboard/chart_table/**",
+            "/dashboard/artist_detail/**",
     };
 
     public static final String[] AdminMatchers = {
-            "/dashboard/**"
+            "/dashboard/user_table/**",
     };
 
     public static final String rememberMeKey = "Pulse";

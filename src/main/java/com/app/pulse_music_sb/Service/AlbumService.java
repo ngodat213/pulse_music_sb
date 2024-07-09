@@ -6,14 +6,12 @@ import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
 import com.app.pulse_music_sb.Request.Request.RequestCreateAlbum;
 import com.app.pulse_music_sb.Request.Request.RequestUpdateAlbum;
 import com.app.pulse_music_sb.Service.Interface.IAlbumService;
-import com.app.pulse_music_sb.Util.MP3DurationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,9 +24,9 @@ public class AlbumService implements IAlbumService {
     @Autowired
     private UserService userService;
     @Autowired
-    private MusicTypeServiceImpl musicTypeServiceImpl;
+    private IMusicTypeService musicTypeServiceImpl;
     @Autowired
-    private MusicServiceImpl musicServiceImpl;
+    private MusicService musicServiceImpl;
     @Autowired
     private CloudService cloudService;
 
