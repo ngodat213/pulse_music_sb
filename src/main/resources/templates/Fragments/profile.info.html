@@ -16,7 +16,7 @@
                 </h1>
                 <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis" th:if="${profile.bio != null || profile.bio != ''}" th:text="${profile.bio}"></p>
                 <div class="item-action m-b">
-                    <a class="btn btn-sm rounded primary" data-toggle="modal" data-target="#upload-modal">
+                    <a class="btn btn-sm rounded primary" th:href="@{/dashboard/music_table}">
                         Upload
                     </a>
                     <!-- Button to Open the Modal -->

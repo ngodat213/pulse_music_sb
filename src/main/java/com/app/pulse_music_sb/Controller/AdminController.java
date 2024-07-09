@@ -65,7 +65,9 @@ public class AdminController {
     }
 
     @GetMapping("/music_table")
-    public String musicTable (@RequestParam(defaultValue = "1") int page,
+    public String musicTable (
+                              @AuthenticationPrincipal CustomUserDetails customUserDetails,
+                                @RequestParam(defaultValue = "1") int page,
                               @RequestParam(defaultValue = "10") int limit,
                               @RequestParam(defaultValue = "desc", name = "sort") String sortDirection,
                               @RequestParam(defaultValue = "createdAt") String sortBy,
@@ -73,7 +75,7 @@ public class AdminController {
         PaginationDTO paginationDTO = new PaginationDTO(page, limit, sortDirection, sortBy);
         model.addAttribute("music", new RequestCreateMusic());
         model.addAttribute("artists", userService.getAll(paginationDTO));
-        model.addAttribute("musics", musicService.findAllBy(paginationDTO));
+        model.addAttribute("musics", userService.getTracksByUserId(customUserDetails.getId()));
         model.addAttribute("types", musicTypeService.findAllBy(paginationDTO));
         return "Layouts/Dashboard/music_table";
     }
@@ -90,7 +92,7 @@ public class AdminController {
         model.addAttribute("types", musicTypeService.findAllBy(paginationDTO));
         model.addAttribute("musics", musicService.findAllBy(paginationDTO));
         model.addAttribute("createAlbum", new RequestCreateAlbum());
-        model.addAttribute("albums", albumService.findAllBy(paginationDTO));
+        model.addAttribute("albums", userService.getAlbumsByUserId(customUserDetail.getId()));
         return "Layouts/Dashboard/album_table";
     }
 
