@@ -5,60 +5,24 @@
     <div class="nav-active-border b-primary bottom m-b-md m-t">
       <ul class="nav l-h-2x" data-ui-jp="taburl">
         <li class="nav-item m-r inline">
-          <a class="nav-link active" href="#" data-toggle="tab" data-target="#track">Tracks</a>
+          <a class="nav-link active" href="#" data-toggle="tab" data-target="#track" th:if="${#authentication.principal.isAdminOrArtist()}">Tracks</a>
         </li>
         <li class="nav-item m-r inline">
           <a class="nav-link" href="#" data-toggle="tab" data-target="#playlist">Playlists</a>
         </li>
         <li class="nav-item m-r inline">
-          <a class="nav-link" href="#" data-toggle="tab" data-target="#album">Albums</a>
+          <a class="nav-link" href="#" data-toggle="tab" data-target="#album" th:if="${#authentication.principal.isAdminOrArtist()}">Albums</a>
         </li>
         <li class="nav-item m-r inline">
           <a class="nav-link" href="#" data-toggle="tab" data-target="#like">Likes</a>
         </li>
-        <li class="nav-item m-r inline">
-          <a class="nav-link" href="#" data-toggle="tab" data-target="#profile">Profile</a>
-        </li>
       </ul>
     </div>
     <div class="tab-content">
-      <div th:replace="~{/Fragments/profile.track :: profile_track(${tracks})}"></div>
+      <div th:replace="~{/Fragments/profile.track :: profile_track(${tracks})}" th:if="${#authentication.principal.isAdminOrArtist()}"></div>
       <div th:replace="~{/Fragments/profile.playlist :: profile_playlist(${playlists})}"></div>
-      <div th:replace="~{/Fragments/profile.album :: profile_album(${albums})}"></div>
+      <div th:replace="~{/Fragments/profile.album :: profile_album(${albums})}" th:if="${#authentication.principal.isAdminOrArtist()}"></div>
       <div th:replace="~{/Fragments/profile.like :: profile_like(${likes})}"></div>
-      <div class="tab-pane" id="profile">
-        <form>
-          <div class="form-group row">
-            <div class="col-sm-3 form-control-label text-muted">
-              Location
-            </div>
-            <div class="col-sm-9">
-              <input value="Earth" class="form-control" />
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-3 form-control-label text-muted">
-              Website
-            </div>
-            <div class="col-sm-9">
-              <input placeholder="http://" class="form-control" />
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-3 form-control-label text-muted">
-              Music Type
-            </div>
-            <div class="col-sm-9">
-              <select class="form-control c-select">
-                <option>Blue</option>
-                <option>Electro</option>
-                <option>Pop</option>
-                <option>Soul</option>
-              </select>
-            </div>
-          </div>
-        </form>
-      </div>
     </div>
   </div>
 </div>

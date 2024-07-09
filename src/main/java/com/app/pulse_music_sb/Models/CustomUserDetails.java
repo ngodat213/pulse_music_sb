@@ -99,6 +99,14 @@ public class CustomUserDetails implements UserDetails, OAuth2User {
         return user.getRole().equals(UserRole.ADMIN);
     }
 
+    public boolean isArtist(){
+        return user.getRole().equals(UserRole.ADMIN);
+    }
+
+    public boolean isAdminOrArtist(){
+        return isAdmin() || isArtist();
+    }
+
     public String getFullName() {
         if (isOAuth2User) {
             return oAuth2User.getAttribute("fullName");
