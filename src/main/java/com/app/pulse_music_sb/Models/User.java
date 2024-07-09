@@ -2,6 +2,7 @@ package com.app.pulse_music_sb.Models;
 import com.app.pulse_music_sb.Const.Constants;
 import com.app.pulse_music_sb.Enums.LoginType;
 import com.app.pulse_music_sb.Enums.UserRole;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
@@ -32,6 +33,7 @@ public class User{
             @Size(min = 8, message = "Password too short"),
             @Size(max = 80, message = "Password too long")
     })
+    @JsonIgnore
     private String password;
 
     @Column(unique = true, nullable = false, length = 50)
@@ -74,12 +76,15 @@ public class User{
     }
 
     // -----------------= INFO MUSIC =----------------- //
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Music> tracks = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Playlist> playLists = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Album> albums = new ArrayList<>();
 
@@ -91,6 +96,7 @@ public class User{
     )
     private List<MusicType> userTypes;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "user_liked_music",
