@@ -4,6 +4,7 @@ import com.app.pulse_music_sb.Models.CustomUserDetails;
 import com.app.pulse_music_sb.Models.Music;
 import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
+import com.app.pulse_music_sb.Request.DTO.SearchDTO;
 import com.app.pulse_music_sb.Request.DTO.UserDTO;
 import com.app.pulse_music_sb.Request.Request.RequestCreateMusic;
 import com.app.pulse_music_sb.Service.AlbumService;
@@ -166,6 +167,9 @@ public class HomeController {
 
     @GetMapping("/search")
     public ResponseEntity<Map<String, Object>> search(@RequestParam(value = "query", defaultValue = "") String query) {
-        return ResponseEntity.ok().body(Map.of("success", musicService.searchMusic(query)));
+        SearchDTO searchDTO = new SearchDTO();
+        searchDTO.setArtists(userService.searchArtist(query));
+        searchDTO.setMusics(musicService.searchMusic(query));
+        return ResponseEntity.ok().body(Map.of("success", searchDTO));
     }
 }

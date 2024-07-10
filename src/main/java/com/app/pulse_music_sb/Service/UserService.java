@@ -58,6 +58,11 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public List<User> searchArtist(String query) {
+        return userRepository.searchArtist(query);
+    }
+
+    @Override
     public List<Music> getMusicPopulars(User user) {
         return userRepository.findTop4ByUserIdOrderByPlayCountDesc(user.getId());
     }

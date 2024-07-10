@@ -30,4 +30,8 @@ public interface UserRepository extends JpaRepository<User, String> {
     List<Music> findAllTracksByUserId(String userId);
     @Query("SELECT m FROM Playlist m WHERE m.user.id = :userId ORDER BY m.playCount DESC")
     List<Playlist> findAllPlaylistsByUserId(String userId);
+    @Query("SELECT u FROM User u WHERE " +
+            "u.fullName LIKE CONCAT('%', :query, '%') AND " +
+            "u.role = 'ARTIST'")
+    List<User> searchArtist(String query);
 }
