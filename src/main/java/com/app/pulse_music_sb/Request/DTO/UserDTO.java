@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class UserDTO {
     private String id;
-    private String fullname;
+    private String fullName;
     private String avatarUrl;
     private String bio;
     private List<Music> tracks;
@@ -26,7 +26,7 @@ public class UserDTO {
         UserDTO userDTO = new UserDTO();
         userDTO.id = user.getId();
         userDTO.avatarUrl = user.getAvatarUrl();
-        userDTO.fullname = user.getFullName();
+        userDTO.fullName = user.getFullName();
         userDTO.bio = user.getBio();
         userDTO.tracks = user.getTracks();
         userDTO.types = user.getUserTypes();

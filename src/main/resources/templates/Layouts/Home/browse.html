@@ -3,9 +3,9 @@
       layout:decorate="~{_layout.html}">
 <body>
 <div layout:fragment="content">
-    <div th:insert="Fragments/browse :: browse_content(${musics}, ${types})"></div>
-    <div class="col-lg-3 w-xxl w-auto-md" th:if="${likes != null && !likes.isEmpty()}" >
-        <div th:insert="Fragments/likes :: like_sidebar(${likes})"></div>
+    <div class="row-col">
+        <div th:replace="~{/Fragments/browse :: browse_content(${musics}, ${types})}"></div>
+        <div th:replace="~{/Fragments/likes :: like_sidebar(${likes})}"></div>
     </div>
 </div>
 <script th:src="@{/scripts/app.min.js}"></script>

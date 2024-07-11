@@ -28,7 +28,7 @@
         }"
         >
             <div class="row row-lg">
-                <div th:each="artist : ${artists}" th:class="${zeroLike} == false ? 'col-xs-4 col-sm-4 col-md-3' : 'col-xs-1 col-sm-1 col-md-1'">
+                <div th:each="artist : ${artists}" th:class="${zeroLike} == false ? 'col-xs-4 col-sm-4 col-md-3' : 'col-xs-2 col-sm-2 col-md-2'">
                     <div class="item">
                         <div class="item-media rounded">
                             <a th:href="@{/artist_detail/{id}(id=${artist.id})}" class="item-media-content" th:style="'background-image: url(' + ${artist.getAvatarUrl()} + ')'"> </a>

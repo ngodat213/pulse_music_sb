@@ -9,18 +9,18 @@
                     Last week
                 </button>
                 <div class="dropdown-menu">
-                    <a href="#" class="dropdown-item active">Last week</a>
-                    <a href="#" class="dropdown-item">Last month</a>
-                    <a href="#" class="dropdown-item">Last year</a>
-                    <a href="#" class="dropdown-item">All the time</a>
+                    <a th:href="@{/chart(range='Last week')}" class="dropdown-item active">Last week</a>
+                    <a th:href="@{/chart(range='Last month')}" class="dropdown-item">Last month</a>
+                    <a th:href="@{/chart(range='Last year')}" class="dropdown-item">Last year</a>
+                    <a th:href="@{/chart(range='All the time')}" class="dropdown-item">All the time</a>
                 </div>
             </div>
         </div>
         <div class="row item-list item-list-md item-list-li m-b">
             <div class="col-xs-12" th:each="chart : ${charts}">
-                <div class="item r" data-id="item-8" data-src="http://api.soundcloud.com/tracks/236288744/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+                <div class="item r" th:data-id="${chart.id}" data-src="http://api.soundcloud.com/tracks/236288744/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
                     <div class="item-media">
-                        <a href="track.detail.html" class="item-media-content" th:style="'background-image: url(' + ${chart.image.url} + ')'"> ></a>
+                        <a class="item-media-content" th:style="'background-image: url(' + ${chart.image.url} + ')'"> ></a>
                         <div class="item-overlay center">
                             <button class="btn-playpause">Play</button>
                         </div>
@@ -32,10 +32,10 @@
                             <div class="dropdown-menu pull-right black lt"></div>
                         </div>
                         <div class="item-title text-ellipsis">
-                            <a href="track.detail.html" th:text="${chart.title}"></a>
+                            <a th:text="${chart.title}"></a>
                         </div>
                         <div class="item-author text-sm text-ellipsis">
-                            <a href="artist.detail.html" class="text-muted" th:text="${chart.user.fullName}"></a>
+                            <a th:href="@{/artist_detail/{id}(id=${chart.user.id})}" class="text-muted" th:text="${chart.user.fullName}"></a>
                         </div>
                         <div class="item-meta text-sm text-muted">
                             <span class="item-meta-stats text-xs item-meta-right">

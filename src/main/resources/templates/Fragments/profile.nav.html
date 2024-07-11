@@ -5,56 +5,24 @@
     <div class="nav-active-border b-primary bottom m-b-md m-t">
       <ul class="nav l-h-2x" data-ui-jp="taburl">
         <li class="nav-item m-r inline">
-          <a class="nav-link active" href="#" data-toggle="tab" data-target="#track">Tracks</a>
+          <a class="nav-link active" href="#" data-toggle="tab" data-target="#track" th:if="${#authentication.principal.isAdminOrArtist()}">Tracks</a>
         </li>
         <li class="nav-item m-r inline">
           <a class="nav-link" href="#" data-toggle="tab" data-target="#playlist">Playlists</a>
         </li>
         <li class="nav-item m-r inline">
-          <a class="nav-link" href="#" data-toggle="tab" data-target="#like">Likes</a>
+          <a class="nav-link" href="#" data-toggle="tab" data-target="#album" th:if="${#authentication.principal.isAdminOrArtist()}">Albums</a>
         </li>
         <li class="nav-item m-r inline">
-          <a class="nav-link" href="#" data-toggle="tab" data-target="#profile">Profile</a>
+          <a class="nav-link" href="#" data-toggle="tab" data-target="#like">Likes</a>
         </li>
       </ul>
     </div>
     <div class="tab-content">
-      <div th:replace="~{/Fragments/profile.track :: profile_track(${profile.tracks})}"></div>
-      <div th:replace="~{/Fragments/profile.playlist :: profile_playlist(${profile.playlists})}"></div>
-      <div th:replace="~{/Fragments/profile.like :: profile_like(${profile.likes})}"></div>
-      <div class="tab-pane" id="profile">
-        <form>
-          <div class="form-group row">
-            <div class="col-sm-3 form-control-label text-muted">
-              Location
-            </div>
-            <div class="col-sm-9">
-              <input value="Earth" class="form-control" />
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-3 form-control-label text-muted">
-              Website
-            </div>
-            <div class="col-sm-9">
-              <input placeholder="http://" class="form-control" />
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-3 form-control-label text-muted">
-              Music Type
-            </div>
-            <div class="col-sm-9">
-              <select class="form-control c-select">
-                <option>Blue</option>
-                <option>Electro</option>
-                <option>Pop</option>
-                <option>Soul</option>
-              </select>
-            </div>
-          </div>
-        </form>
-      </div>
+      <div th:replace="~{/Fragments/profile.track :: profile_track(${tracks})}" th:if="${#authentication.principal.isAdminOrArtist()}"></div>
+      <div th:replace="~{/Fragments/profile.playlist :: profile_playlist(${playlists})}"></div>
+      <div th:replace="~{/Fragments/profile.album :: profile_album(${albums})}" th:if="${#authentication.principal.isAdminOrArtist()}"></div>
+      <div th:replace="~{/Fragments/profile.like :: profile_like(${likes})}"></div>
     </div>
   </div>
 </div>
@@ -65,11 +33,11 @@
       <div class="col-xs-12">
         <div class="item r" data-id="item-7" data-src="http://api.soundcloud.com/tracks/245566366/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
           <div class="item-media">
-            <a href="track.detail.html" class="item-media-content" style="background-image: url('images/b6.jpg');"></a>
+            <a href="../Layouts/Home/album.detail.html" class="item-media-content" style="background-image: url('images/b6.jpg');"></a>
           </div>
           <div class="item-info">
             <div class="item-title text-ellipsis">
-              <a href="track.detail.html">Reflection (Deluxe)</a>
+              <a href="../Layouts/Home/album.detail.html">Reflection (Deluxe)</a>
             </div>
             <div class="item-author text-sm text-ellipsis">
               <a href="artist.detail.html" class="text-muted">Fifth Harmony</a>
@@ -80,11 +48,11 @@
       <div class="col-xs-12">
         <div class="item r" data-id="item-8" data-src="http://api.soundcloud.com/tracks/236288744/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
           <div class="item-media">
-            <a href="track.detail.html" class="item-media-content" style="background-image: url('images/b7.jpg');"></a>
+            <a href="../Layouts/Home/album.detail.html" class="item-media-content" style="background-image: url('images/b7.jpg');"></a>
           </div>
           <div class="item-info">
             <div class="item-title text-ellipsis">
-              <a href="track.detail.html">Simple Place To Be</a>
+              <a href="../Layouts/Home/album.detail.html">Simple Place To Be</a>
             </div>
             <div class="item-author text-sm text-ellipsis">
               <a href="artist.detail.html" class="text-muted">RYD</a>
@@ -95,11 +63,11 @@
       <div class="col-xs-12">
         <div class="item r" data-id="item-5" data-src="http://streaming.radionomy.com/JamendoLounge">
           <div class="item-media">
-            <a href="track.detail.html" class="item-media-content" style="background-image: url('images/b4.jpg');"></a>
+            <a href="../Layouts/Home/album.detail.html" class="item-media-content" style="background-image: url('images/b4.jpg');"></a>
           </div>
           <div class="item-info">
             <div class="item-title text-ellipsis">
-              <a href="track.detail.html">Live Radio</a>
+              <a href="../Layouts/Home/album.detail.html">Live Radio</a>
             </div>
             <div class="item-author text-sm text-ellipsis">
               <a href="artist.detail.html" class="text-muted">Radionomy</a>
@@ -110,11 +78,11 @@
       <div class="col-xs-12">
         <div class="item r" data-id="item-2" data-src="http://api.soundcloud.com/tracks/259445397/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
           <div class="item-media">
-            <a href="track.detail.html" class="item-media-content" style="background-image: url('images/b1.jpg');"></a>
+            <a href="../Layouts/Home/album.detail.html" class="item-media-content" style="background-image: url('images/b1.jpg');"></a>
           </div>
           <div class="item-info">
             <div class="item-title text-ellipsis">
-              <a href="track.detail.html">Fireworks</a>
+              <a href="../Layouts/Home/album.detail.html">Fireworks</a>
             </div>
             <div class="item-author text-sm text-ellipsis">
               <a href="artist.detail.html" class="text-muted">Kygo</a>
@@ -125,11 +93,11 @@
       <div class="col-xs-12">
         <div class="item r" data-id="item-4" data-src="http://api.soundcloud.com/tracks/230791292/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
           <div class="item-media">
-            <a href="track.detail.html" class="item-media-content" style="background-image: url('images/b3.jpg');"></a>
+            <a href="../Layouts/Home/album.detail.html" class="item-media-content" style="background-image: url('images/b3.jpg');"></a>
           </div>
           <div class="item-info">
             <div class="item-title text-ellipsis">
-              <a href="track.detail.html">What A Time To Be Alive</a>
+              <a href="../Layouts/Home/album.detail.html">What A Time To Be Alive</a>
             </div>
             <div class="item-author text-sm text-ellipsis">
               <a href="artist.detail.html" class="text-muted">Judith Garcia</a>

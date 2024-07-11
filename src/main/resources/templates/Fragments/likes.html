@@ -1,59 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
-<div class="padding" style="bottom: 60px;" data-ui-jp="stick_in_parent" th:fragment="like_sidebar(likes)">
-    <!--        <h6 class="text text-muted" th:text="${sizeLikes} + ' Likes'"></h6>-->
-    <div class="row item-list item-list-sm m-b">
-        <div class="col-xs-12" th:each="music : ${likes}">
-            <div class="item r" data-id="item-9" th:data-src="${music.mp3.url}">
-                <div class="item-media">
-                    <a href="track.detail.html" class="item-media-content" th:style="'background-image: url(' + ${music.image.url} + ')'"></a>
-                </div>
-                <div class="item-info">
-                    <div class="item-title text-ellipsis">
-                        <a href="track.detail.html" th:text="${music.title}"></a>
+<div class="col-lg-3 w-xxl w-auto-md" th:fragment="like_sidebar(likes)" th:if="${likes != null && !likes.isEmpty()}">
+    <div class="padding" style="bottom: 60px;" data-ui-jp="stick_in_parent">
+        <!--        <h6 class="text text-muted" th:text="${sizeLikes} + ' Likes'"></h6>-->
+        <div class="row item-list item-list-sm m-b">
+            <div class="col-xs-12" th:each="music : ${likes}">
+                <div class="item r" th:data-id="${music.id}" th:data-src="${music.mp3.url}">
+                    <div class="item-media">
+                        <a href="../Layouts/Home/album.detail.html" class="item-media-content" th:style="'background-image: url(' + ${music.image.url} + ')'"></a>
                     </div>
-                    <div class="item-author text-sm text-ellipsis">
-                        <a href="artist.detail.html" class="text-muted" th:text="${music.user.fullName}"></a>
+                    <div class="item-info">
+                        <div class="item-title text-ellipsis">
+                            <a href="../Layouts/Home/album.detail.html" th:text="${music.title}"></a>
+                        </div>
+                        <div class="item-author text-sm text-ellipsis">
+                            <a href="artist.detail.html" class="text-muted" th:text="${music.user.fullName}"></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!--        <h6 class="text text-muted">Go mobile</h6>-->
+        <!--        <div class="btn-groups">-->
+        <!--            <a-->
+        <!--                    href="#"-->
+        <!--                    class="btn btn-sm dark lt m-r-xs"-->
+        <!--                    style="width: 135px"-->
+        <!--            ><span class="pull-left m-r-sm"-->
+        <!--            ><i class="fa fa-apple fa-2x"></i-->
+        <!--            ></span>-->
+        <!--                <span class="clear text-left l-h-1x"-->
+        <!--                ><span class="text-muted text-xxs"-->
+        <!--                >Download on the</span-->
+        <!--                >-->
+        <!--                        <b class="block m-b-xs">App Store</b></span-->
+        <!--                ></a-->
+        <!--            >-->
+        <!--            <a href="#" class="btn btn-sm dark lt" style="width: 133px"-->
+        <!--            ><span class="pull-left m-r-sm"-->
+        <!--            ><i class="fa fa-play fa-2x"></i-->
+        <!--            ></span>-->
+        <!--                <span class="clear text-left l-h-1x"-->
+        <!--                ><span class="text-muted text-xxs">Get it on</span>-->
+        <!--                        <b class="block m-b-xs m-r-xs">Google Play</b></span-->
+        <!--                ></a-->
+        <!--            >-->
+        <!--        </div>-->
+        <div class="b-b m-y"></div>
+        <div class="nav text-sm _600">
+            <a href="#" class="nav-link text-muted m-r-xs">About</a>
+            <a href="#" class="nav-link text-muted m-r-xs">Contact</a>
+            <a href="#" class="nav-link text-muted m-r-xs">Legal</a>
+            <a href="#" class="nav-link text-muted m-r-xs">Policy</a>
+        </div>
     </div>
-    <!--        <h6 class="text text-muted">Go mobile</h6>-->
-    <!--        <div class="btn-groups">-->
-    <!--            <a-->
-    <!--                    href="#"-->
-    <!--                    class="btn btn-sm dark lt m-r-xs"-->
-    <!--                    style="width: 135px"-->
-    <!--            ><span class="pull-left m-r-sm"-->
-    <!--            ><i class="fa fa-apple fa-2x"></i-->
-    <!--            ></span>-->
-    <!--                <span class="clear text-left l-h-1x"-->
-    <!--                ><span class="text-muted text-xxs"-->
-    <!--                >Download on the</span-->
-    <!--                >-->
-    <!--                        <b class="block m-b-xs">App Store</b></span-->
-    <!--                ></a-->
-    <!--            >-->
-    <!--            <a href="#" class="btn btn-sm dark lt" style="width: 133px"-->
-    <!--            ><span class="pull-left m-r-sm"-->
-    <!--            ><i class="fa fa-play fa-2x"></i-->
-    <!--            ></span>-->
-    <!--                <span class="clear text-left l-h-1x"-->
-    <!--                ><span class="text-muted text-xxs">Get it on</span>-->
-    <!--                        <b class="block m-b-xs m-r-xs">Google Play</b></span-->
-    <!--                ></a-->
-    <!--            >-->
-    <!--        </div>-->
-    <div class="b-b m-y"></div>
-    <div class="nav text-sm _600">
-        <a href="#" class="nav-link text-muted m-r-xs">About</a>
-        <a href="#" class="nav-link text-muted m-r-xs">Contact</a>
-        <a href="#" class="nav-link text-muted m-r-xs">Legal</a>
-        <a href="#" class="nav-link text-muted m-r-xs">Policy</a>
-    </div>
-    <p class="text-muted text-xs p-b-lg">&copy; Copyright 2016</p>
 </div>
 </body>
 </html>

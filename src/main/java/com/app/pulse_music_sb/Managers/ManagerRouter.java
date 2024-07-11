@@ -2,15 +2,24 @@ package com.app.pulse_music_sb.Managers;
 
 public class ManagerRouter {
     public static final String[] UserMatchers = {
-            "/", "/browse", "/artist", "/chart", "/artist_detail/**", "/profile"
+            "/",
+            "/browse",
+            "/artist",
+            "/chart",
+            "/artist_detail/**",
+            "/profile",
+            "/album/**",
+            "/profile_change",
     };
 
     public static final String[] ArtistsMatchers = {
-            "/", "/browse", "/artist", "/chart"
+            "/dashboard/artist_table/**",
+            "/dashboard/chart_table/**",
+            "/dashboard/artist_detail/**",
     };
 
     public static final String[] AdminMatchers = {
-            "/dashboard/**"
+            "/dashboard/user_table/**",
     };
 
     public static final String rememberMeKey = "Pulse";

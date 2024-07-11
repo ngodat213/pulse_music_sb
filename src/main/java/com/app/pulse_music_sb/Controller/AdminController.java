@@ -2,39 +2,37 @@ package com.app.pulse_music_sb.Controller;
 
 import com.app.pulse_music_sb.Const.ErrorConstants;
 import com.app.pulse_music_sb.Const.ToastConstants;
-import com.app.pulse_music_sb.Models.Music;
-import com.app.pulse_music_sb.Models.MusicType;
-import com.app.pulse_music_sb.Models.User;
-import com.app.pulse_music_sb.Request.Request.RequestCreateMusic;
-import com.app.pulse_music_sb.Request.Request.RequestMusicType;
-import com.app.pulse_music_sb.Request.Request.RequestUpdateMusic;
-import com.app.pulse_music_sb.Service.Interface.MusicService;
-import com.app.pulse_music_sb.Service.Interface.MusicTypeService;
+import com.app.pulse_music_sb.Models.*;
+import com.app.pulse_music_sb.Request.Request.*;
+import com.app.pulse_music_sb.Service.Interface.IAlbumService;
+import com.app.pulse_music_sb.Service.Interface.IMusicService;
+import com.app.pulse_music_sb.Service.Interface.IMusicTypeService;
 import com.app.pulse_music_sb.Service.UserService;
 import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("/dashboard")
 public class AdminController {
     @Autowired
-    private MusicService musicService;
+    private IMusicService IMusicService;
     @Autowired
     private UserService userService;
     @Autowired
-    private MusicTypeService musicTypeService;
+    private IMusicTypeService musicTypeService;
+    @Autowired
+    private IAlbumService albumService;
 
     @GetMapping("")
     public String dashboard (){
@@ -60,13 +58,16 @@ public class AdminController {
                                   @RequestParam(defaultValue = "createdAt") String sortBy,
                                   Model model){
         PaginationDTO paginationDTO = new PaginationDTO(page, limit, sortDirection, sortBy);
+        List<RequestMusicTypes> req = IMusicService.findAllMusicTypes(musicTypeService.findAllBy(paginationDTO));
         model.addAttribute("type", new RequestMusicType());
-        model.addAttribute("types", musicTypeService.findAll(paginationDTO));
+        model.addAttribute("types", req);
         return "Layouts/Dashboard/music_type_table";
     }
 
     @GetMapping("/music_table")
-    public String musicTable (@RequestParam(defaultValue = "1") int page,
+    public String musicTable (
+                              @AuthenticationPrincipal CustomUserDetails customUserDetails,
+                                @RequestParam(defaultValue = "1") int page,
                               @RequestParam(defaultValue = "10") int limit,
                               @RequestParam(defaultValue = "desc", name = "sort") String sortDirection,
                               @RequestParam(defaultValue = "createdAt") String sortBy,
@@ -74,11 +75,81 @@ public class AdminController {
         PaginationDTO paginationDTO = new PaginationDTO(page, limit, sortDirection, sortBy);
         model.addAttribute("music", new RequestCreateMusic());
         model.addAttribute("artists", userService.getAll(paginationDTO));
-        model.addAttribute("musics", musicService.findAllBy(paginationDTO));
-        model.addAttribute("types", musicTypeService.findAll(paginationDTO));
+        model.addAttribute("musics", userService.getTracksByUserId(customUserDetails.getId()));
+        model.addAttribute("types", musicTypeService.findAllBy(paginationDTO));
         return "Layouts/Dashboard/music_table";
     }
+
+    @GetMapping("/album_table")
+    public String album_table(@AuthenticationPrincipal CustomUserDetails customUserDetail,
+                              @RequestParam(defaultValue = "1") int page,
+                              @RequestParam(defaultValue = "10") int limit,
+                              @RequestParam(defaultValue = "desc", name = "sort") String sortDirection,
+                              @RequestParam(defaultValue = "createdAt") String sortBy,
+                              Model model){
+        model.addAttribute("user", customUserDetail.getUser().getId());
+        PaginationDTO paginationDTO = new PaginationDTO(page, limit, sortDirection, sortBy);
+        model.addAttribute("types", musicTypeService.findAllBy(paginationDTO));
+        model.addAttribute("musics", IMusicService.findAllBy(paginationDTO));
+        model.addAttribute("createAlbum", new RequestCreateAlbum());
+        model.addAttribute("albums", userService.getAlbumsByUserId(customUserDetail.getId()));
+        return "Layouts/Dashboard/album_table";
+    }
+
     // API
+    // ----------------------==ALBUM==---------------------- //
+    @GetMapping("/album_table/{id}")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> getAlbumById(@PathVariable String id) {
+        Optional<Album> album = albumService.findById(id);
+        if (album.isPresent()) {
+            return ResponseEntity.ok(Map.of("status", "success", "musicType", album.get()));
+        } else {
+            return ResponseEntity.status(404).body(Map.of("status", "error", "message", "MusicType not found"));
+        }
+    }
+
+    @PostMapping("/album_table")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> createAlbum(@ModelAttribute RequestCreateAlbum createAlbum,
+                                                           @RequestParam("image") MultipartFile image) {
+        try {
+            Map<String, Object> response = new HashMap<>();
+            if (!image.getContentType().startsWith("image/")) {
+                response.put("status", "error");
+                response.put("message", "Unsupported image format");
+                return ResponseEntity.badRequest().body(response);
+            }
+
+            Album savedAlbum = albumService.save(createAlbum, image);
+            return ResponseEntity.ok(Map.of("status", "success", "Album", savedAlbum));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("status", "error", "message", e.getMessage()));
+        }
+    }
+
+    @PutMapping("/album_table/{id}")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> updateAlbum(@PathVariable String id, @RequestBody RequestUpdateAlbum requestUpdateAlbum) {
+        if (albumService.existsById(id)) {
+            Album updatedMusicType = albumService.update(id, requestUpdateAlbum);
+            return ResponseEntity.ok(Map.of("status", "success", "musicType", updatedMusicType));
+        } else {
+            return ResponseEntity.status(404).body(Map.of("status", "error", "message", "MusicType not found"));
+        }
+    }
+
+    @DeleteMapping("/album_table/{id}")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> deleteAlbum(@PathVariable String id) {
+        if (albumService.existsById(id)) {
+            musicTypeService.deleteById(id);
+            return ResponseEntity.ok(Map.of("status", "success", "message", "MusicType deleted successfully"));
+        } else {
+            return ResponseEntity.status(404).body(Map.of("status", "error", "message", "MusicType not found"));
+        }
+    }
     // ----------------------==MUSIC TYPE==---------------------- //
     @GetMapping("/music_type_table/{id}")
     @ResponseBody
@@ -126,7 +197,7 @@ public class AdminController {
     @GetMapping("/music_table/{id}")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> getMusic(@PathVariable String id) {
-        Music music = musicService.findById(id);
+        Music music = IMusicService.findById(id);
         if (music != null) {
             return ResponseEntity.ok(Map.of("status", "success", "music", music));
         } else {
@@ -140,9 +211,9 @@ public class AdminController {
                                                             @Validated @ModelAttribute RequestUpdateMusic request,
                                                             @RequestParam("image") MultipartFile image,
                                                             @RequestParam("mp3") MultipartFile mp3) {
-        Music existingMusic = musicService.findById(id);
+        Music existingMusic = IMusicService.findById(id);
         if (existingMusic != null) {
-            musicService.update(id, request, image, mp3);
+            IMusicService.update(id, request, image, mp3);
             return ResponseEntity.ok(Map.of("status", "success", "message", "Music updated successfully"));
         } else {
             return ResponseEntity.status(404).body(Map.of("status", "error", "message", "Music not found"));
@@ -170,7 +241,7 @@ public class AdminController {
 
         try {
             // Process your file and form data
-            musicService.save(createMusic, image, mp3);
+            IMusicService.save(createMusic, image, mp3);
             response.put("status", "success");
             response.put("message", "Music created successfully");
             return ResponseEntity.ok(response);

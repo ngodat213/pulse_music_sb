@@ -2,9 +2,9 @@ package com.app.pulse_music_sb.Service;
 
 import com.app.pulse_music_sb.Models.CloudStorage;
 import com.app.pulse_music_sb.Repository.ImageStorageRepository;
+import com.app.pulse_music_sb.Service.Interface.ICloudService;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,13 +14,14 @@ import java.util.Map;
 
 
 @Service
-public class CloudService {
+public class CloudService implements ICloudService {
 
     @Autowired
     private Cloudinary cloudinary;
     @Autowired
     private ImageStorageRepository pImageRepository;
 
+    @Override
     public CloudStorage uploadFile(MultipartFile file, boolean isAudio){
         Map uploadResult = uploadFileToCloudinary(file, isAudio);
         return  pImageRepository.save(
@@ -29,6 +30,15 @@ public class CloudService {
                         uploadResult.get("asset_id").toString(),
                         uploadResult.get("public_id").toString())
         );
+    }
+
+    @Override
+    public void deleteProductImage(String publicId) {
+        try {
+            cloudinary.uploader().destroy(publicId, ObjectUtils.emptyMap());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     
     private Map uploadFileToCloudinary(MultipartFile file, boolean isAudio){
@@ -54,11 +64,5 @@ public class CloudService {
         return file.getContentType() != null && file.getContentType().startsWith("audio");
     }
 
-    public void deleteProductImage(String publicId) {
-        try {
-            cloudinary.uploader().destroy(publicId, ObjectUtils.emptyMap());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 }

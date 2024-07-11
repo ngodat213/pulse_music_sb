@@ -1,6 +1,9 @@
 package com.app.pulse_music_sb.Models;
 
 import com.app.pulse_music_sb.Common.AbstractEntity;
+import com.app.pulse_music_sb.Request.DTO.MetaDTO;
+import com.app.pulse_music_sb.Request.DTO.PlaylistTrackDTO;
+import com.app.pulse_music_sb.Request.DTO.ThumbDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -56,5 +59,35 @@ public class Music extends AbstractEntity {
             return likedByUsers.size();
         }
         return 0;
+    }
+
+    public String getFormatTime(){
+        int minutes = duration / 60;
+        int seconds = duration % 60;
+        return String.format("%d:%d", minutes, seconds);
+    }
+
+    public PlaylistTrackDTO toDTO() {
+        ThumbDTO thumbDTO = new ThumbDTO();
+        thumbDTO.setSrc(image.getUrl());
+
+        MetaDTO metaDTO = new MetaDTO();
+        metaDTO.setAuthor(getUser().getFullName());
+        metaDTO.setAuthorlink("#");
+        metaDTO.setDate(getFormattedCreatedAt());
+        metaDTO.setCategory(musicType != null ? musicType.getTypeName() : "no");
+        metaDTO.setPlay(playCount);
+        metaDTO.setLike(heartCount);
+        metaDTO.setDuration(getFormatTime());
+
+        PlaylistTrackDTO res = new PlaylistTrackDTO();
+        res.setId(getId());
+        res.setTitle(getTitle());
+        res.setExcept(getDescription());
+        res.setLink("#");
+        res.setThumb(thumbDTO);
+        res.setSrc(getMp3().getUrl());
+        res.setMeta(metaDTO);
+        return res;
     }
 }

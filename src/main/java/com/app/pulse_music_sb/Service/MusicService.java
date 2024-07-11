@@ -2,11 +2,15 @@ package com.app.pulse_music_sb.Service;
 
 import com.app.pulse_music_sb.Models.CloudStorage;
 import com.app.pulse_music_sb.Models.Music;
+import com.app.pulse_music_sb.Models.MusicType;
 import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Repository.MusicRepository;
+import com.app.pulse_music_sb.Repository.MusicTypeRepository;
+import com.app.pulse_music_sb.Request.DTO.PlaylistTrackDTO;
 import com.app.pulse_music_sb.Request.Request.RequestCreateMusic;
+import com.app.pulse_music_sb.Request.Request.RequestMusicTypes;
 import com.app.pulse_music_sb.Request.Request.RequestUpdateMusic;
-import com.app.pulse_music_sb.Service.Interface.MusicService;
+import com.app.pulse_music_sb.Service.Interface.IMusicService;
 import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
 import com.app.pulse_music_sb.Util.MP3DurationUtil;
 import org.springframework.data.domain.Page;
@@ -16,10 +20,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
-public class MusicServiceImpl implements MusicService {
+public class MusicService implements IMusicService {
     @Autowired
     private MusicRepository musicRepository;
     @Autowired
@@ -28,6 +36,8 @@ public class MusicServiceImpl implements MusicService {
     private CloudService cloudService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private MusicTypeRepository typeRepository;
 
     @Override
     public Page<Music> findAllBy(PaginationDTO paginationDTO) {
@@ -38,6 +48,21 @@ public class MusicServiceImpl implements MusicService {
     @Override
     public List<Music> findAll() {
         return musicRepository.findAll();
+    }
+
+    @Override
+    public List<Music> findByType(String musicType) {
+        MusicType findType = typeRepository.findByTypeName(musicType).orElseThrow(() -> new RuntimeException("Type not found"));
+        return musicRepository.findAllByMusicType(findType);
+    }
+
+    @Override
+    public List<Music> getMusicByTimeRange(String timeRange) {
+        if(timeRange.equals("All the time")){
+            return musicRepository.findAll();
+        }
+        LocalDateTime startTime = calculateStartTime(timeRange);
+        return musicRepository.findByCreatedAtAfter(startTime);
     }
 
     @Override
@@ -102,5 +127,56 @@ public class MusicServiceImpl implements MusicService {
     @Override
     public void deleteById(String id) {
         musicRepository.deleteById(id);
+    }
+
+    @Override
+    public List<RequestMusicTypes> findAllMusicTypes(Page<MusicType> types) {
+        List<RequestMusicTypes> res = new ArrayList<>();
+        for (MusicType type: types) {
+            res.add(new RequestMusicTypes(type, musicRepository.findAllByMusicType(type)));
+        }
+        return res;
+    }
+
+    @Override
+    public List<Music> findByIds(List<String> ids) {
+        return ids.stream()
+                .map(id -> musicRepository.findById(id).orElseThrow(() -> new RuntimeException("Music not found")))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public PlaylistTrackDTO getPlaylistTrack() {
+        return musicRepository.findTopLikedMusic().get().toDTO();
+    }
+
+    @Override
+    public PlaylistTrackDTO getRandomTrack() {
+        List<Music> musics = findAll();
+        Random rand = new Random();
+        Music randomElement = musics.get(rand.nextInt(musics.size()));
+        return randomElement.toDTO();
+    }
+
+    @Override
+    public List<Music> searchMusic(String query) {
+        if(query.equals("")){
+            return musicRepository.findAll();
+        }
+        return musicRepository.searchMusics(query);
+    }
+
+    private LocalDateTime calculateStartTime(String timeRange) {
+        LocalDateTime now = LocalDateTime.now();
+        switch (timeRange) {
+            case "Last week":
+                return now.minusWeeks(1);
+            case "Last month":
+                return now.minusMonths(1);
+            case "Last year":
+                return now.minusYears(1);
+            default:
+                return LocalDateTime.MIN; // From the earliest date
+        }
     }
 }

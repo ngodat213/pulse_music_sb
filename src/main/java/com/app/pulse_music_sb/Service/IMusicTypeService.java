@@ -2,26 +2,32 @@ package com.app.pulse_music_sb.Service;
 
 import com.app.pulse_music_sb.Models.MusicType;
 import com.app.pulse_music_sb.Repository.MusicTypeRepository;
-import com.app.pulse_music_sb.Service.Interface.MusicTypeService;
 import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
-public class MusicTypeServiceImpl implements MusicTypeService {
+public class IMusicTypeService implements com.app.pulse_music_sb.Service.Interface.IMusicTypeService {
     @Autowired
     private MusicTypeRepository musicTypeRepository;
     @Autowired
     private PaginationService paginationService;
 
     @Override
-    public Page<MusicType> findAll(PaginationDTO paginationDTO) {
+    public Page<MusicType> findAllBy(PaginationDTO paginationDTO) {
         Pageable pageable = paginationService.getPageable(paginationDTO);
         return musicTypeRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<MusicType> findAll() {
+        return musicTypeRepository.findAll();
     }
 
     @Override
@@ -47,5 +53,12 @@ public class MusicTypeServiceImpl implements MusicTypeService {
     @Override
     public boolean existsById(String id) {
         return musicTypeRepository.existsById(id);
+    }
+
+    @Override
+    public List<MusicType> findByIds(List<String> ids) {
+        return ids.stream()
+                .map(id -> musicTypeRepository.findById(id).orElseThrow(() -> new RuntimeException("MusicType not found")))
+                .collect(Collectors.toList());
     }
 }

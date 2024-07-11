@@ -1,17 +1,16 @@
 package com.app.pulse_music_sb.Service;
 
-import com.app.pulse_music_sb.Models.Music;
+import com.app.pulse_music_sb.Models.*;
 import com.app.pulse_music_sb.Repository.MusicRepository;
 import com.app.pulse_music_sb.Request.Request.RequestRegisterUser;
-import com.app.pulse_music_sb.Request.Request.RequestPasswordChange;
-import com.app.pulse_music_sb.Request.Request.RequestPasswordReset;
 import com.app.pulse_music_sb.Enums.UserRole;
 import com.app.pulse_music_sb.Exceptions.DuplicateResourceException;
 import com.app.pulse_music_sb.Exceptions.ResourceNotFoundException;
-import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Repository.UserRepository;
 import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
 import com.app.pulse_music_sb.Service.Interface.IUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -23,15 +22,16 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
 public class UserService implements IUserService {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -41,32 +41,94 @@ public class UserService implements IUserService {
     private MusicRepository musicRepository;
 
     private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private CloudService cloudService;
 
     @Override
     public List<User> getAll(PaginationDTO paginationDTO) {
+        logger.info("Fetching all users with pagination: {}", paginationDTO);
         Pageable pageable = paginationService.getPageable(paginationDTO);
         return userRepository.findAll(pageable).toList();
     }
 
     @Override
     public List<User> getArtists(){
-        System.out.println(UserRole.ARTIST.getAuthority());
+        logger.info("Fetching all artists");
         return userRepository.findAllByRole(UserRole.ARTIST);
     }
 
     @Override
     public List<Music> getUserLikedMusic(String userId) {
+        logger.info("Fetching liked music for user with ID: {}", userId);
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         return user.getUserLiked();
     }
 
     @Override
+    public List<User> searchArtist(String query) {
+        logger.info("Search artist by query: {}", query);
+        return userRepository.searchArtist(query);
+    }
+
+    @Override
     public List<Music> getMusicPopulars(User user) {
+        logger.info("Get music popular by user: {}", user);
         return userRepository.findTop4ByUserIdOrderByPlayCountDesc(user.getId());
     }
 
     @Override
+    public List<Album> getAlbumsByUserId(String userId) {
+        logger.info("Get albums by userId: {}", userId);
+        return userRepository.findAllAlbumsByUserId(userId);
+    }
+
+    @Override
+    public List<Music> getTracksByUserId(String userId) {
+        logger.info("Get tracks by userId: {}", userId);
+        return userRepository.findAllTracksByUserId(userId);
+    }
+
+    @Override
+    public List<Playlist> getPlaylistsByUserId(String userId) {
+        logger.info("Get playlist by userId: {}", userId);
+        return userRepository.findAllPlaylistsByUserId(userId);
+    }
+
+    @Override
+    public User updateAvatarAndFullName(String userId, String fullName, MultipartFile file) {
+        logger.info("Update avatar and fullName by userId: {}, fullName: {}, file: {}", userId, fullName, file);
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        if(user.getAvatar() != null){
+            cloudService.deleteProductImage(user.getAvatar().getPublicId());
+        }
+        CloudStorage avatar = cloudService.uploadFile(file, false);
+        user.setAvatar(avatar);
+        user.setFullName(fullName);
+        return userRepository.saveAndFlush(user);
+    }
+
+    @Override
+    public boolean setFavorite(String userId, String musicID) {
+        logger.info("Setting favorite music with ID: {} for user with ID: {}", musicID, userId);
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        Music music = musicRepository.findById(musicID).orElseThrow(() -> new RuntimeException("Music not found"));
+        List<Music> likes = user.getUserLiked();
+
+        if (likes.contains(music)) {
+            likes.remove(music);
+        } else {
+            likes.add(music);
+        }
+
+        user.setUserLiked(likes);
+        userRepository.save(user);
+        return true;
+    }
+
+
+    @Override
     public User likeMusic(String userId, String musicId) {
+        logger.info("Like music for user with music id: {} for user with ID: {}", userId, musicId);
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         Music music = musicRepository.findById(musicId).orElseThrow(() -> new RuntimeException("Music not found"));
         user.getUserLiked().add(music);
@@ -75,7 +137,7 @@ public class UserService implements IUserService {
 
     @Override
     public User findById(String id) {
-        return userRepository.findById(id).get();
+        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     @Override
@@ -90,7 +152,8 @@ public class UserService implements IUserService {
 
     @Override
     public User register(RequestRegisterUser req) {
-        if(!userRepository.existsByEmail(req.getEmail())){
+        logger.info("Register user for RequestRegisterUser: {}", req);
+        if(!userRepository.existsByEmail(req.getEmail()) && !req.getPassword().isEmpty()){
             if(checkPassword(req.getPassword(), req.getConfirmPassword())) {
                 req.setPassword(encodePassword(req.getPassword()));
 
@@ -121,6 +184,7 @@ public class UserService implements IUserService {
 
     @Override
     public User currentUser() {
+        logger.info("Get current user");
         if(!isAuthenticated()){
             return null;
         }
@@ -152,6 +216,7 @@ public class UserService implements IUserService {
 
     @Override
     public boolean handleLockUser(String id) {
+        logger.info("Handle lock user by id: {}", id);
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("The user with id [%s] not exists"
                         .formatted(id)));
@@ -161,11 +226,6 @@ public class UserService implements IUserService {
         user.setEnabled(!user.isEnabled());
         userRepository.saveAndFlush(user);
         return true;
-    }
-
-    @Override
-    public User getUserByUsername(String email) {
-        return userRepository.findByEmail(email);
     }
 
     @Override
@@ -197,15 +257,21 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void GenTokenResetPassword(User user){
-        user.setTokenResetPassword(GenToken(45));
+    public String GenTokenResetPassword(User user){
+        user.setTokenResetPassword(GenToken(5));
         user.setTokenResetPasswordExpired(new Date(System.currentTimeMillis()+1000*60*10));
         userRepository.save(user);
+        return user.getTokenResetPassword();
     }
 
     @Override
-    public String GenToken(int Length){
-        return "1111";
+    public String GenToken(int length) {
+        StringBuilder token = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            int digit = (int) (Math.random() * 10); // Generates a random digit between 0 and 9
+            token.append(digit);
+        }
+        return token.toString();
     }
 
     @Override

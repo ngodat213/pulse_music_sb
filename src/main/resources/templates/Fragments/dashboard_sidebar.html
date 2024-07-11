@@ -2,48 +2,13 @@
 <html lang="en">
 <nav class="sidebar">
     <div class="logo d-flex justify-content-between">
-        <a class="large_logo" th:href="@{/dashboard}"><img alt th:src="@{/img/logo.png}" /></a>
-        <a class="small_logo" th:href="@{/dashboard}"><img alt th:src="@{/img/mini_logo.png}" /></a>
+        <a class="large_logo" th:href="@{/}"><img alt th:src="@{/images/logo.png}" style="width: 50px; height: 50px;"/>Pulse</a>
+        <a class="small_logo" th:href="@{/}"><img alt th:src="@{/images/logo.png}" style="width: 50px; height: 50px;"/>Pulse</a>
         <div class="sidebar_close_icon d-lg-none">
             <i class="ti-close"></i>
         </div>
     </div>
     <ul id="sidebar_menu">
-        <li>
-            <a aria-expanded="false" th:href="@{/dashboard}">
-                <div class="nav_icon_small">
-                    <img alt th:src="@{/img/menu-icon/dashboard.svg}" />
-                </div>
-                <div class="nav_title">
-                    <span>Analytic</span>
-                </div>
-            </a>
-        </li>
-        <li>
-            <a aria-expanded="false" th:href="@{/dashboard}">
-                <div class="nav_icon_small">
-                    <img alt th:src="@{/img/menu-icon/2.svg}" />
-                </div>
-                <div class="nav_title">
-                    <span>Default </span>
-                </div>
-            </a>
-        </li>
-        <h4 class="menu-text"><span>CUSTOM</span> <i class="fas fa-ellipsis-h"></i></h4>
-        <li class>
-            <a aria-expanded="false" class="has-arrow" href="#">
-                <div class="nav_icon_small">
-                    <img alt th:src="@{/img/menu-icon/5.svg}" />
-                </div>
-                <div class="nav_title">
-                    <span>Application </span>
-                </div>
-            </a>
-            <ul>
-                <li><a th:href="@{/dashboard/mail_box}">Mail Box</a></li>
-                <li><a th:href="@{/dashboard/chat}">Chat</a></li>
-            </ul>
-        </li>
         <h4 class="menu-text"><span>TABLE</span> <i class="fas fa-ellipsis-h"></i></h4>
         <li class>
             <a aria-expanded="false" class="has-arrow" href="#">
@@ -55,44 +20,10 @@
                 </div>
             </a>
             <ul>
-                <li><a th:href="@{/dashboard/user_table}">User</a></li>
+                <li th:if="${#authentication.principal.isAdmin()}"><a th:href="@{/dashboard/user_table}">User</a></li>
                 <li><a th:href="@{/dashboard/music_table}">Music</a></li>
                 <li><a th:href="@{/dashboard/music_type_table}">Music type</a></li>
-            </ul>
-        </li>
-        <h4 class="menu-text"><span>Elements</span> <i class="fas fa-ellipsis-h"></i></h4>
-        <li class>
-            <a aria-expanded="false" href="invoice.html">
-                <div class="nav_icon_small">
-                    <img alt th:src="@{/img/menu-icon/6.svg}" />
-                </div>
-                <div class="nav_title">
-                    <span>Invoice</span>
-                </div>
-            </a>
-        </li>
-        <li class>
-            <a aria-expanded="false" href="calender.html">
-                <div class="nav_icon_small">
-                    <img alt th:src="@{/img/menu-icon/7.svg}" />
-                </div>
-                <div class="nav_title">
-                    <span>Calander</span>
-                </div>
-            </a>
-        </li>
-        <li class>
-            <a aria-expanded="false" class="has-arrow" href="#">
-                <div class="nav_icon_small">
-                    <img alt th:src="@{/img/menu-icon/8.svg}" />
-                </div>
-                <div class="nav_title">
-                    <span>Products</span>
-                </div>
-            </a>
-            <ul>
-                <li><a href="Cart.html">Cart</a></li>
-                <li><a href="Checkout.html">Checkout</a></li>
+                <li><a th:href="@{/dashboard/album_table}">Album</a></li>
             </ul>
         </li>
     </ul>
