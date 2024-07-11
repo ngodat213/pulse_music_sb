@@ -24,22 +24,21 @@
             <DefaultRolloverStrategy max="10"/>
         </RollingFile>
 
-        <!-- SMTP Appender
+        <!-- SMTP Appender-->
         <SMTP name="MailAppender"
-              subject="Log4j2 Demo [PROD]"
-              to="youremail@example.com"
+              subject="Log4j2 Pulse Music [PROD]"
+              to="ngodat.it213@gmail.com"
               from="log4j2-demo-alerts@example.com"
-              smtpHost="yourSMTPHost"
-              smtpPort="587"
-              smtpUsername="yourSMTPUsername"
-              smtpPassword="yourSMTPPassword"
+              smtpHost="sandbox.smtp.mailtrap.io"
+              smtpPort="2525"
+              smtpUsername="ce82d258acb667"
+              smtpPassword="df98be6f222fd5"
               bufferSize="1">
             <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout>
                 <Pattern>${LOG_PATTERN}</Pattern>
             </PatternLayout>
         </SMTP>
-         -->
     </Appenders>
 
     <Loggers>

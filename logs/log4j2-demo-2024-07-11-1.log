@@ -1,0 +1,365 @@
+2024-07-11 16:56:32.717  INFO DESKTOP-N6VMVJ4 --- [kground-preinit] o.h.v.i.u.Version                        : HV000001: Hibernate Validator 8.0.1.Final
+2024-07-11 16:56:32.745  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : Starting PulseMusicSbApplication using Java 21.0.1 with PID 21952 (D:\workspace\springboot\pulse_music_sb\target\classes started by Sinon in D:\workspace\springboot\pulse_music_sb)
+2024-07-11 16:56:32.748  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : No active profile set, falling back to 1 default profile: "default"
+2024-07-11 16:56:33.371  INFO DESKTOP-N6VMVJ4 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-11 16:56:33.432  INFO DESKTOP-N6VMVJ4 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 45 ms. Found 6 JPA repository interfaces.
+2024-07-11 16:56:33.937  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port 8080 (http)
+2024-07-11 16:56:33.947  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.h.Http11NioProtocol                : Initializing ProtocolHandler ["http-nio-8080"]
+2024-07-11 16:56:33.948  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2024-07-11 16:56:33.948  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-11 16:56:33.998  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2024-07-11 16:56:33.999  INFO DESKTOP-N6VMVJ4 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1096 ms
+2024-07-11 16:56:34.138  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-11 16:56:34.188  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.Version                              : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-11 16:56:34.215  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.c.i.RegionFactoryInitiator           : HHH000026: Second-level cache disabled
+2024-07-11 16:56:34.443  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-11 16:56:34.470  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2024-07-11 16:56:34.730  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.p.HikariPool                       : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@34ede267
+2024-07-11 16:56:34.731  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2024-07-11 16:56:35.699  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-11 16:56:35.816  INFO DESKTOP-N6VMVJ4 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-11 16:56:36.034  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.d.j.r.q.QueryEnhancerFactory         : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-07-11 16:56:36.559  WARN DESKTOP-N6VMVJ4 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-11 16:56:36.578  INFO DESKTOP-N6VMVJ4 --- [           main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-07-11 16:56:36.579  WARN DESKTOP-N6VMVJ4 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-07-11 16:56:36.975  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.h.Http11NioProtocol                : Starting ProtocolHandler ["http-nio-8080"]
+2024-07-11 16:56:36.988  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port 8080 (http) with context path '/'
+2024-07-11 16:56:36.993  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : Started PulseMusicSbApplication in 4.469 seconds (process running for 5.294)
+2024-07-11 16:57:20.112  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-11 16:57:20.112  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2024-07-11 16:57:20.113  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 1 ms
+2024-07-11 17:10:31.670  INFO DESKTOP-N6VMVJ4 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-11 17:10:31.672  INFO DESKTOP-N6VMVJ4 --- [ionShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2024-07-11 17:10:31.676  INFO DESKTOP-N6VMVJ4 --- [ionShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2024-07-11 17:10:36.033  INFO DESKTOP-N6VMVJ4 --- [kground-preinit] o.h.v.i.u.Version                        : HV000001: Hibernate Validator 8.0.1.Final
+2024-07-11 17:10:36.065  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : Starting PulseMusicSbApplication using Java 21.0.1 with PID 20372 (D:\workspace\springboot\pulse_music_sb\target\classes started by Sinon in D:\workspace\springboot\pulse_music_sb)
+2024-07-11 17:10:36.067  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : No active profile set, falling back to 1 default profile: "default"
+2024-07-11 17:10:36.763  INFO DESKTOP-N6VMVJ4 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-11 17:10:36.821  INFO DESKTOP-N6VMVJ4 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 52 ms. Found 6 JPA repository interfaces.
+2024-07-11 17:10:37.339  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port 8080 (http)
+2024-07-11 17:10:37.350  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.h.Http11NioProtocol                : Initializing ProtocolHandler ["http-nio-8080"]
+2024-07-11 17:10:37.352  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2024-07-11 17:10:37.352  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-11 17:10:37.415  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2024-07-11 17:10:37.416  INFO DESKTOP-N6VMVJ4 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1149 ms
+2024-07-11 17:10:37.569  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-11 17:10:37.626  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.Version                              : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-11 17:10:37.657  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.c.i.RegionFactoryInitiator           : HHH000026: Second-level cache disabled
+2024-07-11 17:10:37.886  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-11 17:10:37.908  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2024-07-11 17:10:38.193  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.p.HikariPool                       : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2ae08750
+2024-07-11 17:10:38.195  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2024-07-11 17:10:39.172  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-11 17:10:39.293  INFO DESKTOP-N6VMVJ4 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-11 17:10:39.524  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.d.j.r.q.QueryEnhancerFactory         : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-07-11 17:10:40.085  WARN DESKTOP-N6VMVJ4 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-11 17:10:40.105  INFO DESKTOP-N6VMVJ4 --- [           main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-07-11 17:10:40.106  WARN DESKTOP-N6VMVJ4 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-07-11 17:10:40.591  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.h.Http11NioProtocol                : Starting ProtocolHandler ["http-nio-8080"]
+2024-07-11 17:10:40.612  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port 8080 (http) with context path '/'
+2024-07-11 17:10:40.619  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : Started PulseMusicSbApplication in 4.815 seconds (process running for 6.062)
+2024-07-11 17:10:53.389  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-11 17:10:53.389  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2024-07-11 17:10:53.390  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 1 ms
+2024-07-11 17:13:16.628  INFO DESKTOP-N6VMVJ4 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-11 17:13:16.630  INFO DESKTOP-N6VMVJ4 --- [ionShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2024-07-11 17:13:16.634  INFO DESKTOP-N6VMVJ4 --- [ionShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2024-07-11 17:13:20.573  INFO DESKTOP-N6VMVJ4 --- [kground-preinit] o.h.v.i.u.Version                        : HV000001: Hibernate Validator 8.0.1.Final
+2024-07-11 17:13:20.598  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : Starting PulseMusicSbApplication using Java 21.0.1 with PID 13160 (D:\workspace\springboot\pulse_music_sb\target\classes started by Sinon in D:\workspace\springboot\pulse_music_sb)
+2024-07-11 17:13:20.600  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : No active profile set, falling back to 1 default profile: "default"
+2024-07-11 17:13:21.192  INFO DESKTOP-N6VMVJ4 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-11 17:13:21.241  INFO DESKTOP-N6VMVJ4 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 44 ms. Found 6 JPA repository interfaces.
+2024-07-11 17:13:21.663  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port 8080 (http)
+2024-07-11 17:13:21.671  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.h.Http11NioProtocol                : Initializing ProtocolHandler ["http-nio-8080"]
+2024-07-11 17:13:21.672  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2024-07-11 17:13:21.672  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-11 17:13:21.712  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2024-07-11 17:13:21.713  INFO DESKTOP-N6VMVJ4 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 957 ms
+2024-07-11 17:13:21.814  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-11 17:13:21.857  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.Version                              : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-11 17:13:21.882  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.c.i.RegionFactoryInitiator           : HHH000026: Second-level cache disabled
+2024-07-11 17:13:22.093  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-11 17:13:22.113  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2024-07-11 17:13:22.333  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.p.HikariPool                       : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7fb5368e
+2024-07-11 17:13:22.334  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2024-07-11 17:13:23.185  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-11 17:13:23.291  INFO DESKTOP-N6VMVJ4 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-11 17:13:23.505  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.d.j.r.q.QueryEnhancerFactory         : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-07-11 17:13:23.972  WARN DESKTOP-N6VMVJ4 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-11 17:13:23.991  INFO DESKTOP-N6VMVJ4 --- [           main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-07-11 17:13:23.992  WARN DESKTOP-N6VMVJ4 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-07-11 17:13:24.368  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.h.Http11NioProtocol                : Starting ProtocolHandler ["http-nio-8080"]
+2024-07-11 17:13:24.390  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port 8080 (http) with context path '/'
+2024-07-11 17:13:24.396  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : Started PulseMusicSbApplication in 4.008 seconds (process running for 4.713)
+2024-07-11 17:13:45.058  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-11 17:13:45.058  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2024-07-11 17:13:45.059  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 1 ms
+2024-07-11 17:13:47.237  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-7] c.a.p.S.UserService                      : Fetching liked music for user with ID: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 17:13:47.258  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-7] c.a.p.S.UserService                      : Get playlist by userId: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 17:13:47.264  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-7] c.a.p.S.UserService                      : Get albums by userId: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 17:13:47.271  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-7] c.a.p.S.UserService                      : Get tracks by userId: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 17:13:58.200  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] c.a.p.S.UserService                      : Fetching liked music for user with ID: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 17:18:02.807  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-9] c.a.p.S.UserService                      : Fetching liked music for user with ID: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 17:18:03.335  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] c.a.p.S.UserService                      : Fetching all artists
+2024-07-11 17:18:03.343  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] c.a.p.S.UserService                      : Fetching liked music for user with ID: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 17:18:04.385  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-3] c.a.p.S.UserService                      : Fetching liked music for user with ID: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 17:20:13.414  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-5] c.a.p.S.UserService                      : Fetching liked music for user with ID: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 17:20:13.417  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-5] c.a.p.S.UserService                      : Get playlist by userId: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 17:20:13.421  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-5] c.a.p.S.UserService                      : Get albums by userId: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 17:20:13.427  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-5] c.a.p.S.UserService                      : Get tracks by userId: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 17:20:14.910  INFO DESKTOP-N6VMVJ4 --- [io-8080-exec-10] c.a.p.S.UserService                      : Fetching liked music for user with ID: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 17:29:19.652  INFO DESKTOP-N6VMVJ4 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-11 17:29:19.653  INFO DESKTOP-N6VMVJ4 --- [ionShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2024-07-11 17:29:19.658  INFO DESKTOP-N6VMVJ4 --- [ionShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2024-07-11 17:29:23.857  INFO DESKTOP-N6VMVJ4 --- [kground-preinit] o.h.v.i.u.Version                        : HV000001: Hibernate Validator 8.0.1.Final
+2024-07-11 17:29:23.869  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : Starting PulseMusicSbApplication using Java 21.0.1 with PID 10232 (D:\workspace\springboot\pulse_music_sb\target\classes started by Sinon in D:\workspace\springboot\pulse_music_sb)
+2024-07-11 17:29:23.872  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : No active profile set, falling back to 1 default profile: "default"
+2024-07-11 17:29:24.452  INFO DESKTOP-N6VMVJ4 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-11 17:29:24.500  INFO DESKTOP-N6VMVJ4 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 44 ms. Found 6 JPA repository interfaces.
+2024-07-11 17:29:24.921  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port 8080 (http)
+2024-07-11 17:29:24.928  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.h.Http11NioProtocol                : Initializing ProtocolHandler ["http-nio-8080"]
+2024-07-11 17:29:24.930  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2024-07-11 17:29:24.930  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-11 17:29:24.970  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2024-07-11 17:29:24.971  INFO DESKTOP-N6VMVJ4 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 952 ms
+2024-07-11 17:29:25.077  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-11 17:29:25.116  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.Version                              : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-11 17:29:25.141  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.c.i.RegionFactoryInitiator           : HHH000026: Second-level cache disabled
+2024-07-11 17:29:25.345  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-11 17:29:25.364  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2024-07-11 17:29:25.595  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.p.HikariPool                       : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@73d7d676
+2024-07-11 17:29:25.596  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2024-07-11 17:29:26.455  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-11 17:29:26.755  INFO DESKTOP-N6VMVJ4 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-11 17:29:26.935  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.d.j.r.q.QueryEnhancerFactory         : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-07-11 17:29:27.429  WARN DESKTOP-N6VMVJ4 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-11 17:29:27.448  INFO DESKTOP-N6VMVJ4 --- [           main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-07-11 17:29:27.448  WARN DESKTOP-N6VMVJ4 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-07-11 17:29:27.845  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.h.Http11NioProtocol                : Starting ProtocolHandler ["http-nio-8080"]
+2024-07-11 17:29:27.858  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port 8080 (http) with context path '/'
+2024-07-11 17:29:27.863  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : Started PulseMusicSbApplication in 4.212 seconds (process running for 4.924)
+2024-07-11 17:36:02.069  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-11 17:36:02.069  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2024-07-11 17:36:02.070  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 1 ms
+2024-07-11 20:52:59.626  WARN DESKTOP-N6VMVJ4 --- [l-1 housekeeper] c.z.h.p.HikariPool                       : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=26m1s121ms821µs800ns).
+2024-07-11 21:49:26.140  INFO DESKTOP-N6VMVJ4 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-11 21:49:26.144  INFO DESKTOP-N6VMVJ4 --- [ionShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2024-07-11 21:49:26.148  INFO DESKTOP-N6VMVJ4 --- [ionShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2024-07-11 21:49:31.417  INFO DESKTOP-N6VMVJ4 --- [kground-preinit] o.h.v.i.u.Version                        : HV000001: Hibernate Validator 8.0.1.Final
+2024-07-11 21:49:31.448  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : Starting PulseMusicSbApplication using Java 21.0.1 with PID 13576 (D:\workspace\springboot\pulse_music_sb\target\classes started by Sinon in D:\workspace\springboot\pulse_music_sb)
+2024-07-11 21:49:31.450  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : No active profile set, falling back to 1 default profile: "default"
+2024-07-11 21:49:32.142  INFO DESKTOP-N6VMVJ4 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-11 21:49:32.199  INFO DESKTOP-N6VMVJ4 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 52 ms. Found 6 JPA repository interfaces.
+2024-07-11 21:49:32.684  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port 8080 (http)
+2024-07-11 21:49:32.694  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.h.Http11NioProtocol                : Initializing ProtocolHandler ["http-nio-8080"]
+2024-07-11 21:49:32.695  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2024-07-11 21:49:32.695  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-11 21:49:32.751  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2024-07-11 21:49:32.752  INFO DESKTOP-N6VMVJ4 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1110 ms
+2024-07-11 21:49:32.871  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-11 21:49:32.950  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.Version                              : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-11 21:49:32.986  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.c.i.RegionFactoryInitiator           : HHH000026: Second-level cache disabled
+2024-07-11 21:49:33.291  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-11 21:49:33.321  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2024-07-11 21:49:33.674  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.p.HikariPool                       : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4eacb6d1
+2024-07-11 21:49:33.676  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2024-07-11 21:49:34.824  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-11 21:49:34.985  INFO DESKTOP-N6VMVJ4 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-11 21:49:35.176  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.d.j.r.q.QueryEnhancerFactory         : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-07-11 21:49:35.745  WARN DESKTOP-N6VMVJ4 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-11 21:49:35.768  INFO DESKTOP-N6VMVJ4 --- [           main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-07-11 21:49:35.768  WARN DESKTOP-N6VMVJ4 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-07-11 21:49:36.194  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.h.Http11NioProtocol                : Starting ProtocolHandler ["http-nio-8080"]
+2024-07-11 21:49:36.212  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port 8080 (http) with context path '/'
+2024-07-11 21:49:36.219  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : Started PulseMusicSbApplication in 5.031 seconds (process running for 5.939)
+2024-07-11 21:50:02.572  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-11 21:50:02.573  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2024-07-11 21:50:02.573  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 0 ms
+2024-07-11 21:50:06.407  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-7] c.a.p.S.UserService                      : Fetching liked music for user with ID: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 21:57:01.823  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-8] c.a.p.S.UserService                      : Fetching liked music for user with ID: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 21:57:01.829  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-8] c.a.p.S.UserService                      : Get playlist by userId: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 21:57:01.838  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-8] c.a.p.S.UserService                      : Get albums by userId: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 21:57:01.847  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-8] c.a.p.S.UserService                      : Get tracks by userId: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:00:51.257  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-9] c.a.p.S.UserService                      : Fetching liked music for user with ID: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:00:51.669  INFO DESKTOP-N6VMVJ4 --- [io-8080-exec-10] c.a.p.S.UserService                      : Fetching liked music for user with ID: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:00:52.687  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-5] c.a.p.S.UserService                      : Fetching all artists
+2024-07-11 22:00:52.699  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-5] c.a.p.S.UserService                      : Fetching liked music for user with ID: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:00:53.092  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-3] c.a.p.S.UserService                      : Fetching liked music for user with ID: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:00:54.841  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-7] c.a.p.S.UserService                      : Fetching liked music for user with ID: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:00:54.843  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-7] c.a.p.S.UserService                      : Get playlist by userId: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:00:54.846  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-7] c.a.p.S.UserService                      : Get albums by userId: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:00:54.851  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-7] c.a.p.S.UserService                      : Get tracks by userId: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:00:58.781  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-9] c.a.p.S.UserService                      : Fetching liked music for user with ID: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:00:58.783  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-9] c.a.p.S.UserService                      : Get playlist by userId: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:00:58.786  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-9] c.a.p.S.UserService                      : Get albums by userId: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:00:58.790  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-9] c.a.p.S.UserService                      : Get tracks by userId: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:09:57.754  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-4] c.a.p.S.UserService                      : Fetching liked music for user with ID: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:09:57.757  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-4] c.a.p.S.UserService                      : Get playlist by userId: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:09:57.760  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-4] c.a.p.S.UserService                      : Get albums by userId: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:09:57.764  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-4] c.a.p.S.UserService                      : Get tracks by userId: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:09:59.421  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] c.a.p.S.UserService                      : Fetching liked music for user with ID: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:09:59.424  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] c.a.p.S.UserService                      : Get playlist by userId: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:09:59.426  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] c.a.p.S.UserService                      : Get albums by userId: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:09:59.430  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] c.a.p.S.UserService                      : Get tracks by userId: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:10:15.347  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-7] c.a.p.S.UserService                      : Fetching liked music for user with ID: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:10:16.987  INFO DESKTOP-N6VMVJ4 --- [io-8080-exec-10] c.a.p.S.UserService                      : Fetching liked music for user with ID: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:10:26.144  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] c.a.p.S.UserService                      : Fetching liked music for user with ID: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:10:41.297  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-6] c.a.p.S.UserService                      : Fetching liked music for user with ID: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:10:47.062  INFO DESKTOP-N6VMVJ4 --- [nio-8080-exec-1] c.a.p.S.UserService                      : Fetching liked music for user with ID: 7147f343-3455-4f1a-b514-6e658ba46a3c
+2024-07-11 22:30:37.183  INFO DESKTOP-N6VMVJ4 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-11 22:30:37.185  INFO DESKTOP-N6VMVJ4 --- [ionShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2024-07-11 22:30:37.187  INFO DESKTOP-N6VMVJ4 --- [ionShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2024-07-11 22:30:40.598  INFO DESKTOP-N6VMVJ4 --- [kground-preinit] o.h.v.i.u.Version                        : HV000001: Hibernate Validator 8.0.1.Final
+2024-07-11 22:30:40.625  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : Starting PulseMusicSbApplication using Java 21.0.1 with PID 972 (D:\workspace\springboot\pulse_music_sb\target\classes started by Sinon in D:\workspace\springboot\pulse_music_sb)
+2024-07-11 22:30:40.627  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : No active profile set, falling back to 1 default profile: "default"
+2024-07-11 22:30:41.289  INFO DESKTOP-N6VMVJ4 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-11 22:30:41.340  INFO DESKTOP-N6VMVJ4 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 48 ms. Found 6 JPA repository interfaces.
+2024-07-11 22:30:41.814  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port 8080 (http)
+2024-07-11 22:30:41.823  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.h.Http11NioProtocol                : Initializing ProtocolHandler ["http-nio-8080"]
+2024-07-11 22:30:41.825  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2024-07-11 22:30:41.825  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-11 22:30:41.872  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2024-07-11 22:30:41.873  INFO DESKTOP-N6VMVJ4 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1058 ms
+2024-07-11 22:30:41.986  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-11 22:30:42.061  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.Version                              : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-11 22:30:42.099  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.c.i.RegionFactoryInitiator           : HHH000026: Second-level cache disabled
+2024-07-11 22:30:42.342  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-11 22:30:42.366  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2024-07-11 22:30:42.685  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.p.HikariPool                       : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4b9ed99d
+2024-07-11 22:30:42.686  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2024-07-11 22:30:42.965 ERROR DESKTOP-N6VMVJ4 --- [           main] j.LocalContainerEntityManagerFactoryBean : Failed to initialize JPA EntityManagerFactory: Could not determine recommended JdbcType for Java type 'com.app.pulse_music_sb.Models.CloudStorage'
+2024-07-11 22:30:42.966  WARN DESKTOP-N6VMVJ4 --- [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Could not determine recommended JdbcType for Java type 'com.app.pulse_music_sb.Models.CloudStorage'
+2024-07-11 22:30:42.966  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2024-07-11 22:30:42.986  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2024-07-11 22:30:42.988  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.StandardService                  : Stopping service [Tomcat]
+2024-07-11 22:30:42.996  INFO DESKTOP-N6VMVJ4 --- [           main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-07-11 22:30:43.009 ERROR DESKTOP-N6VMVJ4 --- [           main] o.s.b.SpringApplication                  : Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Could not determine recommended JdbcType for Java type 'com.app.pulse_music_sb.Models.CloudStorage'
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1788)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:205)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:952)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
+	at com.app.pulse_music_sb.PulseMusicSbApplication.main(PulseMusicSbApplication.java:26)
+Caused by: org.hibernate.type.descriptor.java.spi.JdbcTypeRecommendationException: Could not determine recommended JdbcType for Java type 'com.app.pulse_music_sb.Models.CloudStorage'
+	at org.hibernate.type.descriptor.java.spi.UnknownBasicJavaType.getRecommendedJdbcType(UnknownBasicJavaType.java:50)
+	at org.hibernate.boot.model.process.internal.InferredBasicValueResolver.from(InferredBasicValueResolver.java:195)
+	at org.hibernate.mapping.BasicValue.resolution(BasicValue.java:647)
+	at org.hibernate.mapping.BasicValue.buildResolution(BasicValue.java:498)
+	at org.hibernate.mapping.BasicValue.resolve(BasicValue.java:350)
+	at org.hibernate.mapping.BasicValue.resolve(BasicValue.java:340)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.lambda$processValueResolvers$4(InFlightMetadataCollectorImpl.java:1796)
+	at java.base/java.util.ArrayList.removeIf(ArrayList.java:1765)
+	at java.base/java.util.ArrayList.removeIf(ArrayList.java:1743)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processValueResolvers(InFlightMetadataCollectorImpl.java:1795)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1781)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:334)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1431)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1502)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1835)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1784)
+	... 15 more
+2024-07-11 22:38:22.179  INFO DESKTOP-N6VMVJ4 --- [kground-preinit] o.h.v.i.u.Version                        : HV000001: Hibernate Validator 8.0.1.Final
+2024-07-11 22:38:22.204  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : Starting PulseMusicSbApplication using Java 21.0.1 with PID 11364 (D:\workspace\springboot\pulse_music_sb\target\classes started by Sinon in D:\workspace\springboot\pulse_music_sb)
+2024-07-11 22:38:22.206  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : No active profile set, falling back to 1 default profile: "default"
+2024-07-11 22:38:22.823  INFO DESKTOP-N6VMVJ4 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-11 22:38:22.875  INFO DESKTOP-N6VMVJ4 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 47 ms. Found 6 JPA repository interfaces.
+2024-07-11 22:38:23.309  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port 8080 (http)
+2024-07-11 22:38:23.318  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.h.Http11NioProtocol                : Initializing ProtocolHandler ["http-nio-8080"]
+2024-07-11 22:38:23.319  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2024-07-11 22:38:23.319  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-11 22:38:23.362  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2024-07-11 22:38:23.362  INFO DESKTOP-N6VMVJ4 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 991 ms
+2024-07-11 22:38:23.470  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-11 22:38:23.510  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.Version                              : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-11 22:38:23.535  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.c.i.RegionFactoryInitiator           : HHH000026: Second-level cache disabled
+2024-07-11 22:38:23.744  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-11 22:38:23.765  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2024-07-11 22:38:23.998  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.p.HikariPool                       : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@25c548d1
+2024-07-11 22:38:23.999  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2024-07-11 22:38:24.974  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-11 22:38:26.998  INFO DESKTOP-N6VMVJ4 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-11 22:38:27.179  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.d.j.r.q.QueryEnhancerFactory         : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-07-11 22:38:27.710  WARN DESKTOP-N6VMVJ4 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-11 22:38:27.732  INFO DESKTOP-N6VMVJ4 --- [           main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-07-11 22:38:27.733  WARN DESKTOP-N6VMVJ4 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-07-11 22:38:28.128  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.h.Http11NioProtocol                : Starting ProtocolHandler ["http-nio-8080"]
+2024-07-11 22:38:28.141  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port 8080 (http) with context path '/'
+2024-07-11 22:38:28.146  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : Started PulseMusicSbApplication in 6.157 seconds (process running for 6.873)
+2024-07-11 22:39:47.011  INFO DESKTOP-N6VMVJ4 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-11 22:39:47.012  INFO DESKTOP-N6VMVJ4 --- [ionShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2024-07-11 22:39:47.017  INFO DESKTOP-N6VMVJ4 --- [ionShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2024-07-11 22:39:51.363  INFO DESKTOP-N6VMVJ4 --- [kground-preinit] o.h.v.i.u.Version                        : HV000001: Hibernate Validator 8.0.1.Final
+2024-07-11 22:39:51.394  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : Starting PulseMusicSbApplication using Java 21.0.1 with PID 20228 (D:\workspace\springboot\pulse_music_sb\target\classes started by Sinon in D:\workspace\springboot\pulse_music_sb)
+2024-07-11 22:39:51.397  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : No active profile set, falling back to 1 default profile: "default"
+2024-07-11 22:39:52.043  INFO DESKTOP-N6VMVJ4 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-11 22:39:52.104  INFO DESKTOP-N6VMVJ4 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 55 ms. Found 6 JPA repository interfaces.
+2024-07-11 22:39:52.576  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port 8080 (http)
+2024-07-11 22:39:52.585  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.h.Http11NioProtocol                : Initializing ProtocolHandler ["http-nio-8080"]
+2024-07-11 22:39:52.586  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2024-07-11 22:39:52.586  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-11 22:39:52.631  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2024-07-11 22:39:52.631  INFO DESKTOP-N6VMVJ4 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1052 ms
+2024-07-11 22:39:52.743  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-11 22:39:52.790  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.Version                              : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-11 22:39:52.818  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.c.i.RegionFactoryInitiator           : HHH000026: Second-level cache disabled
+2024-07-11 22:39:53.024  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-11 22:39:53.044  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2024-07-11 22:39:53.263  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.p.HikariPool                       : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@96dfcbb
+2024-07-11 22:39:53.265  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2024-07-11 22:39:54.167  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-11 22:39:54.320  INFO DESKTOP-N6VMVJ4 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-11 22:39:54.503  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.d.j.r.q.QueryEnhancerFactory         : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-07-11 22:39:55.032  WARN DESKTOP-N6VMVJ4 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-11 22:39:55.052  INFO DESKTOP-N6VMVJ4 --- [           main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-07-11 22:39:55.053  WARN DESKTOP-N6VMVJ4 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-07-11 22:39:55.453  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.h.Http11NioProtocol                : Starting ProtocolHandler ["http-nio-8080"]
+2024-07-11 22:39:55.472  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port 8080 (http) with context path '/'
+2024-07-11 22:39:55.478  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : Started PulseMusicSbApplication in 4.341 seconds (process running for 5.177)
+2024-07-11 23:04:56.016  INFO DESKTOP-N6VMVJ4 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-11 23:04:56.017  INFO DESKTOP-N6VMVJ4 --- [ionShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2024-07-11 23:04:56.021  INFO DESKTOP-N6VMVJ4 --- [ionShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2024-07-11 23:05:00.253  INFO DESKTOP-N6VMVJ4 --- [kground-preinit] o.h.v.i.u.Version                        : HV000001: Hibernate Validator 8.0.1.Final
+2024-07-11 23:05:00.279  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : Starting PulseMusicSbApplication using Java 21.0.1 with PID 19820 (D:\workspace\springboot\pulse_music_sb\target\classes started by Sinon in D:\workspace\springboot\pulse_music_sb)
+2024-07-11 23:05:00.282  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : No active profile set, falling back to 1 default profile: "default"
+2024-07-11 23:05:00.969  INFO DESKTOP-N6VMVJ4 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-11 23:05:01.038  INFO DESKTOP-N6VMVJ4 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 63 ms. Found 6 JPA repository interfaces.
+2024-07-11 23:05:01.517  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port 8080 (http)
+2024-07-11 23:05:01.526  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.h.Http11NioProtocol                : Initializing ProtocolHandler ["http-nio-8080"]
+2024-07-11 23:05:01.528  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2024-07-11 23:05:01.528  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-11 23:05:01.574  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2024-07-11 23:05:01.574  INFO DESKTOP-N6VMVJ4 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1124 ms
+2024-07-11 23:05:01.680  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-11 23:05:01.719  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.Version                              : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-11 23:05:01.744  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.c.i.RegionFactoryInitiator           : HHH000026: Second-level cache disabled
+2024-07-11 23:05:01.968  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-11 23:05:01.988  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2024-07-11 23:05:02.217  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.p.HikariPool                       : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7df5549e
+2024-07-11 23:05:02.218  INFO DESKTOP-N6VMVJ4 --- [           main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2024-07-11 23:05:03.216  INFO DESKTOP-N6VMVJ4 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-11 23:05:05.563  INFO DESKTOP-N6VMVJ4 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-11 23:05:05.756  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.d.j.r.q.QueryEnhancerFactory         : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-07-11 23:05:06.282  WARN DESKTOP-N6VMVJ4 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-11 23:05:06.310  INFO DESKTOP-N6VMVJ4 --- [           main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-07-11 23:05:06.311  WARN DESKTOP-N6VMVJ4 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-07-11 23:05:06.720  INFO DESKTOP-N6VMVJ4 --- [           main] o.a.c.h.Http11NioProtocol                : Starting ProtocolHandler ["http-nio-8080"]
+2024-07-11 23:05:06.732  INFO DESKTOP-N6VMVJ4 --- [           main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port 8080 (http) with context path '/'
+2024-07-11 23:05:06.738  INFO DESKTOP-N6VMVJ4 --- [           main] c.a.p.PulseMusicSbApplication            : Started PulseMusicSbApplication in 6.685 seconds (process running for 7.429)

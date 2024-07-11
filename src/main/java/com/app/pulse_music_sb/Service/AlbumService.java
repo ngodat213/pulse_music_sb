@@ -24,7 +24,7 @@ public class AlbumService implements IAlbumService {
     @Autowired
     private UserService userService;
     @Autowired
-    private IMusicTypeService musicTypeServiceImpl;
+    private MusicTypeService musicTypeServiceImpl;
     @Autowired
     private MusicService musicServiceImpl;
     @Autowired

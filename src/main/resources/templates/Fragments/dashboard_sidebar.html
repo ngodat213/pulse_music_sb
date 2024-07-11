@@ -21,6 +21,7 @@
             </a>
             <ul>
                 <li th:if="${#authentication.principal.isAdmin()}"><a th:href="@{/dashboard/user_table}">User</a></li>
+                <li th:if="${#authentication.principal.isAdmin()}"><a th:href="@{/dashboard/available_plan}">Available Plan</a></li>
                 <li><a th:href="@{/dashboard/music_table}">Music</a></li>
                 <li><a th:href="@{/dashboard/music_type_table}">Music type</a></li>
                 <li><a th:href="@{/dashboard/album_table}">Album</a></li>

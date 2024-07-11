@@ -5,6 +5,7 @@ import com.app.pulse_music_sb.Const.ToastConstants;
 import com.app.pulse_music_sb.Models.*;
 import com.app.pulse_music_sb.Request.Request.*;
 import com.app.pulse_music_sb.Service.Interface.IAlbumService;
+import com.app.pulse_music_sb.Service.Interface.IAvailablePlanService;
 import com.app.pulse_music_sb.Service.Interface.IMusicService;
 import com.app.pulse_music_sb.Service.Interface.IMusicTypeService;
 import com.app.pulse_music_sb.Service.UserService;
@@ -33,6 +34,8 @@ public class AdminController {
     private IMusicTypeService musicTypeService;
     @Autowired
     private IAlbumService albumService;
+    @Autowired
+    private IAvailablePlanService availablePlanService;
 
     @GetMapping("")
     public String dashboard (){
@@ -96,8 +99,30 @@ public class AdminController {
         return "Layouts/Dashboard/album_table";
     }
 
+    @GetMapping("/available_plan")
+    public String available_plan(@AuthenticationPrincipal CustomUserDetails customUserDetail,
+                              @RequestParam(defaultValue = "1") int page,
+                              @RequestParam(defaultValue = "10") int limit,
+                              @RequestParam(defaultValue = "desc", name = "sort") String sortDirection,
+                              @RequestParam(defaultValue = "createdAt") String sortBy,
+                              Model model){
+        PaginationDTO paginationDTO = new PaginationDTO(page, limit, sortDirection, sortBy);
+        model.addAttribute("createAvailablePlan", new AvailablePlan());
+        model.addAttribute("availablePlans", availablePlanService.findAll());
+        return "Layouts/Dashboard/available_plan";
+    }
+
     // API
     // ----------------------==ALBUM==---------------------- //
+    @PostMapping("/available_plan")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> createAvailablePlan(@Valid @ModelAttribute AvailablePlan availablePlan) {
+        Map<String, Object> response = new HashMap<>();
+        availablePlanService.save(availablePlan);
+        response.put(ErrorConstants.status,ErrorConstants.statusSuccess);
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("/album_table/{id}")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> getAlbumById(@PathVariable String id) {

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<div id="modalss" class="modalss" th:fragment="modal_plans">
+    <div class="modalss-contents">
+        <span class="closes-btns">&times;</span>
+        <h2>Available plans</h2>
+        <div class="plans">
+            <div class="plans-headers" th:text="${availablePlan.title}">
+                Premium Student
+            </div>
+            <ul>
+                <li th:text="${availablePlan.description}">1 verified Premium account</li>
+
+            </ul>
+            <div class="plans-footers">
+                <div class="pricess" th:text="${availablePlan.price}"> <span th:text="${availablePlan.expireType.getExpireTypeType()}"></span></div>
+                <form th:action="@{/vnpay/submitOrder}" method="post">
+                    <input type="hidden" id="amount" name="amount" th:value="${availablePlan.price}" required/>
+                    <input type="hidden" id="orderInfo" name="orderInfo" th:value="${availablePlan.title}" required/>
+                    <button type="submit">Select</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

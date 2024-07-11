@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class IMusicTypeService implements com.app.pulse_music_sb.Service.Interface.IMusicTypeService {
+public class MusicTypeService implements com.app.pulse_music_sb.Service.Interface.IMusicTypeService {
     @Autowired
     private MusicTypeRepository musicTypeRepository;
     @Autowired
