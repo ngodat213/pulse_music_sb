@@ -5,6 +5,8 @@ import com.app.pulse_music_sb.Request.Request.RequestRegisterUser;
 import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Service.MailService;
 import com.app.pulse_music_sb.Service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AuthController {
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+
     @Autowired
     private UserService userService;
     @Autowired
@@ -26,6 +30,7 @@ public class AuthController {
      */
     @GetMapping("/register")
     public String Register(Model model){
+        logger.debug("Accessing register page");
         model.addAttribute("registerUser", new RequestRegisterUser());
         return "Layouts/Auth/Register";
     }
@@ -36,6 +41,7 @@ public class AuthController {
      */
     @PostMapping("/register_submit")
     public String CreateUser(RequestRegisterUser registerUser){
+        logger.debug("Registering new user: {}", registerUser.getEmail());
         userService.register(registerUser);
         return "redirect:/login";
     }
@@ -46,6 +52,7 @@ public class AuthController {
      */
     @GetMapping("/login")
     public String Login(){
+        logger.debug("Accessing login page");
         return "Layouts/Auth/Login";
     }
 
@@ -55,6 +62,7 @@ public class AuthController {
      */
     @GetMapping("/me")
     public String GetCurrentUser(@AuthenticationPrincipal CustomUserDetails customUserDetail, Model model){
+        logger.debug("Accessing current user page");
         User user = userService.currentUser();
         model.addAttribute("user", user);
         return "Layouts/Auth/Me";
@@ -66,6 +74,7 @@ public class AuthController {
      */
     @GetMapping("/change_password")
     public String  ChangePassword(@AuthenticationPrincipal CustomUserDetails customUserDetail, Model model){
+        logger.debug("Accessing change password page for user: {}", customUserDetail.getUsername());
         model.addAttribute("user", customUserDetail.getUser());
         return "Layout/Auth/changepassword";
     }
@@ -78,6 +87,7 @@ public class AuthController {
     public String SavePassword(@AuthenticationPrincipal CustomUserDetails customUserDetail,
                                @RequestParam("oldpassword") String oldPassword,
                                @RequestParam("newpassword") String newpassword){
+        logger.debug("Changing password for user: {}", customUserDetail.getUsername());
         User user = customUserDetail.getUser();
         if(userService.checkOldPassword(user, oldPassword)){
             userService.UpdatePassword(user, newpassword);
@@ -93,6 +103,7 @@ public class AuthController {
      */
     @GetMapping("forgot_password")
     public String ForgotPassword(){
+        logger.debug("Accessing forgot password page");
         return "Layouts/Auth/forgot_password";
     }
 
@@ -102,6 +113,7 @@ public class AuthController {
      */
     @PostMapping("/forgot_password")
     public String ForgotPassword(@RequestParam("email") String email){
+        logger.debug("Processing forgot password for email: {}", email);
         User user = userService.getUserByEmail(email);
         if(user != null){
             String token = userService.GenTokenResetPassword(user);
@@ -117,6 +129,7 @@ public class AuthController {
      */
     @GetMapping("/reset_password")
     public String ResetPassword(@RequestParam("token") String token,Model model){
+        logger.debug("Accessing reset password page with token: {}", token);
         User user = userService.getUserByToken(token);
         if(user != null){
             model.addAttribute("user", user);
@@ -132,6 +145,7 @@ public class AuthController {
     public String ResetPassword_Save(@RequestParam("email") String email,
                                      @RequestParam("password") String password,
                                      @RequestParam("confirm_password") String confirmPassword){
+        logger.debug("Resetting password for email: {}", email);
         if(!password.equals(confirmPassword)){
             return "redirect:/reset_password?error";
         }

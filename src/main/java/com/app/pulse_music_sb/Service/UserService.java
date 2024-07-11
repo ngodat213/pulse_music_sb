@@ -9,6 +9,8 @@ import com.app.pulse_music_sb.Exceptions.ResourceNotFoundException;
 import com.app.pulse_music_sb.Repository.UserRepository;
 import com.app.pulse_music_sb.Request.DTO.PaginationDTO;
 import com.app.pulse_music_sb.Service.Interface.IUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -29,6 +31,8 @@ import java.util.List;
 @Transactional
 public class UserService implements IUserService {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -42,48 +46,57 @@ public class UserService implements IUserService {
 
     @Override
     public List<User> getAll(PaginationDTO paginationDTO) {
+        logger.info("Fetching all users with pagination: {}", paginationDTO);
         Pageable pageable = paginationService.getPageable(paginationDTO);
         return userRepository.findAll(pageable).toList();
     }
 
     @Override
     public List<User> getArtists(){
+        logger.info("Fetching all artists");
         return userRepository.findAllByRole(UserRole.ARTIST);
     }
 
     @Override
     public List<Music> getUserLikedMusic(String userId) {
+        logger.info("Fetching liked music for user with ID: {}", userId);
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         return user.getUserLiked();
     }
 
     @Override
     public List<User> searchArtist(String query) {
+        logger.info("Search artist by query: {}", query);
         return userRepository.searchArtist(query);
     }
 
     @Override
     public List<Music> getMusicPopulars(User user) {
+        logger.info("Get music popular by user: {}", user);
         return userRepository.findTop4ByUserIdOrderByPlayCountDesc(user.getId());
     }
 
     @Override
     public List<Album> getAlbumsByUserId(String userId) {
+        logger.info("Get albums by userId: {}", userId);
         return userRepository.findAllAlbumsByUserId(userId);
     }
 
     @Override
     public List<Music> getTracksByUserId(String userId) {
+        logger.info("Get tracks by userId: {}", userId);
         return userRepository.findAllTracksByUserId(userId);
     }
 
     @Override
     public List<Playlist> getPlaylistsByUserId(String userId) {
+        logger.info("Get playlist by userId: {}", userId);
         return userRepository.findAllPlaylistsByUserId(userId);
     }
 
     @Override
     public User updateAvatarAndFullName(String userId, String fullName, MultipartFile file) {
+        logger.info("Update avatar and fullName by userId: {}, fullName: {}, file: {}", userId, fullName, file);
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         if(user.getAvatar() != null){
             cloudService.deleteProductImage(user.getAvatar().getPublicId());
@@ -96,6 +109,7 @@ public class UserService implements IUserService {
 
     @Override
     public boolean setFavorite(String userId, String musicID) {
+        logger.info("Setting favorite music with ID: {} for user with ID: {}", musicID, userId);
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         Music music = musicRepository.findById(musicID).orElseThrow(() -> new RuntimeException("Music not found"));
         List<Music> likes = user.getUserLiked();
@@ -114,6 +128,7 @@ public class UserService implements IUserService {
 
     @Override
     public User likeMusic(String userId, String musicId) {
+        logger.info("Like music for user with music id: {} for user with ID: {}", userId, musicId);
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         Music music = musicRepository.findById(musicId).orElseThrow(() -> new RuntimeException("Music not found"));
         user.getUserLiked().add(music);
@@ -137,6 +152,7 @@ public class UserService implements IUserService {
 
     @Override
     public User register(RequestRegisterUser req) {
+        logger.info("Register user for RequestRegisterUser: {}", req);
         if(!userRepository.existsByEmail(req.getEmail()) && !req.getPassword().isEmpty()){
             if(checkPassword(req.getPassword(), req.getConfirmPassword())) {
                 req.setPassword(encodePassword(req.getPassword()));
@@ -168,6 +184,7 @@ public class UserService implements IUserService {
 
     @Override
     public User currentUser() {
+        logger.info("Get current user");
         if(!isAuthenticated()){
             return null;
         }
@@ -199,6 +216,7 @@ public class UserService implements IUserService {
 
     @Override
     public boolean handleLockUser(String id) {
+        logger.info("Handle lock user by id: {}", id);
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("The user with id [%s] not exists"
                         .formatted(id)));

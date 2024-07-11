@@ -1,0 +1,57 @@
+2024-07-11 16:48:49 - Starting PulseMusicSbApplication using Java 21.0.1 with PID 15432 (D:\workspace\springboot\pulse_music_sb\target\classes started by Sinon in D:\workspace\springboot\pulse_music_sb)
+2024-07-11 16:48:49 - No active profile set, falling back to 1 default profile: "default"
+2024-07-11 16:48:50 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-11 16:48:50 - Finished Spring Data repository scanning in 53 ms. Found 6 JPA repository interfaces.
+2024-07-11 16:48:51 - Tomcat initialized with port 8080 (http)
+2024-07-11 16:48:51 - Starting service [Tomcat]
+2024-07-11 16:48:51 - Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-11 16:48:51 - Initializing Spring embedded WebApplicationContext
+2024-07-11 16:48:51 - Root WebApplicationContext: initialization completed in 1231 ms
+2024-07-11 16:48:51 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-11 16:48:51 - HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-11 16:48:51 - HHH000026: Second-level cache disabled
+2024-07-11 16:48:51 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-11 16:48:51 - HikariPool-1 - Starting...
+2024-07-11 16:48:51 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@128a188a
+2024-07-11 16:48:51 - HikariPool-1 - Start completed.
+2024-07-11 16:48:52 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-11 16:48:52 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-11 16:48:53 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-07-11 16:48:53 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-11 16:48:53 - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-07-11 16:48:53 - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-07-11 16:48:54 - Tomcat started on port 8080 (http) with context path '/'
+2024-07-11 16:48:54 - Started PulseMusicSbApplication in 4.986 seconds (process running for 5.534)
+2024-07-11 16:49:11 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-11 16:49:11 - Initializing Servlet 'dispatcherServlet'
+2024-07-11 16:49:11 - Completed initialization in 0 ms
+2024-07-11 16:52:41 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-11 16:52:41 - HikariPool-1 - Shutdown initiated...
+2024-07-11 16:52:41 - HikariPool-1 - Shutdown completed.
+2024-07-11 16:52:42 - Starting PulseMusicSbApplication using Java 21.0.1 with PID 13120 (D:\workspace\springboot\pulse_music_sb\target\classes started by Sinon in D:\workspace\springboot\pulse_music_sb)
+2024-07-11 16:52:42 - No active profile set, falling back to 1 default profile: "default"
+2024-07-11 16:52:43 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-11 16:52:43 - Finished Spring Data repository scanning in 50 ms. Found 6 JPA repository interfaces.
+2024-07-11 16:52:44 - Tomcat initialized with port 8080 (http)
+2024-07-11 16:52:44 - Starting service [Tomcat]
+2024-07-11 16:52:44 - Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-11 16:52:44 - Initializing Spring embedded WebApplicationContext
+2024-07-11 16:52:44 - Root WebApplicationContext: initialization completed in 1047 ms
+2024-07-11 16:52:44 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-11 16:52:44 - HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-11 16:52:44 - HHH000026: Second-level cache disabled
+2024-07-11 16:52:44 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-11 16:52:44 - HikariPool-1 - Starting...
+2024-07-11 16:52:44 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6df31abf
+2024-07-11 16:52:44 - HikariPool-1 - Start completed.
+2024-07-11 16:52:45 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-11 16:52:45 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-11 16:52:45 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-07-11 16:52:46 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-11 16:52:46 - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-07-11 16:52:46 - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-07-11 16:52:46 - Tomcat started on port 8080 (http) with context path '/'
+2024-07-11 16:52:46 - Started PulseMusicSbApplication in 4.188 seconds (process running for 4.736)
+2024-07-11 16:56:26 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-11 16:56:26 - HikariPool-1 - Shutdown initiated...
+2024-07-11 16:56:26 - HikariPool-1 - Shutdown completed.
