@@ -2,6 +2,7 @@ package com.app.pulse_music_sb.Models;
 import com.app.pulse_music_sb.Const.Constants;
 import com.app.pulse_music_sb.Enums.LoginType;
 import com.app.pulse_music_sb.Enums.UserRole;
+import com.app.pulse_music_sb.Enums.UserType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -57,6 +58,13 @@ public class User{
     @Enumerated(EnumType.STRING)
     private LoginType loginType;
 
+    @Enumerated(EnumType.STRING)
+    private UserType userType;
+    private LocalDateTime premiumExpired;
+
+
+    private int countMusic;
+
     @CreatedDate
     private LocalDateTime createdAt;
 
@@ -79,6 +87,10 @@ public class User{
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Music> tracks = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<Invoice> invoices = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")

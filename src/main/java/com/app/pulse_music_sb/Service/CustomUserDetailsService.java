@@ -2,6 +2,7 @@ package com.app.pulse_music_sb.Service;
 
 import com.app.pulse_music_sb.Enums.LoginType;
 import com.app.pulse_music_sb.Enums.UserRole;
+import com.app.pulse_music_sb.Enums.UserType;
 import com.app.pulse_music_sb.Models.CustomUserDetails;
 import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Repository.UserRepository;
@@ -64,6 +65,7 @@ public class CustomUserDetailsService extends DefaultOAuth2UserService implement
         user.setFullName(oAuth2User.getAttribute("name"));
         user.setLoginType(loginType);
         user.setRole(UserRole.USER);
+        user.setUserType(UserType.NORMAL);
         return userRepository.save(user);
     }
 }
