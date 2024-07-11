@@ -5,6 +5,7 @@ import com.app.pulse_music_sb.Models.Music;
 import com.app.pulse_music_sb.Models.MusicType;
 import com.app.pulse_music_sb.Models.User;
 import com.app.pulse_music_sb.Repository.MusicRepository;
+import com.app.pulse_music_sb.Repository.MusicTypeRepository;
 import com.app.pulse_music_sb.Request.DTO.PlaylistTrackDTO;
 import com.app.pulse_music_sb.Request.Request.RequestCreateMusic;
 import com.app.pulse_music_sb.Request.Request.RequestMusicTypes;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -34,6 +36,8 @@ public class MusicService implements IMusicService {
     private CloudService cloudService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private MusicTypeRepository typeRepository;
 
     @Override
     public Page<Music> findAllBy(PaginationDTO paginationDTO) {
@@ -44,6 +48,21 @@ public class MusicService implements IMusicService {
     @Override
     public List<Music> findAll() {
         return musicRepository.findAll();
+    }
+
+    @Override
+    public List<Music> findByType(String musicType) {
+        MusicType findType = typeRepository.findByTypeName(musicType).orElseThrow(() -> new RuntimeException("Type not found"));
+        return musicRepository.findAllByMusicType(findType);
+    }
+
+    @Override
+    public List<Music> getMusicByTimeRange(String timeRange) {
+        if(timeRange.equals("All the time")){
+            return musicRepository.findAll();
+        }
+        LocalDateTime startTime = calculateStartTime(timeRange);
+        return musicRepository.findByCreatedAtAfter(startTime);
     }
 
     @Override
@@ -114,7 +133,7 @@ public class MusicService implements IMusicService {
     public List<RequestMusicTypes> findAllMusicTypes(Page<MusicType> types) {
         List<RequestMusicTypes> res = new ArrayList<>();
         for (MusicType type: types) {
-            res.add(new RequestMusicTypes(type, musicRepository.findByMusicType(type)));
+            res.add(new RequestMusicTypes(type, musicRepository.findAllByMusicType(type)));
         }
         return res;
     }
@@ -145,5 +164,19 @@ public class MusicService implements IMusicService {
             return musicRepository.findAll();
         }
         return musicRepository.searchMusics(query);
+    }
+
+    private LocalDateTime calculateStartTime(String timeRange) {
+        LocalDateTime now = LocalDateTime.now();
+        switch (timeRange) {
+            case "Last week":
+                return now.minusWeeks(1);
+            case "Last month":
+                return now.minusMonths(1);
+            case "Last year":
+                return now.minusYears(1);
+            default:
+                return LocalDateTime.MIN; // From the earliest date
+        }
     }
 }

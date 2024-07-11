@@ -100,7 +100,7 @@ public class CustomUserDetails implements UserDetails, OAuth2User {
     }
 
     public boolean isArtist(){
-        return user.getRole().equals(UserRole.ADMIN);
+        return user.getRole().equals(UserRole.ARTIST);
     }
 
     public boolean isAdminOrArtist(){

@@ -9,8 +9,8 @@
                     All
                 </button>
                 <div class="dropdown-menu">
-                    <a href="#" class="dropdown-item active">All</a>
-                    <a href="#" class="dropdown-item" th:each="type : ${types}" th:text="type.typeName"></a>
+                    <a href="/browse" class="dropdown-item active">All</a>
+                    <a class="dropdown-item" th:each="type : ${types}" th:text="${type.typeName}" th:href="@{/browse(tm=${type.typeName})}"></a>
                 </div>
             </div>
         </div>
@@ -49,9 +49,9 @@
                     </div>
                 </div>
             </div>
-            <div class="text-center">
-                <a th:href="@{/scroll_item}" class="btn btn-sm white rounded jscroll-next">Show More</a>
-            </div>
+<!--            <div class="text-center">-->
+<!--                <a th:href="@{/scroll_item}" class="btn btn-sm white rounded jscroll-next">Show More</a>-->
+<!--            </div>-->
         </div>
     </div>
 </div>

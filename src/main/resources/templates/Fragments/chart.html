@@ -9,10 +9,10 @@
                     Last week
                 </button>
                 <div class="dropdown-menu">
-                    <a href="#" class="dropdown-item active">Last week</a>
-                    <a href="#" class="dropdown-item">Last month</a>
-                    <a href="#" class="dropdown-item">Last year</a>
-                    <a href="#" class="dropdown-item">All the time</a>
+                    <a th:href="@{/chart(range='Last week')}" class="dropdown-item active">Last week</a>
+                    <a th:href="@{/chart(range='Last month')}" class="dropdown-item">Last month</a>
+                    <a th:href="@{/chart(range='Last year')}" class="dropdown-item">Last year</a>
+                    <a th:href="@{/chart(range='All the time')}" class="dropdown-item">All the time</a>
                 </div>
             </div>
         </div>

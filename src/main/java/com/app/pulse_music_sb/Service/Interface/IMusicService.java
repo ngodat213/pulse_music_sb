@@ -15,6 +15,8 @@ import java.util.List;
 public interface IMusicService {
     Page<Music> findAllBy(PaginationDTO paginationDTO);
     List<Music> findAll();
+    List<Music> findByType(String musicType);
+    List<Music> getMusicByTimeRange(String timeRange);
     Music findById(String id);
     Music save(RequestCreateMusic createMusic, MultipartFile image, MultipartFile mp3);
     Music update(String id, RequestUpdateMusic request, MultipartFile image, MultipartFile mp3);
